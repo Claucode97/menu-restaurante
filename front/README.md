@@ -1,4 +1,4 @@
-# Aplicación menu restaurante (front)
+# aplicacion menu-restaurante (front)
 
 ## Configuración del proyecto
 
