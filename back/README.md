@@ -1,4 +1,4 @@
-# aplicacion menu-restaurante (backend) (Jose, Claudio, Joseph)
+# aplicacion menu-restaurante (backend) (Jose, Claudio, Joseph, Jefferson)
 
 ## Puesta en marcha
 
