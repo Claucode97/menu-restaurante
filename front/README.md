@@ -1,4 +1,4 @@
-# aplicacion menu-restaurante (front) (Jose, Claudio, Joseph, Jefferson)
+# aplicacion menu-restaurante (front) P
 
 ## Configuración del proyecto
 
