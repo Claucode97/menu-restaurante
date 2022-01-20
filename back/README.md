@@ -1,4 +1,4 @@
-# Aplicación semilla (backend)
+# aplicacion menu-restaurante (backend)
 
 ## Puesta en marcha
 
