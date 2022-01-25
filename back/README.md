@@ -1,4 +1,4 @@
-# aplicacion menu-restaurante (backend) P
+# aplicacion menu-restaurante (backend)
 
 ## Puesta en marcha
 
