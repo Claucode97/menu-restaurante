@@ -1,21 +1,21 @@
 def data_for_testing_endpoint():
     menu_ejemplo={'primeros':[
-        {'nombre_plato':'ensalada mixta', 'descripcion':'ensalada con cebolla'},
-        {'nombre_plato':'Alubias con sus sacramentos', 'descripcion':'tocino, chorizo, morcilla'},
-        {'nombre_plato':'Spaguetti a la bolognesa', 'descripcion':'salsa de tomate'}
+        {'id':'01','nombre_plato':'ensalada mixta', 'descripcion':'ensalada con cebolla'},
+        {'id':'02','nombre_plato':'Alubias con sus sacramentos', 'descripcion':'tocino, chorizo, morcilla'},
+        {'id':'03','nombre_plato':'Spaguetti a la bolognesa', 'descripcion':'salsa de tomate'}
         
         ],
         'segundos':[
-            {'nombre_plato':'lomo con patatas', 'descripcion':'asado a las brasas'},
-            {'nombre_plato':'arroz cremoso de carne', 'descripcion':'verduras, curry'},
-            {'nombre_plato':'Muslo de pollo relleno', 'descripcion':'asado a las brasas, verduras salteadas'}
+            {'id':'04','nombre_plato':'lomo con patatas', 'descripcion':'asado a las brasas'},
+            {'id':'05','nombre_plato':'arroz cremoso de carne', 'descripcion':'verduras, curry'},
+            {'id':'06','nombre_plato':'Muslo de pollo relleno', 'descripcion':'asado a las brasas, verduras salteadas'}
             
             ],
         'postres':[
-            {'nombre_plato':'flan horneado', 'descripcion':'alto contenido de huevo'},
-            {'nombre_plato':'helado', 'descripcion':'sin tacc'},
-            {'nombre_plato':'lemon pie', 'descripcion':'bizcocho'},
-            {'nombre_plato':'natilla de chocolate', 'descripcion':'derivado lacteo'}
+            {'id':'07','nombre_plato':'flan horneado', 'descripcion':'alto contenido de huevo'},
+            {'id':'08','nombre_plato':'helado', 'descripcion':'sin tacc'},
+            {'id':'09','nombre_plato':'lemon pie', 'descripcion':'bizcocho'},
+            {'id':'10','nombre_plato':'natilla de chocolate', 'descripcion':'derivado lacteo'}
         ]}
     return menu_ejemplo
 
