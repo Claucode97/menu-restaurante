@@ -1,7 +1,7 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="@/assets/img/logo.png" />
-    <h1>{{ info.app_name }}</h1>
+    <img alt="menu logo" src="@/assets/img/imagen_de_bienbenida_menu.png" />
+    <h1>Bienvenido</h1>
   </div>
 </template>
 
@@ -9,21 +9,6 @@
 
 export default {
   name: 'Home',
-  data() {
-    return {
-      info: {}
-    }
-  },
-  mounted() {
-    this.loadData()
-  },
-  methods: {
-    async loadData() {
-      const response = await fetch('http://localhost:5000/api/info')
-      this.info = await response.json()
-    }
-  }
-
 
 }
 </script>
@@ -31,5 +16,9 @@ export default {
 <style scoped>
 h1 {
   font-style: italic;
+}
+img{
+  width: 30vw;
+  height: 35vh;
 }
 </style>

@@ -1,16 +1,19 @@
 import { createRouter, createWebHistory } from 'vue-router'
+import menu_dia from '../pages/menu_dia/menu_dia.vue'
+import home from '../pages/home/HomePage.vue'
+
 
 const routes = [
   {
     path: '/',
     name: 'Home',
-    component: () => import('@/pages/home/HomePage.vue'),
+    component: home
   },
   {
-    path: '/about',
-    name: 'About',
-    component: () => import('@/pages/about/AboutPage.vue'),
-  },
+    path :'/menu_dia',
+    name : 'Menu_Dia',
+    component: menu_dia
+  }
 ]
 
 const router = createRouter({
