@@ -1,7 +1,8 @@
 from src.lib.utils import temp_file
 from src.webserver import create_app
 from src.domain.info import InfoRepository, Info
-from src.menu import Menu, data_for_testing_endpoint
+from src.domain.class_menu import MenuRepository, Menu
+
 
 
 def test_should_return_info_in_database():
@@ -20,13 +21,6 @@ def test_should_return_info_in_database():
         "app_name": "test application",
     }
 
-def test_should_return_menu():
-    primeros='ensalada mixta'
-    segundos='lomo con patatas'
-    postres='flan de huevo'
-    menu_of_the_day=str(Menu(primeros,segundos,postres))
-    expected='Primeros: ensalada mixta, Segundos: lomo con patatas, Postres: flan de huevo'
 
-    assert menu_of_the_day == expected
   
 
