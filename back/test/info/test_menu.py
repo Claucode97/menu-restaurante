@@ -7,7 +7,7 @@ def test_should_return_empty_list():
     menu_repository = MenuRepository(temp_file())
     app = create_app(repositories={"menu": menu_repository})
     client = app.test_client()
-    response = client.get("/api/menu_dia")
+    response = client.get("/api/menu_dias")
     assert response.json == []
 
 #----------------------------------------------------------------
@@ -28,7 +28,7 @@ def test_should_return_list_of_plates():
     menu_repository.save(plate_02)
 
     # ACT (when)
-    response = client.get("/api/menu_dia")
+    response = client.get("/api/menu_dias")
 
     # ASSERT (then)
     assert response.json == [
