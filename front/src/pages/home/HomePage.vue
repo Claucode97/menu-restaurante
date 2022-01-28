@@ -19,6 +19,6 @@ h1 {
 }
 img{
   width: 30vw;
-  height: 35vh;
+
 }
 </style>

@@ -1,28 +1,26 @@
 <template>
-  <nav class="menu dia">
     <h1>MENU DEL DIA</h1>   
     <h2>Primeros</h2>
-    <section  v-for="menu in menus.primeros" :key="menu.id">
+    <section  v-for="menu in menus.primeros" :key="menu.id_dish">
         <ul class="split_the_dishes">
-            <li>{{menu.nombre_plato}}  :</li> 
-            <li>{{menu.descripcion}}</li>
+            <li>{{menu.name_dish}}  :</li> 
+            <li>{{menu.desc_dish}}</li>
         </ul>
     </section>
         <h2>Segundos</h2>
-    <section  v-for="menu in menus.segundos" :key="menu.id">
+    <section  v-for="menu in menus.segundos" :key="menu.id_dish">
         <ul class="split_the_dishes">
-            <li>{{menu.nombre_plato}}  :</li>
-            <li>{{menu.descripcion}}</li>
+            <li>{{menu.name_dish}}  :</li>
+            <li>{{menu.desc_dish}}</li>
         </ul>
     </section>
         <h2>Postres</h2>
-    <section v-for="menu in menus.postres" :key="menu.id">
+    <section v-for="menu in menus.postres" :key="menu.id_dish">
         <ul class="split_the_dishes">
-            <li>{{menu.nombre_plato}}  :</li>
-            <li>{{menu.descripcion}}</li>
+            <li>{{menu.name_dish}}  :</li>
+            <li>{{menu.desc_dish}}</li>
         </ul>
     </section>
-  </nav>
 </template>
 
 <script>
