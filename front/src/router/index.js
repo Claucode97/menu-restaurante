@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import menu_dia from '../pages/menu_dia/menu_dia.vue'
+import menu from '../pages/menu/menu.vue'
 import home from '../pages/home/HomePage.vue'
+import menus from '../pages/menus/menus.vue'
 
 
 const routes = [
@@ -10,9 +11,14 @@ const routes = [
     component: home
   },
   {
-    path :'/menu_dia',
-    name : 'Menu_Dia',
-    component: menu_dia
+    path :'/menu',
+    name : 'Menu',
+    component: menu
+  },
+  {
+    path :'/menus',
+    name : 'Menus',
+    component: menus
   }
 ]
 
