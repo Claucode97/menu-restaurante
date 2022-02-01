@@ -1,5 +1,8 @@
 <template>
-  <h1>MENU DEL DIA</h1>
+  <h1>
+    MENÚ DEL DÍA: <span>{{ this.date }}</span>
+  </h1>
+
   <h2>Primeros</h2>
   <section v-for="menu in this.primeros" :key="menu.id_dish">
     <ul class="split_the_dishes">
@@ -32,7 +35,7 @@ export default {
       primeros: [],
       segundos: [],
       postres: [],
-      date: "hola",
+      date: "2022-01-31",
     };
   },
   computed: {
@@ -51,7 +54,6 @@ export default {
       this.primeros = this.menus.desc.primeros;
       this.segundos = this.menus.desc.segundos;
       this.postres = this.menus.desc.postres;
-      this.date = this.menus.date;
     },
   },
 };
