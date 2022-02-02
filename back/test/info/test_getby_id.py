@@ -1,6 +1,6 @@
 from src.lib.utils import temp_file
 from src.webserver import create_app
-
+import json
 from src.domain.class_menu import Menu, MenuRepository
 
 
@@ -12,15 +12,13 @@ def test_should_return_one_menu_by_id():
     plate_01 = Menu(
         id="ML", desc="Pollo con patatas"
     )
-    plate_02 = Menu(
-        id="MM", desc="Pollo con huevo"
-    )
+    plate_02 = Menu(id="MM", desc=json.dumps({"primeros":[
+        {"id_dish":"01","name_dish":"ensalada mixta", "desc_dish":"ensalada con cebolla"}]}))
     menu_repository.save(plate_01)
     menu_repository.save(plate_02)
     # ACT (when)
     response = client.get("/api/menu_dia")
     print('respuesta JSON: ',response.json)
     # ASSERT (then)
-    assert response.json =={
-            "id":"ML",
-            "desc": "Pollo con patatas"}
+    assert response.json =={"id":"MM","desc": {"primeros":[
+        {"id_dish":"01","name_dish":"ensalada mixta", "desc_dish":"ensalada con cebolla"}]}}
