@@ -1,6 +1,6 @@
 <template>
 <ul v-for="dates in listOfDates" :key="dates.id">
-  <a href="">
+  <a href='/menu/$route.params.date'>
   <li>{{dates.date}}</li>
   </a>
 </ul>
