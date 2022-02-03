@@ -31,29 +31,28 @@ export default {
   name: "menu_dia",
   data() {
     return {
-      menus: [],
       primeros: [],
       segundos: [],
       postres: [],
-      date: "2022-01-31",
+      date: this.$route.params.date,
     };
   },
-  computed: {
-    filteredMenus() {
-      return NaN;
-    },
-  },
+
   mounted() {
     this.loadData();
   },
   methods: {
     async loadData() {
-      const response = await fetch("http://localhost:5000/api/menu_dia");
-      this.menus = await response.json();
+      const response = await fetch("http://192.168.21.222:5000/api/menus");
+      let menus = await response.json();
 
-      this.primeros = this.menus.desc.primeros;
-      this.segundos = this.menus.desc.segundos;
-      this.postres = this.menus.desc.postres;
+      for (let menu of menus) {
+        if (menu.date == this.$route.params.date) {
+          this.primeros = menu.desc.primeros;
+          this.segundos = menu.desc.segundos;
+          this.postres = menu.desc.postres;
+        }
+      }
     },
   },
 };
