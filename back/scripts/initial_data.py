@@ -11,4 +11,4 @@ database_path = "data/database.db"
 
 menu_repository = MenuRepository(database_path)
 
-menu_repository.save(Menu(id="MM",desc=json.dumps(menu_ejemplo)))
+menu_repository.save(Menu(id="MM",date="2022-01-03",desc=json.dumps(menu_ejemplo)))

@@ -2,12 +2,13 @@ import sqlite3
 import json
 
 class Menu:
-    def __init__(self, id, desc):
+    def __init__(self, id,date, desc):
         self.id=id
+        self.date=date
         self.desc= desc
 
     def to_dict(self):
-        return {"id": self.id, "desc": self.desc}
+        return {"id": self.id,"date":self.date, "desc": self.desc}
 
 
 class MenuRepository:
@@ -22,8 +23,9 @@ class MenuRepository:
 
     def init_tables(self):
         sql = """
-            create table if not exists menu_dia (
+            create table if not exists menus (
                 id varchar,
+                date varchar,
                 desc varchar
             )
         """
@@ -34,7 +36,7 @@ class MenuRepository:
         conn.commit()
 
     def get_all(self):
-        sql = """select * from menu_dia"""
+        sql = """select * from menus order by date desc"""
         conn = self.create_conn()
         cursor = conn.cursor()
         cursor.execute(sql)
@@ -42,19 +44,18 @@ class MenuRepository:
         dict_menu = []
         for item in data:
             menu_class = Menu(
-                id= item["id"], desc=item["desc"])
+                id= item["id"],date=item["date"], desc=json.loads(item["desc"]))
             dict_menu.append(menu_class)
         return dict_menu
  #---------------------------------------------------   
 
     def getby_id(self,id):
-        #sql = ("""select * from menu_dia where id = ?""", (id,))
         conn = self.create_conn()
         cursor = conn.cursor()
-        cursor.execute("""SELECT * FROM menu_dia WHERE id =?""", (id,))
+        cursor.execute("""SELECT * FROM menus WHERE id =?""", (id,))
         data = cursor.fetchone()
         menu_class = Menu(
-            id= data["id"], desc=json.loads(data["desc"]))
+            id= data["id"],date=data["date"], desc=json.loads(data["desc"]))
         # print('objeto',repr(menu_class))
         # print('id',repr(menu_class.id))
         # print('desc: ',repr(menu_class.desc))
@@ -63,8 +64,8 @@ class MenuRepository:
 
 
     def save(self, menu):
-        sql = """insert into menu_dia (id, desc) values (
-            :id, :desc
+        sql = """insert into menus (id,date, desc) values (
+            :id,:date, :desc
         ) """
         conn = self.create_conn()
         cursor = conn.cursor()
