@@ -35,7 +35,7 @@ export default {
       primeros: [],
       segundos: [],
       postres: [],
-      date: "2022-01-31",
+      date: this.$route.params.date,
     };
   },
   computed: {
