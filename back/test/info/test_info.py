@@ -1,8 +1,7 @@
 from src.lib.utils import temp_file
 from src.webserver import create_app
 from src.domain.info import InfoRepository, Info
-from src.domain.class_menu import MenuRepository, Menu
-
+from src.domain.Menu import MenuRepository, Menu
 
 
 def test_should_return_info_in_database():
@@ -15,12 +14,7 @@ def test_should_return_info_in_database():
             app_name="test application",
         )
     )
-
     response = client.get("/api/info")
     assert response.json == {
         "app_name": "test application",
     }
-
-
-  
-

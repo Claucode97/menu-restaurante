@@ -1,14 +1,15 @@
 import sqlite3
 import json
 
+
 class Menu:
-    def __init__(self, id,date, desc):
-        self.id=id
-        self.date=date
-        self.desc= desc
+    def __init__(self, id, date, desc):
+        self.id = id
+        self.date = date
+        self.desc = desc
 
     def to_dict(self):
-        return {"id": self.id,"date":self.date, "desc": self.desc}
+        return {"id": self.id, "date": self.date, "desc": self.desc}
 
 
 class MenuRepository:
@@ -23,7 +24,7 @@ class MenuRepository:
 
     def init_tables(self):
         sql = """
-            create table if not exists menus (
+            CREATE table if not exists menus (
                 id varchar,
                 date varchar,
                 desc varchar
@@ -36,7 +37,7 @@ class MenuRepository:
         conn.commit()
 
     def get_all(self):
-        sql = """select * from menus order by date desc"""
+        sql = """SELECT * FROM menus ORDER BY date desc"""
         conn = self.create_conn()
         cursor = conn.cursor()
         cursor.execute(sql)
@@ -44,24 +45,29 @@ class MenuRepository:
         dict_menu = []
         for item in data:
             menu_class = Menu(
-                id= item["id"],date=item["date"], desc=json.loads(item["desc"]))
+                id=item["id"], date=item["date"], desc=json.loads(item["desc"]))
             dict_menu.append(menu_class)
         return dict_menu
- #---------------------------------------------------   
 
-    def getby_id(self,id):
+ # ---------------------------------------------------
+
+    def get_by_id(self, id):
         conn = self.create_conn()
         cursor = conn.cursor()
         cursor.execute("""SELECT * FROM menus WHERE id =?""", (id,))
         data = cursor.fetchone()
         menu_class = Menu(
-            id= data["id"],date=data["date"], desc=json.loads(data["desc"]))
-        # print('objeto',repr(menu_class))
-        # print('id',repr(menu_class.id))
-        # print('desc: ',repr(menu_class.desc))
-        return menu_class    
-        #return menu_class.desc
+            id=data["id"], date=data["date"], desc=json.loads(data["desc"]))
+        return menu_class
 
+    def get_by_date(self, date):
+        conn = self.create_conn()
+        cursor = conn.cursor()
+        cursor.execute("""SELECT * FROM menus WHERE date =?""", (date,))
+        data = cursor.fetchone()
+        menu_class = Menu(
+            id=data["id"], date=data["date"], desc=json.loads(data["desc"]))
+        return menu_class
 
     def save(self, menu):
         sql = """insert into menus (id,date, desc) values (
