@@ -43,16 +43,13 @@ export default {
   },
   methods: {
     async loadData() {
-      const response = await fetch("http://localhost:5000/api/menus");
+      const response = await fetch("http://192.168.21.125:5000/api/menus/by-date/" + this.$route.params.date);
       let menus = await response.json();
-
-      for (let menu of menus) {
-        if (menu.date == this.$route.params.date) {
-          this.firsts = menu.desc.firsts;
-          this.seconds = menu.desc.seconds;
-          this.desserts = menu.desc.desserts;
-        }
-      }
+      this.firsts = menus.desc.firsts;
+      this.seconds = menus.desc.seconds;
+      this.desserts = menus.desc.desserts;
+        
+      
     },
   },
 };
