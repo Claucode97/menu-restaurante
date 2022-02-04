@@ -3,7 +3,6 @@ from flask_cors import CORS
 from src.lib.utils import object_to_json
 
 
-
 def create_app(repositories):
     app = Flask(__name__)
     CORS(app)
@@ -21,18 +20,16 @@ def create_app(repositories):
     def show_menu():
         menu = repositories["menu"].get_all()
         return object_to_json(menu)
-    
-    @app.route("/api/menus/<date>", methods=["GET"])
+
+    @app.route("/api/menus/by-date/<date>", methods=["GET"])
     def show_menu_by_date(date):
         menu = repositories["menu"].get_by_date(date)
         return object_to_json(menu)
 
-    
     @app.route("/api/menu_dia", methods=["GET"])
     def show_menu_by_id():
-        id="MM"
-        menu = repositories["menu"].getby_id(id)
+        id = "MM"
+        menu = repositories["menu"].get_by_id(id)
         return object_to_json(menu)
-        
-        
+
     return app

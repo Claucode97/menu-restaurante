@@ -31,7 +31,7 @@ class InfoRepository:
         conn.commit()
 
     def get_info(self):
-        sql = """select * from info"""
+        sql = """SELECT * FROM info"""
         conn = self.create_conn()
         cursor = conn.cursor()
         cursor.execute(sql)
@@ -41,7 +41,7 @@ class InfoRepository:
         return Info(app_name=data["app_name"])
 
     def save(self, info):
-        sql = """insert into info (app_name) values (
+        sql = """INSERT into info (app_name) VALUES (
             :app_name
         ) """
         conn = self.create_conn()
