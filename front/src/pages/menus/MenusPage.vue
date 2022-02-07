@@ -1,7 +1,7 @@
 <template>
-  <ul v-for="dates in listOfDates" :key="dates.id">
-    <router-link :to="{name: 'Menu', params: {date: dates.date}}">
-      <li>{{ dates.date }}</li>
+  <ul v-for="menuDate in listOfDates" :key="menuDate.id">
+    <router-link :to="{name: 'Menu', params: {date: menuDate.date}}">
+      <li>{{ menuDate.date }}</li>
     </router-link>
   </ul>
 </template>
