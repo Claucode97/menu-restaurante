@@ -1,6 +1,6 @@
 <template>
   <ul v-for="dates in listOfDates" :key="dates.id">
-    <router-link v-bind:to="/by-date/ + dates.date">
+    <router-link :to="{name: 'Menu', params: {date: dates.date}}">
       <li>{{ dates.date }}</li>
     </router-link>
   </ul>

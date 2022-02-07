@@ -11,7 +11,7 @@ const routes = [
     component: home
   },
   {
-    path :'/by-date/:date',
+    path :'/menus/by-date/:date',
     name : 'Menu',
     component: menu
   },
