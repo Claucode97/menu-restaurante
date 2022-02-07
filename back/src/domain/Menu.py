@@ -37,7 +37,7 @@ class MenuRepository:
         conn.commit()
 
     def get_all(self):
-        sql = """SELECT * FROM menus ORDER BY date desc"""
+        sql = """SELECT * FROM menus ORDER BY date DESC"""
         conn = self.create_conn()
         cursor = conn.cursor()
         cursor.execute(sql)
@@ -70,10 +70,11 @@ class MenuRepository:
         return menu_class
 
     def save(self, menu):
-        sql = """insert into menus (id,date, desc) values (
+        sql = """INSERT into menus (id,date, desc) VALUES (
             :id,:date, :desc
         ) """
         conn = self.create_conn()
         cursor = conn.cursor()
-        cursor.execute(sql, menu.to_dict())
+        cursor.execute(sql, menu.to_dict(),
+                       )
         conn.commit()
