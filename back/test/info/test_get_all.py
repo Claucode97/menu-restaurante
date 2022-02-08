@@ -21,15 +21,15 @@ def test_should_return_list_of_plates():
     client = app.test_client()
 
     plate_01 = Menu(
-        id="001", date="2020-01-05", desc=json.dumps({"firsts": [
-            {"id_dish": "01", "name_dish": "ensalada mixta", "desc_dish": "ensalada con cebolla"}]})
+        id="001", date="2020-01-05", desc={"firsts": [
+            {"id_dish": "01", "name_dish": "ensalada mixta", "desc_dish": "ensalada con cebolla"}]}
     )
     plate_02 = Menu(
-        id="002", date="2022-04-20", desc=json.dumps({"firsts": [
+        id="002", date="2022-04-20", desc=({"firsts": [
             {"id_dish": "01", "name_dish": "ensalada mixta", "desc_dish": "ensalada con cebolla"}]})
     )
     plate_03 = Menu(
-        id="003", date="2012-11-10", desc=json.dumps({"firsts": [
+        id="003", date="2012-11-10", desc=({"firsts": [
             {"id_dish": "01", "name_dish": "ensalada mixta", "desc_dish": "ensalada con cebolla"}]})
     )
 

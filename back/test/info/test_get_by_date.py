@@ -12,8 +12,8 @@ def test_should_return_one_menu_by_date():
     plate_01 = Menu(
         id="ML", date="2022-01-03", desc="Pollo con patatas"
     )
-    plate_02 = Menu(id="MM", date="2022-10-15", desc=json.dumps({"firsts": [
-        {"id_dish": "01", "name_dish": "ensalada mixta", "desc_dish": "ensalada con cebolla"}]}))
+    plate_02 = Menu(id="MM", date="2022-10-15", desc={"firsts": [
+        {"id_dish": "01", "name_dish": "ensalada mixta", "desc_dish": "ensalada con cebolla"}]})
     menu_repository.save(plate_01)
     menu_repository.save(plate_02)
     # ACT (when)
