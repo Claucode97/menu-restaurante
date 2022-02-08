@@ -70,11 +70,14 @@ class MenuRepository:
         return menu_class
 
     def save(self, menu):
-        sql = """INSERT into menus (id,date, desc) VALUES (
+        sql = """INSERT INTO menus (id,date, desc) VALUES (
             :id,:date, :desc
         ) """
         conn = self.create_conn()
         cursor = conn.cursor()
-        cursor.execute(sql, menu.to_dict(),
-                       )
+        cursor.execute(sql, {
+            "id": menu.id,
+            "date": menu.date,
+            "desc": json.dumps(menu.desc)
+        })
         conn.commit()
