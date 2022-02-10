@@ -4,6 +4,7 @@
 
 ```
 npm install
+npm install uuidv4 --save
 ```
 
 ### Ejecutar servidor de desarrollo

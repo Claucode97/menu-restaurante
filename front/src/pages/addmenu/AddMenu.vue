@@ -4,10 +4,10 @@
         <div class="date">
             <input type="date" name="date" id="date" v-model="date">
         </div>
-        <p class="title">Nombre</p> <p class="title">Descripción</p>
         <p v-show="!isHiddenFirsts">Primeros:</p>
             <section class="namePlates" v-for="(i,index) in 3" :key="index">
-                <pre v-show="!isHiddenFirsts">{{index +1}}</pre><input class= "name_dish"  type="text" placeholder="Introducir plato" v-model="nameDishFirsts[index]" v-show="!isHiddenFirsts">
+                <pre v-show="!isHiddenFirsts">{{index +1}}</pre>
+                <input  class= "name_dish"  type="text" placeholder="Introducir plato " v-model="nameDishFirsts[index]" v-show="!isHiddenFirsts">
                 <input class= "descPlates" type="text" placeholder="Introducir descripción" v-model="descDishFirsts[index]" v-show="!isHiddenFirsts">
             </section>
             <button @click.prevent="addFirsts" v-show="!isHiddenFirsts" >Agrega Primeros</button>
@@ -103,28 +103,22 @@ body{
     padding:0;
     margin:0;
 }
-.title{
-    display:inline-flex;
-    flex-direction: row;
-    justify-content: space-between;
-    
-}
+
 .date{
     display:flex;
     justify-content: flex-end;
-
 }
 .namePlates{
     display:grid;
-    grid-template-columns: 0.01fr 1fr 3fr;
-}
-.descPlates{
-    display:grid;
-    grid-template-columns:0.01fr 1fr 3fr;
+    grid-template-columns:.0001fr 1fr 3fr;
 }
 
 input{
     margin-bottom:0.2em;
+    margin-right:0.5em;
+}
+pre{
+    font-size: 10px;
 }
 
 
