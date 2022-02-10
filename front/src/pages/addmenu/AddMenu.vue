@@ -5,26 +5,26 @@
             <input type="date" name="date" id="date" v-model="date">
         </div>
         <p class="title">Nombre</p> <p class="title">Descripción</p>
-        <p>Primeros:</p>
+        <p v-show="!isHiddenFirsts">Primeros:</p>
             <section class="namePlates" v-for="(i,index) in 3" :key="index">
                 <pre v-show="!isHiddenFirsts">{{index +1}}</pre><input class= "name_dish"  type="text" placeholder="Introducir plato" v-model="nameDishFirsts[index]" v-show="!isHiddenFirsts">
                 <input class= "descPlates" type="text" placeholder="Introducir descripción" v-model="descDishFirsts[index]" v-show="!isHiddenFirsts">
             </section>
             <button @click.prevent="addFirsts" v-show="!isHiddenFirsts" >Agrega Primeros</button>
-        <p>Segundos:</p>
+        <p v-show="!isHiddenSeconds">Segundos:</p>
         <section class="namePlates" v-for="(i,index) in 3" :key="index">
                 <pre v-show="!isHiddenSeconds">{{index +1}}</pre><input class= "name_dish"  type="text" placeholder="Introducir plato" v-model="nameDishSeconds[index]" v-show="!isHiddenSeconds">
                 <input class= "descPlates" type="text" placeholder="Introducir descripción" v-model="descDishSeconds[index]" v-show="!isHiddenSeconds">
             </section>
             <button @click.prevent="addSeconds" v-show="!isHiddenSeconds">Agregar Segundos</button>
         
-        <p>Postres:</p>
+        <p v-show="!isHiddenDesserts">Postres:</p>
         <section class="namePlates" v-for="(i,index) in 4" :key="index">
                 <pre v-show="!isHiddenDesserts">{{index +1}}</pre><input class= "name_dish"  type="text" placeholder="Introducir plato" v-model="nameDishDesserts[index]" v-show="!isHiddenDesserts">
                 <input class= "descPlates" type="text" placeholder="Introducir descripción" v-model="descDishDesserts[index]" v-show="!isHiddenDesserts">
             </section>
             <button @click.prevent="addDesserts" v-show="!isHiddenDesserts">Agrega Postres</button>
-            <button @click.prevent="onSaveClicked" class="submitButton">Enviar formulario</button>
+            <button @click.prevent="onSaveClicked" class="submitButton" v-show="isHiddenDesserts && isHiddenSeconds && isHiddenFirsts">Enviar formulario</button>
     </form>
 </template>
 <!-- /addNewMenu?date=2022-02-10 -->
@@ -80,12 +80,20 @@ export default {
         console.log('Resultado:',this.desserts)
         this.isHiddenDesserts=true
     },
-    onSaveClicked(){
-        
+    async onSaveClicked(){
         this.desc={'firsts':this.firsts,'seconds':this.seconds,'desserts':this.desserts}
         this.dictToSend={'date':this.date,'desc':this.desc}
         this.dictToSend.id=uuidv4();
         console.log(JSON.stringify(this.dictToSend))
+        const settings={
+            method:"POST",
+            body: JSON.stringify(this.dictToSend),
+            headers:{
+                'Content-Type':'application/json'
+                }
+        }
+        var response = await fetch("http://localhost:5000/api/menus",settings)
+        console.log(response)
     }
   },
 };

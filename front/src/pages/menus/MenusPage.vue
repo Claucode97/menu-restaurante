@@ -45,7 +45,7 @@ export default {
     
 
     async loadData() {
-      const response = await fetch("http://192.168.21.125:5000/api/menus");
+      const response = await fetch("http://localhost:5000/api/menus");
       this.listOfDates = await response.json();
     },
   },

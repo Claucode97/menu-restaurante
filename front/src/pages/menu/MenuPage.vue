@@ -43,7 +43,7 @@ export default {
   },
   methods: {
     async loadData() {
-      const response = await fetch("http://192.168.21.125:5000/api/menus/by-date/" + this.$route.params.date);
+      const response = await fetch("http://localhost:5000/api/menus/by-date/" + this.$route.params.date);
       let menus = await response.json();
       this.firsts = menus.desc.firsts;
       this.seconds = menus.desc.seconds;
