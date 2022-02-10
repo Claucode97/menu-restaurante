@@ -1,77 +1,92 @@
+
 <template>
-<form action="addNewMenu" >
-    <div class="date">
-        <input type="date" name="date" id="date">
-    </div>
-    <p class="title">Nombre</p> <p class="title">Descripción</p>
-    <p>Primeros:</p>
-    <section class="firsts" v-for="i in 3" :key="i">
-        <pre>{{i}}</pre><input class= "name_dish" id="f1" type="text" placeholder="Introducir plato" v-model="name_dish" 
-        v-show= !block_input>
-        <input class= "desc_dish" type="text" placeholder="Introducir descripción" v-model="desc_dish" @keydown.tab="addDishToDict(i)" this.name_dish='' v-show= !block_input>
+    <form action="">
+        <div class="date">
+            <input type="date" name="date" id="date" v-model="date">
+        </div>
+        <p class="title">Nombre</p> <p class="title">Descripción</p>
+        <p>Primeros:</p>
+            <section class="namePlates" v-for="(i,index) in 3" :key="index">
+                <pre v-show="!isHiddenFirsts">{{index +1}}</pre><input class= "name_dish"  type="text" placeholder="Introducir plato" v-model="nameDishFirsts[index]" v-show="!isHiddenFirsts">
+                <input class= "descPlates" type="text" placeholder="Introducir descripción" v-model="descDishFirsts[index]" v-show="!isHiddenFirsts">
+            </section>
+            <button @click.prevent="addFirsts" v-show="!isHiddenFirsts" >Agrega Primeros</button>
+        <p>Segundos:</p>
+        <section class="namePlates" v-for="(i,index) in 3" :key="index">
+                <pre v-show="!isHiddenSeconds">{{index +1}}</pre><input class= "name_dish"  type="text" placeholder="Introducir plato" v-model="nameDishSeconds[index]" v-show="!isHiddenSeconds">
+                <input class= "descPlates" type="text" placeholder="Introducir descripción" v-model="descDishSeconds[index]" v-show="!isHiddenSeconds">
+            </section>
+            <button @click.prevent="addSeconds" v-show="!isHiddenSeconds">Agregar Segundos</button>
         
-        
-    </section>
-    <p>Segundos:</p>
-    <section class="seconds">
-        1.<input class= "name_dish" type="text" placeholder="Introducir plato">
-        <input class= "desc_dish" type="text" placeholder="Introducir descripción">
-        2.<input class= "name_dish" type="text" placeholder="Introducir plato">
-        <input class= "desc_dish" type="text" placeholder="Introducir descripción">
-        3.<input class= "name_dish" type="text" placeholder="Introducir plato">
-        <input class= "desc_dish" type="text" placeholder="Introducir descripción">
-    </section>
-    <p>Postres:</p>
-    <section class="desserts">
-        1.<input class= "name_dish" type="text" placeholder="Introducir plato">
-        <input class= "desc_dish" type="text" placeholder="Introducir descripción">
-        2.<input class= "name_dish" type="text" placeholder="Introducir plato">
-        <input class= "desc_dish" type="text" placeholder="Introducir descripción">
-        3.<input class= "name_dish" type="text" placeholder="Introducir plato">
-        <input class= "desc_dish" type="text" placeholder="Introducir descripción">
-        4.<input class= "name_dish" type="text" placeholder="Introducir plato">
-        <input class= "desc_dish" type="text" placeholder="Introducir descripción">
-    </section>
-    <button type="addNewMenu">Añadir Menú</button>
-</form>
-{{$data}}
+        <p>Postres:</p>
+        <section class="namePlates" v-for="(i,index) in 4" :key="index">
+                <pre v-show="!isHiddenDesserts">{{index +1}}</pre><input class= "name_dish"  type="text" placeholder="Introducir plato" v-model="nameDishDesserts[index]" v-show="!isHiddenDesserts">
+                <input class= "descPlates" type="text" placeholder="Introducir descripción" v-model="descDishDesserts[index]" v-show="!isHiddenDesserts">
+            </section>
+            <button @click.prevent="addDesserts" v-show="!isHiddenDesserts">Agrega Postres</button>
+            <button @click.prevent="onSaveClicked" class="submitButton">Enviar formulario</button>
+    </form>
 </template>
 <!-- /addNewMenu?date=2022-02-10 -->
 <script>
+import {v4 as uuidv4} from "uuid";
 export default {
   name: "",
   data() {
     return {
-        block_input: false,
-        name_dish:'',
-        desc_dish:'',
+        nameDishFirsts:{},
+        descDishFirsts:{},
+        nameDishSeconds:{},
+        descDishSeconds:{},
+        nameDishDesserts:{},
+        descDishDesserts:{},
         firsts:[],
-        id_dish:'',
+        seconds:[],
+        desserts:[],
+        desc:{},
+        isHiddenFirsts:false,
+        isHiddenSeconds:false,
+        isHiddenDesserts:false,
         date:'',
-        id:''
+        dictToSend:{}
      };
   },
 
-  mounted() {
-    
-  },
+  mounted() {},
   computed:{
-      isDisabled(){
-          return this.form.validated;
-      }
   },
   methods: {
-    addDish(){
-        console.log(this.firsts.length)
+    addFirsts() { 
+        for (let plate in this.nameDishFirsts){
+            let toDict={'name_dish':this.nameDishFirsts[plate], 'desc_dish':this.descDishFirsts[plate], 'id_dish':plate}
+            this.firsts.push(toDict)
+        }
+        console.log('Resultado:',this.firsts)
+        this.isHiddenFirsts=true
     },
-    addDishToDict(number_dish) { 
-        let toDict={'name_dish':this.name_dish, 'desc_dish':this.desc_dish, 'id_dish':number_dish}
-        this.firsts.push(toDict)
-        this.block_input = true
-        this.name_dish=''
-        this.desc_dish=''
-
+    addSeconds() { 
+        for (let plate in this.nameDishSeconds){
+            let toDict={'name_dish':this.nameDishSeconds[plate], 'desc_dish':this.descDishSeconds[plate], 'id_dish':plate}
+            this.seconds.push(toDict)
+        }
+        console.log('Resultado:',this.seconds)
+        this.isHiddenSeconds=true
     },
+    addDesserts() { 
+        for (let plate in this.nameDishDesserts){
+            let toDict={'name_dish':this.nameDishDesserts[plate], 'desc_dish':this.descDishDesserts[plate], 'id_dish':plate}
+            this.desserts.push(toDict)
+        }
+        console.log('Resultado:',this.desserts)
+        this.isHiddenDesserts=true
+    },
+    onSaveClicked(){
+        
+        this.desc={'firsts':this.firsts,'seconds':this.seconds,'desserts':this.desserts}
+        this.dictToSend={'date':this.date,'desc':this.desc}
+        this.dictToSend.id=uuidv4();
+        console.log(JSON.stringify(this.dictToSend))
+    }
   },
 };
 </script>
@@ -91,18 +106,15 @@ body{
     justify-content: flex-end;
 
 }
-.firsts{
+.namePlates{
     display:grid;
     grid-template-columns: 0.01fr 1fr 3fr;
 }
-.seconds{
+.descPlates{
     display:grid;
     grid-template-columns:0.01fr 1fr 3fr;
 }
-.desserts{
-    display:grid;
-    grid-template-columns: 0.01fr 1fr 3fr;
-}
+
 input{
     margin-bottom:0.2em;
 }
