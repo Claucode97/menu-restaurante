@@ -1,4 +1,3 @@
-
 <template>
     <form action="">
         <div class="date">
@@ -25,9 +24,10 @@
             </section>
             <button @click.prevent="addDesserts" v-show="!isHiddenDesserts">Agrega Postres</button>
             <button @click.prevent="onSaveClicked" class="submitButton" v-show="isHiddenDesserts && isHiddenSeconds && isHiddenFirsts">Enviar formulario</button>
+            <p v-show="menuAdded">Menú agregado con éxito!</p>
     </form>
 </template>
-<!-- /addNewMenu?date=2022-02-10 -->
+
 <script>
 import {v4 as uuidv4} from "uuid";
 export default {
@@ -48,7 +48,8 @@ export default {
         isHiddenSeconds:false,
         isHiddenDesserts:false,
         date:'',
-        dictToSend:{}
+        dictToSend:{},
+        menuAdded:false
      };
   },
 
@@ -61,7 +62,7 @@ export default {
             let toDict={'name_dish':this.nameDishFirsts[plate], 'desc_dish':this.descDishFirsts[plate], 'id_dish':plate}
             this.firsts.push(toDict)
         }
-        console.log('Resultado:',this.firsts)
+        
         this.isHiddenFirsts=true
     },
     addSeconds() { 
@@ -69,7 +70,7 @@ export default {
             let toDict={'name_dish':this.nameDishSeconds[plate], 'desc_dish':this.descDishSeconds[plate], 'id_dish':plate}
             this.seconds.push(toDict)
         }
-        console.log('Resultado:',this.seconds)
+        // console.log('Resultado:',this.seconds)
         this.isHiddenSeconds=true
     },
     addDesserts() { 
@@ -77,14 +78,14 @@ export default {
             let toDict={'name_dish':this.nameDishDesserts[plate], 'desc_dish':this.descDishDesserts[plate], 'id_dish':plate}
             this.desserts.push(toDict)
         }
-        console.log('Resultado:',this.desserts)
+        // console.log('Resultado:',this.desserts)
         this.isHiddenDesserts=true
     },
     async onSaveClicked(){
         this.desc={'firsts':this.firsts,'seconds':this.seconds,'desserts':this.desserts}
         this.dictToSend={'date':this.date,'desc':this.desc}
         this.dictToSend.id=uuidv4();
-        console.log(JSON.stringify(this.dictToSend))
+        // console.log(JSON.stringify(this.dictToSend))
         const settings={
             method:"POST",
             body: JSON.stringify(this.dictToSend),
@@ -93,7 +94,10 @@ export default {
                 }
         }
         var response = await fetch("http://localhost:5000/api/menus",settings)
-        console.log(response)
+        // console.log(response)
+        if (response.status===200){
+            this.menuAdded=true
+        }
     }
   },
 };
