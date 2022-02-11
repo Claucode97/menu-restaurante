@@ -1,5 +1,5 @@
 <template>
-  <router-link class="a" :to="{name: 'Menu', params: {date: dameFecha}}">
+  <router-link class="a" :to="{name: 'Menu', params: {date: getToday}}">
     <button> Menú del día</button>  
   </router-link> 
   <ul v-for="menuDate in listOfDates" :key="menuDate.id">
@@ -24,7 +24,7 @@ export default {
     this.loadData();
   },
   computed:{
-    dameFecha(){
+    getToday(){
       let current = new Date();
       let year = current.getFullYear();
       let month = current.getMonth()+1;
