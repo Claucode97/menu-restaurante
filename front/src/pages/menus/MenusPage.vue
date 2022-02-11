@@ -1,10 +1,10 @@
 <template>
-  <router-link class="a" :to="{name: 'Menu', params: {date: getToday}}">
+  <router-link :to="{name: 'Menu', params: {date: getToday}}">
     <button> Menú del día</button>  
   </router-link> 
-  <ul v-for="menuDate in listOfDates" :key="menuDate.id">
-    <router-link :to="{name: 'Menu', params: {date: menuDate.date}}">
-      <li>{{ menuDate.date }}</li>
+  <ul v-for="menu in listOfMenus" :key="menu.id">
+    <router-link :to="{name: 'Menu', params: {date: menu.date}}">
+      <li>{{ menu.date }}</li>
     </router-link>
   </ul>
 </template>
@@ -13,10 +13,10 @@
 <script>
 
 export default {
-  name: "menu_dia",
+ 
   data() {
     return {
-      listOfDates: [],
+      listOfMenus: [],
     };
   },
 
@@ -36,8 +36,8 @@ export default {
           month = "0" + month
       }
 
-      const hoy = year+'-'+month+'-'+day;
-      return hoy
+      const today = year+'-'+month+'-'+day;
+      return today
 
     },
   },
@@ -46,7 +46,7 @@ export default {
 
     async loadData() {
       const response = await fetch("http://localhost:5000/api/menus");
-      this.listOfDates = await response.json();
+      this.listOfMenus = await response.json();
     },
   },
 };
@@ -63,10 +63,6 @@ ul {
   margin: 1em;
 }
 
-a{
-  text-decoration: none;
-  
-}
 h1{
   border: 2px solid black; 
 

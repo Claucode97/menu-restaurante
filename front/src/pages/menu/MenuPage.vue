@@ -28,7 +28,7 @@
 
 <script>
 export default {
-  name: "menu_dia",
+  
   data() {
     return {
       firsts: [],
