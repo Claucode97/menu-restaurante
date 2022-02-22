@@ -1,31 +1,42 @@
 <template>
-    <form action="">
-        <div class="date">
-            <input type="date" name="date" id="date" v-model="date">
+<form action="">
+    <div class="date">
+        <input type="date" name="date" id="date" v-model="date">
+    </div>
+    <section class="plates_info">
+        <p>Primeros</p>
+        <div class="firsts">
+            <input class="input_plate" type="text" placeholder="Introducir plato" v-model="dict_plates.firsts[0].name_dish">
+            <input class="input_plate" type="text" placeholder="Introducir descripción" v-model="dict_plates.firsts[0].desc_dish">
+            <input class="input_plate" type="text" placeholder="Introducir plato" v-model="dict_plates.firsts[1].name_dish">
+            <input class="input_plate" type="text" placeholder="Introducir descripción" v-model="dict_plates.firsts[1].desc_dish">
+            <input class="input_plate" type="text" placeholder="Introducir plato" v-model="dict_plates.firsts[2].name_dish">
+            <input class="input_plate" type="text" placeholder="Introducir descripción" v-model="dict_plates.firsts[2].desc_dish">
         </div>
-        <p v-show="!isHiddenFirsts">Primeros:</p>
-            <section class="namePlates" v-for="(i,index) in 3" :key="index">
-                <pre v-show="!isHiddenFirsts">{{index +1}}</pre>
-                <input  class= "name_dish"  type="text" placeholder="Introducir plato " v-model="nameDishFirsts[index]" v-show="!isHiddenFirsts">
-                <input class= "descPlates" type="text" placeholder="Introducir descripción" v-model="descDishFirsts[index]" v-show="!isHiddenFirsts">
-            </section>
-            <button @click.prevent="addFirsts" v-show="!isHiddenFirsts" >Agrega Primeros</button>
-        <p v-show="!isHiddenSeconds">Segundos:</p>
-        <section class="namePlates" v-for="(i,index) in 3" :key="index">
-                <pre v-show="!isHiddenSeconds">{{index +1}}</pre><input class= "name_dish"  type="text" placeholder="Introducir plato" v-model="nameDishSeconds[index]" v-show="!isHiddenSeconds">
-                <input class= "descPlates" type="text" placeholder="Introducir descripción" v-model="descDishSeconds[index]" v-show="!isHiddenSeconds">
-            </section>
-            <button @click.prevent="addSeconds" v-show="!isHiddenSeconds">Agregar Segundos</button>
-        
-        <p v-show="!isHiddenDesserts">Postres:</p>
-        <section class="namePlates" v-for="(i,index) in 4" :key="index">
-                <pre v-show="!isHiddenDesserts">{{index +1}}</pre><input class= "name_dish"  type="text" placeholder="Introducir plato" v-model="nameDishDesserts[index]" v-show="!isHiddenDesserts">
-                <input class= "descPlates" type="text" placeholder="Introducir descripción" v-model="descDishDesserts[index]" v-show="!isHiddenDesserts">
-            </section>
-            <button @click.prevent="addDesserts" v-show="!isHiddenDesserts">Agrega Postres</button>
-            <button @click.prevent="onSaveClicked" class="submitButton" v-show="isHiddenDesserts && isHiddenSeconds && isHiddenFirsts">Enviar formulario</button>
-            <p v-show="menuAdded">Menú agregado con éxito!</p>
-    </form>
+        <p>Segundos</p>
+        <div class="seconds">
+            <input class="input_plate" type="text" placeholder="Introducir plato" v-model="dict_plates.seconds[0].name_dish">
+            <input class="input_plate" type="text" placeholder="Introducir descripción" v-model="dict_plates.seconds[0].desc_dish">
+            <input class="input_plate" type="text" placeholder="Introducir plato" v-model="dict_plates.seconds[1].name_dish">
+            <input class="input_plate" type="text" placeholder="Introducir descripción" v-model="dict_plates.seconds[1].desc_dish">
+            <input class="input_plate" type="text" placeholder="Introducir plato" v-model="dict_plates.seconds[2].name_dish">
+            <input class="input_plate" type="text" placeholder="Introducir descripción" v-model="dict_plates.seconds[2].desc_dish">
+        </div>
+        <p>Postres</p>
+        <div class="desserts">
+            <input class="input_plate" type="text" placeholder="Introducir plato" v-model="dict_plates.desserts[0].name_dish">
+            <input class="input_plate" type="text" placeholder="Introducir descripción" v-model="dict_plates.desserts[0].desc_dish">
+            <input class="input_plate" type="text" placeholder="Introducir plato" v-model="dict_plates.desserts[1].name_dish">
+            <input class="input_plate" type="text" placeholder="Introducir descripción" v-model="dict_plates.desserts[1].desc_dish">
+            <input class="input_plate" type="text" placeholder="Introducir plato" v-model="dict_plates.desserts[2].name_dish">
+            <input class="input_plate" type="text" placeholder="Introducir descripción" v-model="dict_plates.desserts[2].desc_dish">
+            <input class="input_plate" type="text" placeholder="Introducir plato" v-model="dict_plates.desserts[3].name_dish">
+            <input class="input_plate" type="text" placeholder="Introducir descripción" v-model="dict_plates.desserts[3].desc_dish">
+        </div>
+    </section>
+    <button @click.prevent="onSaveClicked">Agregar Menú</button>
+</form>
+    <!-- {{$data}} -->
 </template>
 
 <script>
@@ -34,69 +45,71 @@ export default {
   name: "",
   data() {
     return {
-        nameDishFirsts:{},
-        descDishFirsts:{},
-        nameDishSeconds:{},
-        descDishSeconds:{},
-        nameDishDesserts:{},
-        descDishDesserts:{},
-        firsts:[],
-        seconds:[],
-        desserts:[],
-        desc:{},
-        isHiddenFirsts:false,
-        isHiddenSeconds:false,
-        isHiddenDesserts:false,
-        date:'',
-        dictToSend:{},
-        menuAdded:false
-     };
+       date:'',
+       dict_plates:{'firsts':[{'name_dish':'','desc_dish':'', 'id_dish':'01'},
+                              {'name_dish':'','desc_dish':'', 'id_dish':'02'},
+                              {'name_dish':'','desc_dish':'', 'id_dish':'03'}],
+                     'seconds':[{'name_dish':'','desc_dish':'','id_dish':'04'},
+                              {'name_dish':'','desc_dish':'', 'id_dish':'05'},
+                              {'name_dish':'','desc_dish':'','id_dish':'06'}],
+                     'desserts':[{'name_dish':'','desc_dish':'','id_dish':'07'},
+                              {'name_dish':'','desc_dish':'','id_dish':'08'},
+                              {'name_dish':'','desc_dish':'','id_dish':'09'},
+                              {'name_dish':'','desc_dish':'','id_dish':'10'}]          
+                    }
+    };
   },
 
   mounted() {},
   computed:{
   },
   methods: {
-    addFirsts() { 
-        for (let plate in this.nameDishFirsts){
-            let toDict={'name_dish':this.nameDishFirsts[plate], 'desc_dish':this.descDishFirsts[plate], 'id_dish':plate}
-            this.firsts.push(toDict)
+    areValidInputsFromMenu(){
+      if(this.dict_plates.firsts[0].name_dish==="" || this.dict_plates.firsts[0].desc_dish==="" ||
+         this.dict_plates.firsts[1].name_dish==="" || this.dict_plates.firsts[1].desc_dish==="" ||
+         this.dict_plates.firsts[2].name_dish==="" || this.dict_plates.firsts[2].desc_dish==="" ||
+         this.dict_plates.seconds[0].name_dish==="" || this.dict_plates.seconds[0].desc_dish==="" ||
+         this.dict_plates.seconds[1].name_dish==="" || this.dict_plates.seconds[1].desc_dish==="" ||
+         this.dict_plates.seconds[2].name_dish==="" || this.dict_plates.seconds[2].desc_dish==="" ||
+         this.dict_plates.desserts[0].name_dish==="" || this.dict_plates.desserts[0].desc_dish==="" ||
+         this.dict_plates.desserts[1].name_dish==="" || this.dict_plates.desserts[1].desc_dish==="" ||
+         this.dict_plates.desserts[2].name_dish==="" || this.dict_plates.desserts[2].desc_dish==="" ||
+         this.dict_plates.desserts[3].name_dish==="" || this.dict_plates.desserts[3].desc_dish==="")
+        {
+            console.log('Inputs vacios!')
+            return false
         }
-        
-        this.isHiddenFirsts=true
-    },
-    addSeconds() { 
-        for (let plate in this.nameDishSeconds){
-            let toDict={'name_dish':this.nameDishSeconds[plate], 'desc_dish':this.descDishSeconds[plate], 'id_dish':plate}
-            this.seconds.push(toDict)
+      else{
+            return true
         }
-        // console.log('Resultado:',this.seconds)
-        this.isHiddenSeconds=true
-    },
-    addDesserts() { 
-        for (let plate in this.nameDishDesserts){
-            let toDict={'name_dish':this.nameDishDesserts[plate], 'desc_dish':this.descDishDesserts[plate], 'id_dish':plate}
-            this.desserts.push(toDict)
-        }
-        // console.log('Resultado:',this.desserts)
-        this.isHiddenDesserts=true
     },
     async onSaveClicked(){
-        this.desc={'firsts':this.firsts,'seconds':this.seconds,'desserts':this.desserts}
-        this.dictToSend={'date':this.date,'desc':this.desc}
-        this.dictToSend.id=uuidv4();
-        // console.log(JSON.stringify(this.dictToSend))
-        const settings={
+        if (this.areValidInputsFromMenu()===true && this.date!==''){
+            let desc=this.dict_plates
+            this.dictToSend={'date':this.date,'desc':desc}
+            this.dictToSend.id=uuidv4();
+            console.log(JSON.stringify(this.dictToSend))
+            const settings={
             method:"POST",
             body: JSON.stringify(this.dictToSend),
             headers:{
                 'Content-Type':'application/json'
                 }
+            }
+            var response = await fetch("http://localhost:5000/api/menus",settings)
+            // console.log(response)
+            if (response.status===200){
+            alert('Menu agregado con éxito!')
+            this.$router.push("/")
+            }
         }
-        var response = await fetch("http://localhost:5000/api/menus",settings)
-        // console.log(response)
-        if (response.status===200){
-            this.menuAdded=true
+        else{
+            if (this.date===''){
+                alert('Fecha vacía')
+            }
+            if (this.areValidInputsFromMenu()===false){
+                alert('Inputs vacíos!')
+            }
         }
     }
   },
@@ -112,18 +125,22 @@ body{
     display:flex;
     justify-content: flex-end;
 }
-.namePlates{
+.firsts,
+.seconds,
+.desserts{
     display:grid;
-    grid-template-columns:.0001fr 1fr 3fr;
+    grid-template-columns:1fr 3fr;
+    margin-top:0.5em;
+    padding: 0.2em
 }
-
-input{
-    margin-bottom:0.2em;
-    margin-right:0.5em;
+.input_plate{
+    margin-bottom:0.3em;
+    margin-right:0.1em;
 }
-pre{
-    font-size: 10px;
+p{
+    text-align:left
 }
-
-
+button{
+    margin-top:1em
+}
 </style>
