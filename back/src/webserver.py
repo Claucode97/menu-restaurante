@@ -46,4 +46,9 @@ def create_app(repositories):
         menu = repositories["menu"].get_by_id(id)
         return object_to_json(menu)
 
+    @app.route("/api/restaurants", methods=["GET"])
+    def restaurants_get_all():
+        restaurant = repositories["restaurant"].get_all_restaurants()
+        return object_to_json(restaurant)
+
     return app
