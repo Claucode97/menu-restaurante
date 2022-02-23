@@ -45,11 +45,12 @@ class MenuRepository:
         dict_menu = []
         for item in data:
             menu_class = Menu(
-                id=item["id"], date=item["date"], desc=json.loads(item["desc"]))
+                id=item["id"], date=item["date"], desc=json.loads(item["desc"])
+            )
             dict_menu.append(menu_class)
         return dict_menu
 
- # ---------------------------------------------------
+    # ---------------------------------------------------
 
     def get_by_id(self, id):
         conn = self.create_conn()
@@ -57,7 +58,8 @@ class MenuRepository:
         cursor.execute("""SELECT * FROM menus WHERE id =?""", (id,))
         data = cursor.fetchone()
         menu_class = Menu(
-            id=data["id"], date=data["date"], desc=json.loads(data["desc"]))
+            id=data["id"], date=data["date"], desc=json.loads(data["desc"])
+        )
         return menu_class
 
     def get_by_date(self, date):
@@ -66,7 +68,8 @@ class MenuRepository:
         cursor.execute("""SELECT * FROM menus WHERE date =?""", (date,))
         data = cursor.fetchone()
         menu_class = Menu(
-            id=data["id"], date=data["date"], desc=json.loads(data["desc"]))
+            id=data["id"], date=data["date"], desc=json.loads(data["desc"])
+        )
         return menu_class
 
     def save(self, menu):
@@ -75,9 +78,19 @@ class MenuRepository:
         ) """
         conn = self.create_conn()
         cursor = conn.cursor()
-        cursor.execute(sql, {
-            "id": menu.id,
-            "date": menu.date,
-            "desc": json.dumps(menu.desc)
-        })
+        cursor.execute(
+            sql, {"id": menu.id, "date": menu.date, "desc": json.dumps(menu.desc)}
+        )
+        conn.commit()
+
+    def modify_a_menu(self, menu):
+        sql = """UPDATE menus SET desc = :desc 
+             WHERE id = :id;
+        
+        """
+        conn = self.create_conn()
+        cursor = conn.cursor()
+        cursor.execute(
+            sql, {"id": menu.id, "date": menu.date, "desc": json.dumps(menu.desc)}
+        )
         conn.commit()

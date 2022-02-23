@@ -1,4 +1,4 @@
-from flask import Flask,  request
+from flask import Flask, request
 from flask_cors import CORS
 from src.lib.utils import object_to_json
 from src.domain.Menu import Menu
@@ -27,7 +27,14 @@ def create_app(repositories):
         body = request.json
         added_menu = Menu(**body)
         repositories["menu"].save(added_menu)
-        return ''
+        return ""
+
+    @app.route("/api/menus", methods=["PUT"])
+    def modify_menu():
+        body = request.json
+        modified_menu = Menu(**body)
+        repositories["menu"].modify_a_menu(modified_menu)
+        return ""
 
     @app.route("/api/menus/by-date/<date>", methods=["GET"])
     def show_menu_by_date(date):
