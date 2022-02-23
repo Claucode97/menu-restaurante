@@ -2,7 +2,8 @@ import { createRouter, createWebHistory } from 'vue-router'
 import menu from '../pages/menu/MenuPage.vue'
 import home from '../pages/home/HomePage.vue'
 import menus from '../pages/menus/MenusPage.vue'
-import addMenu from '../pages/addmenu/AddMenu.vue'
+import MenuAddPage from '../pages/menu-add/MenuAddPage.vue'
+import MenuModifyPage from '../pages/menu-modify/MenuModifyPage.vue'
 
 const routes = [
   {
@@ -21,9 +22,14 @@ const routes = [
     component: menus
   },
   {
-    path: '/addMenu',
-    name: 'addMenu',
-    component: addMenu
+    path: '/menu/add',
+    name: 'MenuAddPage',
+    component: MenuAddPage
+  },
+  {
+    path: '/menu/modify',
+    name: 'MenuModifyPage',
+    component: MenuModifyPage
   },
 ]
 

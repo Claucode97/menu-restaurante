@@ -42,7 +42,7 @@
 <script>
 import {v4 as uuidv4} from "uuid";
 export default {
-  name: "",
+  name: "MenuAdd",
   data() {
     return {
        date:'',
@@ -88,7 +88,7 @@ export default {
             let desc=this.dict_plates
             this.dictToSend={'date':this.date,'desc':desc}
             this.dictToSend.id=uuidv4();
-            console.log(JSON.stringify(this.dictToSend))
+            // console.log(JSON.stringify(this.dictToSend))
             const settings={
             method:"POST",
             body: JSON.stringify(this.dictToSend),
