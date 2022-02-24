@@ -65,13 +65,11 @@ class RestaurantRepository:
 
     def save_restaurants(self, restaurant):
         sql = """INSERT INTO restaurants (id_restaurant,name) VALUES (
-            :id_restaurant,:name
+            :id_restaurant, :name
         ) """
         conn = self.create_conn()
         cursor = conn.cursor()
         cursor.execute(
-            sql,
-                {"id_restaurant": restaurant.id_restaurant, "name": restaurant.name}
-            ,
+            sql, {"id_restaurant": restaurant.id_restaurant, "name": restaurant.name}
         )
         conn.commit()
