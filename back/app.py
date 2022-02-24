@@ -10,7 +10,7 @@ database_path = "data/database.db"
 repositories = {
     "info": InfoRepository(database_path),
     "menu": MenuRepository(database_path),
-    "restaurant": RestaurantRepository(database_path),
+    "restaurant ": RestaurantRepository(database_path),
 }
 
 app = create_app(repositories)

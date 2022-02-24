@@ -3,13 +3,19 @@ import json
 
 
 class Menu:
-    def __init__(self, id, date, desc):
+    def __init__(self, id, date, desc, id_restaurant):
         self.id = id
         self.date = date
         self.desc = desc
+        self.id_restaurant = id_restaurant
 
     def to_dict(self):
-        return {"id": self.id, "date": self.date, "desc": self.desc}
+        return {
+            "id": self.id,
+            "date": self.date,
+            "desc": self.desc,
+            "id_restaurant": self.id_restaurant,
+        }
 
 
 class MenuRepository:
@@ -27,7 +33,10 @@ class MenuRepository:
             CREATE table if not exists menus (
                 id varchar,
                 date varchar,
-                desc varchar
+                desc varchar,
+                id_restaurant varchar,
+                FOREIGN KEY (id_restaurant) REFERENCES restaurants(id_restaurant)
+                ON DELETE  CASCADE           
             )
         """
 
@@ -73,13 +82,19 @@ class MenuRepository:
         return menu_class
 
     def save(self, menu):
-        sql = """INSERT INTO menus (id,date, desc) VALUES (
-            :id,:date, :desc
+        sql = """INSERT INTO menus (id,date, desc, id_restaurant) VALUES (
+            :id,:date, :desc, :id_restaurant
         ) """
         conn = self.create_conn()
         cursor = conn.cursor()
         cursor.execute(
-            sql, {"id": menu.id, "date": menu.date, "desc": json.dumps(menu.desc)}
+            sql,
+            {
+                "id": menu.id,
+                "date": menu.date,
+                "desc": json.dumps(menu.desc),
+                "id_restaurant": menu.id_restaurant,
+            },
         )
         conn.commit()
 
