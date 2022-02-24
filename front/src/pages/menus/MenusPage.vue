@@ -1,5 +1,4 @@
 <template>
-  {{ currentMonth }} {{ daysOfMonthSelected }}
   <router-link :to="{ name: 'Menu', params: { date: getToday } }">
     <button>Menú del día</button>
   </router-link>
@@ -7,35 +6,26 @@
   <article class="calendar">
     <section class="name-month">
       <button class="button-last-month" @click="prevMonth">⬅</button>
-      <h2>
-        {{ nameMonths[this.currentMonth] }}
-        {{ currentYear }}
-      </h2>
+      <h2>{{ nameMonths[this.currentMonth] }} {{ currentYear }}</h2>
       <button class="button-last-month" @click="nextMonth">➡</button>
     </section>
     <ul class="name-of-week">
-      <li>Lun</li>
-      <li>Mar</li>
-      <li>Mié</li>
-      <li>Jue</li>
-      <li>Vier</li>
-      <li>Sáb</li>
-      <li>Dom</li>
+      <li v-for="index in nameDaysOfWeek" :key="index">{{ index }}</li>
     </ul>
     <ul class="days-of-month">
-      <li v-for="i in showInitialDayOfMonth - 1" :key="i"></li>
+      <li v-for="i in initialPositionOfFirstDay - 1" :key="i"></li>
       <li v-for="index in daysOfMonthSelected" :key="index">
         {{ index }}
       </li>
     </ul>
   </article>
+
   <ul class="menu-date" v-for="menu in listOfMenus" :key="menu.id">
     <router-link :to="{ name: 'Menu', params: { date: menu.date } }">
       <li>{{ menu.date }}</li>
     </router-link>
   </ul>
 </template>
-
 
 <script>
 export default {
@@ -44,20 +34,21 @@ export default {
       currentDay: new Date().getDate(),
       currentMonth: new Date().getMonth(),
       currentYear: new Date().getFullYear(),
-      nameMonths: {
-        0: "Enero",
-        1: "Febrero",
-        2: "Marzo",
-        3: "Abril",
-        4: "Mayo",
-        5: "Junio",
-        6: "Julio",
-        7: "Agosto",
-        8: "Septiembre",
-        9: "Octubre",
-        10: "Noviembre",
-        11: "Diciembre",
-      },
+      nameDaysOfWeek: ["Lun", "Mar", "Mié", "Jue", "Vie", "Sáb", "Dom"],
+      nameMonths: [
+        "Enero",
+        "Febrero",
+        "Marzo",
+        "Abril",
+        "Mayo",
+        "Junio",
+        "Julio",
+        "Agosto",
+        "Septiembre",
+        "Octubre",
+        "Noviembre",
+        "Diciembre",
+      ],
       listOfMenus: [],
     };
   },
@@ -81,7 +72,7 @@ export default {
       const today = year + "-" + month + "-" + day;
       return today;
     },
-    showInitialDayOfMonth() {
+    initialPositionOfFirstDay() {
       let initialDayWeek = new Date(
         this.currentYear,
         this.currentMonth,
