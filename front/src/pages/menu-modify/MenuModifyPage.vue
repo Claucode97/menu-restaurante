@@ -1,8 +1,8 @@
 <template>
 <form >
-    <div class="date">
+    <!-- <div class="date">
         <input type="date" v-model="date" name="date" id="date" @click="getMenuFromDate">
-    </div>
+    </div> -->
     <!-- <button @click.prevent="getMenuFromDate">Cargar menu</button> -->
     <section class="plates_info"  >
         <p>Primeros</p>
@@ -46,9 +46,8 @@ export default {
   name: "modifymenu",
   data() {
     return {
-       date:'',
        dateReceived:this.$route.params.date,
-    //    idReceived:this.$route.params.id,
+       idReceived:this.$route.params.id,
        dict_plates:{'desc':{'firsts':[{'name_dish':'','desc_dish':'', 'id_dish':'01'},
                               {'name_dish':'','desc_dish':'', 'id_dish':'02'},
                               {'name_dish':'','desc_dish':'', 'id_dish':'03'}],
@@ -65,7 +64,7 @@ export default {
   },
 
   mounted() {
-      console.log('date',this.dateReceived)
+    //   console.log('date',this.dateReceived)
       this.loadData()
   },
   computed:{
@@ -75,9 +74,54 @@ export default {
       const response = await fetch("http://localhost:5000/api/menus/by-date/" + this.dateReceived);
       this.dict_plates = await response.json();
     },
-    
+    areValidInputsFromMenu(){
+      if(this.dict_plates.desc.firsts[0].name_dish==="" || this.dict_plates.desc.firsts[0].desc_dish==="" ||
+         this.dict_plates.desc.firsts[1].name_dish==="" || this.dict_plates.desc.firsts[1].desc_dish==="" ||
+         this.dict_plates.desc.firsts[2].name_dish==="" || this.dict_plates.desc.firsts[2].desc_dish==="" ||
+         this.dict_plates.desc.seconds[0].name_dish==="" || this.dict_plates.desc.seconds[0].desc_dish==="" ||
+         this.dict_plates.desc.seconds[1].name_dish==="" || this.dict_plates.desc.seconds[1].desc_dish==="" ||
+         this.dict_plates.desc.seconds[2].name_dish==="" || this.dict_plates.desc.seconds[2].desc_dish==="" ||
+         this.dict_plates.desc.desserts[0].name_dish==="" || this.dict_plates.desc.desserts[0].desc_dish===""||
+         this.dict_plates.desc.desserts[1].name_dish==="" ||this.dict_plates.desc.desserts[1].desc_dish==="" ||
+         this.dict_plates.desc.desserts[2].name_dish==="" ||this.dict_plates.desc.desserts[2].desc_dish==="" ||
+         this.dict_plates.desc.desserts[3].name_dish==="" ||this.dict_plates.desc.desserts[3].desc_dish==="")
+        {
+            console.log('Inputs vacios!')
+            return false
+        }
+      else{
+            return true
+        }
+    },
+    async onSaveClicked(){
+        if (this.areValidInputsFromMenu()===true){
+            let desc=this.dict_plates.desc
+            this.dictToSend={'date':this.dateReceived,'desc':desc, 'id':this.dict_plates.id}
+            console.log('dictToSEnd',this.dictToSend)
+            // --------->
+            const settings={
+            method:"PUT",
+            body: JSON.stringify(this.dictToSend),
+            headers:{
+                'Content-Type':'application/json'
+                }
+            }
+            var response = await fetch("http://localhost:5000/api/menus",settings)
+            // console.log(response)
+            if (response.status===200){
+            alert('Menu modificado con éxito!')
+            this.$router.push("/")
+            }
+        }
+        else{
+            if (this.areValidInputsFromMenu()===false){
+                alert('Inputs vacíos!')
+            }
+        }
+    }
   },
-};
+}
+
 </script>
 <style scoped>
 body{

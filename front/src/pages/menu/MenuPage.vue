@@ -1,6 +1,6 @@
 <template>
   <h2>
-    MENÚ DEL DÍA: <span>{{ this.date }}</span>
+    MENÚ DEL DÍA: <span>???:{{ dateParsed }}</span>
   </h2>
   <div class="modify_div_btn">
     <router-link :to="{name: 'MenuModifyPage', params: {date: this.$route.params.date}}">
@@ -39,6 +39,7 @@ export default {
       seconds: [],
       desserts: [],
       date: this.$route.params.date,
+      parsedDate:''
     };
   },
 
@@ -49,14 +50,20 @@ export default {
     async loadData() {
       const response = await fetch("http://localhost:5000/api/menus/by-date/" + this.$route.params.date);
       let menus = await response.json();
-      console.log('Menus',menus)
       this.firsts = menus.desc.firsts;
       this.seconds = menus.desc.seconds;
       this.desserts = menus.desc.desserts;
-      // let x=new Date().toJSON().slice(0,10)
-      // let day=x.toJSON().slice(8,10)
-      // console.log('Obj Date',x,day)  
+      //-------------------->
+      let year=this.date.slice(0,4)
+      let day=this.date.slice(8,10)
+      console.log('Fecha',day,'-xx-',year)
+      //-------------------->
     },
+    dateParsed(){
+      console.log('Date',this.date)
+      let parsedDate=this.date.slice(8,10)
+      return parsedDate
+    }
   },
 };
 </script>
