@@ -1,4 +1,5 @@
 <template>
+  {{ currentMonth }} {{ daysOfMonthSelected }}
   <router-link :to="{ name: 'Menu', params: { date: getToday } }">
     <button>Menú del día</button>
   </router-link>
@@ -7,11 +8,10 @@
     <section class="name-month">
       <button class="button-last-month" @click="prevMonth">⬅</button>
       <h2>
-        {{ currentCalendar[this.currentMonth]["nameOfMonth"] }}
+        {{ nameMonths[this.currentMonth] }}
         {{ currentYear }}
       </h2>
-      <button class="button-next-month" @click="nextMonth">➡</button>
-      {{ currentMonth }} {{ showDays }}
+      <button class="button-last-month" @click="nextMonth">➡</button>
     </section>
     <ul class="name-of-week">
       <li>Lun</li>
@@ -23,34 +23,10 @@
       <li>Dom</li>
     </ul>
     <ul class="days-of-month">
-      <li @click="onClikDay(1)" class="first-day selected-day">1</li>
-      <li @click="onClikDay(2)">2</li>
-      <li>3</li>
-      <li>6</li>
-      <li>5</li>
-      <li>7</li>
-      <li>4</li>
-      <li>8</li>
-      <li>9</li>
-      <li>10</li>
-      <li>11</li>
-      <li>12</li>
-      <li>13</li>
-      <li>14</li>
-      <li>15</li>
-      <li>16</li>
-      <li>17</li>
-      <li>18</li>
-      <li>19</li>
-      <li>20</li>
-      <li>21</li>
-      <li>22</li>
-      <li>23</li>
-      <li>24</li>
-      <li>25</li>
-      <li>26</li>
-      <li>27</li>
-      <li>28</li>
+      <li v-for="i in showInitialDayOfMonth - 1" :key="i"></li>
+      <li v-for="index in daysOfMonthSelected" :key="index">
+        {{ index }}
+      </li>
     </ul>
   </article>
   <ul class="menu-date" v-for="menu in listOfMenus" :key="menu.id">
@@ -66,58 +42,21 @@ export default {
   data() {
     return {
       currentDay: new Date().getDate(),
-      currentMonth: new Date().getMonth() + 1,
+      currentMonth: new Date().getMonth(),
       currentYear: new Date().getFullYear(),
-      dayOnClicked: null,
-      currentCalendar: {
-        1: {
-          nameOfMonth: "Enero",
-          days: new Date(this.currentYear, 1, 0).getDate(),
-        },
-        2: {
-          nameOfMonth: "Febrero",
-          days: new Date(this.currentYear, 2, 0).getDate(),
-        },
-        3: {
-          nameOfMonth: "Marzo",
-          days: new Date(this.currentYear, 3, 0).getDate(),
-        },
-        4: {
-          nameOfMonth: "Abril",
-          days: new Date(this.currentYear, 4, 0).getDate(),
-        },
-        5: {
-          nameOfMonth: "Mayo",
-          days: new Date(this.currentYear, 5, 0).getDate(),
-        },
-        6: {
-          nameOfMonth: "Junio",
-          days: new Date(this.currentYear, 6, 0).getDate(),
-        },
-        7: {
-          nameOfMonth: "Julio",
-          days: new Date(this.currentYear, 7, 0).getDate(),
-        },
-        8: {
-          nameOfMonth: "Agosto",
-          days: new Date(this.currentYear, 8, 0).getDate(),
-        },
-        9: {
-          nameOfMonth: "Septiembre",
-          days: new Date(this.currentYear, 9, 0).getDate(),
-        },
-        10: {
-          nameOfMonth: "Octubre",
-          days: new Date(this.currentYear, 10, 0).getDate(),
-        },
-        11: {
-          nameOfMonth: "Noviembre",
-          days: new Date(this.currentYear, 11, 0).getDate(),
-        },
-        12: {
-          nameOfMonth: "Diciembre",
-          days: new Date(this.currentYear, 12, 0).getDate(),
-        },
+      nameMonths: {
+        0: "Enero",
+        1: "Febrero",
+        2: "Marzo",
+        3: "Abril",
+        4: "Mayo",
+        5: "Junio",
+        6: "Julio",
+        7: "Agosto",
+        8: "Septiembre",
+        9: "Octubre",
+        10: "Noviembre",
+        11: "Diciembre",
       },
       listOfMenus: [],
     };
@@ -142,26 +81,35 @@ export default {
       const today = year + "-" + month + "-" + day;
       return today;
     },
-    showDays() {
-      //new Date(2022, 1, 0).getDate()
-      return 28;
+    showInitialDayOfMonth() {
+      let initialDayWeek = new Date(
+        this.currentYear,
+        this.currentMonth,
+        1
+      ).getDay();
+      return initialDayWeek;
+    },
+    daysOfMonthSelected() {
+      let totaldays = new Date(
+        this.currentYear,
+        this.currentMonth + 1,
+        0
+      ).getDate();
+      return totaldays;
     },
   },
   methods: {
     nextMonth() {
-      this.currentMonth += 1;
-      if (this.currentMonth > 12) {
-        this.currentMonth = 12;
+      this.currentMonth = this.currentMonth + 1;
+      if (this.currentMonth > 11) {
+        this.currentMonth = 11;
       }
     },
     prevMonth() {
       this.currentMonth -= 1;
-      if (this.currentMonth < 1) {
-        this.currentMonth = 1;
+      if (this.currentMonth < 0) {
+        this.currentMonth = 0;
       }
-    },
-    onClikDay(day) {
-      console.log("el día es: ", day);
     },
     async loadData() {
       const response = await fetch("http://localhost:5000/api/menus");
@@ -214,9 +162,7 @@ h1 {
   justify-content: center;
   align-items: center;
 }
-.first-day {
-  grid-column-start: 2;
-}
+
 .days-of-month > li:hover {
   font-weight: bolder;
   background-color: lightblue;
