@@ -1,4 +1,5 @@
 import sqlite3
+from src.domain.Restaurant import RestaurantRepository
 from src.domain.Menu import MenuRepository
 from src.webserver import create_app
 from src.domain.info import InfoRepository

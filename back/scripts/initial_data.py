@@ -3,6 +3,7 @@ import json
 from unicodedata import name
 
 sys.path.insert(0, "")
+from src.domain.Restaurant import RestaurantRepository, Restaurant
 from src.domain.Menu import MenuRepository, Menu
 from src.example_menu import dict_menu, dict_menu_2, dict_menu_3
 from src.domain.Restaurant import RestaurantRepository, Restaurant
@@ -22,5 +23,10 @@ menu_repository.save(
     Menu(id="MT", date="2022-02-03", desc=dict_menu_2, id_restaurant="02")
 )
 
-restaurant_reposotory.save_restaurants(Restaurant(id_restaurant="01", name="Josu"))
-restaurant_reposotory.save_restaurants(Restaurant(id_restaurant="02", name="Joseba"))
+menu_repository.save(Menu(id="MX", date="2022-03-03", desc=dict_menu_3))
+
+
+restaurante_repository = RestaurantRepository(database_path)
+restaurante_repository.save_restaurants(
+    Restaurant(id_restaurant="01", name="Tia Maruca")
+)
