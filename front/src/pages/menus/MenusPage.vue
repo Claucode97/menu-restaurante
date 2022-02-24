@@ -13,8 +13,12 @@
       <li v-for="index in nameDaysOfWeek" :key="index">{{ index }}</li>
     </ul>
     <ul class="days-of-month">
-      <li v-for="i in initialPositionOfFirstDay - 1" :key="i"></li>
-      <li v-for="index in daysOfMonthSelected" :key="index">
+      <li v-for="i in initialPositionOfFirstDay" :key="i"></li>
+      <li
+        @click="onClickDay(index)"
+        v-for="index in daysOfMonthSelected"
+        :key="index"
+      >
         {{ index }}
       </li>
     </ul>
@@ -78,7 +82,7 @@ export default {
         this.currentMonth,
         1
       ).getDay();
-      return initialDayWeek;
+      return initialDayWeek - 1;
     },
     daysOfMonthSelected() {
       let totaldays = new Date(
@@ -101,6 +105,11 @@ export default {
       if (this.currentMonth < 0) {
         this.currentMonth = 0;
       }
+    },
+    onClickDay(day) {
+      let month = this.currentMonth + 1;
+      const clickedDay = this.currentYear + "-" + month + "-" + day;
+      console.log(clickedDay);
     },
     async loadData() {
       const response = await fetch("http://localhost:5000/api/menus");
