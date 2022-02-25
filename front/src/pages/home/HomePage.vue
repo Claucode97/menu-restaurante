@@ -48,7 +48,7 @@ export default {
       console.log('name',localStorage.name)
       console.log('id',localStorage.id_restaurant)
       console.log('settings',settings)
-      //this.$router.push('/menus',settings)
+      this.$router.push('/menus',settings)
     }
   }
 }

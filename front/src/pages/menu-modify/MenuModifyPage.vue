@@ -41,7 +41,7 @@
 </template>
 
 <script>
-
+import config from "@/config.js"
 export default {
   name: "modifymenu",
   data() {
@@ -106,7 +106,7 @@ export default {
                 'Content-Type':'application/json'
                 }
             }
-            var response = await fetch("http://localhost:5000/api/menus",settings)
+            var response = await fetch(`${config.API_PATH}/menus`,settings)
             // console.log(response)
             if (response.status===200){
             alert('Menu modificado con éxito!')

@@ -32,6 +32,7 @@
 </template>
 
 <script>
+import config from "@/config.js"
 export default {
   data() {
     return {
@@ -123,7 +124,7 @@ export default {
         },
       }
       console.log('id restaurant-settings: ',settings)
-      const response = await fetch("http://localhost:5000/api/menus", settings);
+      const response = await fetch(`${config.API_PATH}/menus`, settings);
       this.listOfMenus = await response.json();
     },
   },

@@ -31,6 +31,7 @@
 </template>
 
 <script>
+import config from "@/config.js"
 export default {
   
   data() {
@@ -54,24 +55,25 @@ export default {
           Authorization: localStorage.id_restaurant,
         },
       }
-      const response = await fetch("http://localhost:5000/api/menus/by-date/" + this.$route.params.date,settings);
+      const response = await fetch(`${config.API_PATH}/menus/by-date/` + this.$route.params.date,settings);
       console.log('response', response)
       let menus = await response.json();
       this.firsts = menus.desc.firsts;
       this.seconds = menus.desc.seconds;
       this.desserts = menus.desc.desserts;
-      //-------------------->
+    },
+  },
+  computed:{
+    dateParsed() {
       let year=this.date.slice(0,4)
       let day=this.date.slice(8,10)
-      console.log('Fecha',day,'-xx-',year)
-    //-------------------->  
-    },
-    dateParsed(){
-      console.log('Date',this.date)
-      let parsedDate=this.date.slice(8,10)
-      return parsedDate
+      let month=this.date.slice(5,7)
+      let months={'01':'Enero','02':'Febrero','03':'Marzo','04':'Abril','05':'Mayo','06':'Junio','07':'Julio','08':'Agosto','09':'Septiembre','10':'Octubre','11':'Noviembre','12':'Diciembre'}
+      console.log('Fecha',day,'-',months[month],'-',year)
+      let fullDate=day+'-'+months[month]+'-'+year
+      return fullDate
     }
-  },
+  }
 };
 </script>
 
