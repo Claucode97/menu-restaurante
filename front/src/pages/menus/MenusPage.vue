@@ -116,7 +116,14 @@ export default {
       console.log(clickedDay);
     },
     async loadData() {
-      const response = await fetch("http://localhost:5000/api/menus");
+      const settings = {
+        method: "GET",
+        headers: {
+          Authorization: localStorage.id_restaurant,
+        },
+      }
+      console.log('id restaurant-settings: ',settings)
+      const response = await fetch("http://localhost:5000/api/menus", settings);
       this.listOfMenus = await response.json();
     },
   },
