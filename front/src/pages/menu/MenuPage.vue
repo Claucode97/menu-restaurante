@@ -48,7 +48,14 @@ export default {
   },
   methods: {
     async loadData() {
-      const response = await fetch("http://localhost:5000/api/menus/by-date/" + this.$route.params.date);
+      const settings = {
+        method: "GET",
+        headers: {
+          Authorization: localStorage.id_restaurant,
+        },
+      }
+      const response = await fetch("http://localhost:5000/api/menus/by-date/" + this.$route.params.date,settings);
+      console.log('response', response)
       let menus = await response.json();
       this.firsts = menus.desc.firsts;
       this.seconds = menus.desc.seconds;
@@ -57,7 +64,7 @@ export default {
       let year=this.date.slice(0,4)
       let day=this.date.slice(8,10)
       console.log('Fecha',day,'-xx-',year)
-      //-------------------->
+    //-------------------->  
     },
     dateParsed(){
       console.log('Date',this.date)
