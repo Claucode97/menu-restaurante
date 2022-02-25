@@ -82,7 +82,11 @@ export default {
         this.currentMonth,
         1
       ).getDay();
-      return initialDayWeek - 1;
+      if (initialDayWeek === 0) {
+        return (initialDayWeek = 6);
+      }
+      let currentInitialDayweek = initialDayWeek - 1;
+      return currentInitialDayweek;
     },
     daysOfMonthSelected() {
       let totaldays = new Date(
