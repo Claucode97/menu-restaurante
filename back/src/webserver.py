@@ -19,20 +19,33 @@ def create_app(repositories):
 
     @app.route("/api/menus", methods=["GET"])
     def show_menu():
-        menu = repositories["menu"].get_all()
+        id_restaurant = request.headers.get("Authorization")
+        menu = repositories["menu"].search_by_id_restaurant(id_restaurant)
         return object_to_json(menu)
 
     @app.route("/api/menus", methods=["POST"])
     def add_menu():
         body = request.json
-        added_menu = Menu(**body)
+        id_restaurant_1 = request.headers.get("Authorization")
+        added_menu = Menu(
+            id=body["id"],
+            date=body["date"],
+            desc=body["desc"],
+            id_restaurant=id_restaurant_1,
+        )
         repositories["menu"].save(added_menu)
         return ""
 
     @app.route("/api/menus", methods=["PUT"])
     def modify_menu():
         body = request.json
-        modified_menu = Menu(**body)
+        id_restaurant_1 = request.headers.get("Authorization")
+        modified_menu = Menu(
+            id=body["id"],
+            date=body["date"],
+            desc=body["desc"],
+            id_restaurant=id_restaurant_1,
+        )
         repositories["menu"].modify_a_menu(modified_menu)
         return ""
 
