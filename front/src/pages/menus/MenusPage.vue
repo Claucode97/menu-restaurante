@@ -6,18 +6,30 @@
   <article class="calendar">
     <section class="name-month">
       <button class="button-last-month" @click="prevMonth">⬅</button>
-      <h2>{{ nameMonths[this.currentMonth] }} {{ currentYear }}</h2>
+      <h2 @click="comeBackCurrentMonth()">
+        {{ nameMonths[this.currentMonth] }} {{ currentYear }}
+      </h2>
       <button class="button-last-month" @click="nextMonth">➡</button>
     </section>
     <ul class="name-of-week">
       <li v-for="index in nameDaysOfWeek" :key="index">{{ index }}</li>
     </ul>
     <ul class="days-of-month">
-      <li v-for="i in initialPositionOfFirstDay" :key="i"></li>
+      <li
+        class="empty-list"
+        v-for="i in initialPositionOfFirstDay"
+        :key="i"
+      ></li>
       <li
         @click="onClickDay(index)"
         v-for="index in daysOfMonthSelected"
         :key="index"
+        class="not-empty-list"
+        :class="{
+          'underline-today':
+            index === this.currentDay &&
+            new Date().getMonth() === this.currentMonth,
+        }"
       >
         {{ index }}
       </li>
@@ -32,7 +44,7 @@
 </template>
 
 <script>
-import config from "@/config.js"
+import config from "@/config.js";
 export default {
   data() {
     return {
@@ -99,6 +111,10 @@ export default {
     },
   },
   methods: {
+    comeBackCurrentMonth() {
+      let comebackMonth = new Date().getMonth();
+      this.currentMonth = comebackMonth;
+    },
     nextMonth() {
       this.currentMonth = this.currentMonth + 1;
       if (this.currentMonth > 11) {
@@ -122,8 +138,8 @@ export default {
         headers: {
           Authorization: localStorage.id_restaurant,
         },
-      }
-      console.log('id restaurant-settings: ',settings)
+      };
+      console.log("id restaurant-settings: ", settings);
       const response = await fetch(`${config.API_PATH}/menus`, settings);
       this.listOfMenus = await response.json();
     },
@@ -142,10 +158,6 @@ export default {
   list-style: none;
   text-align: center;
   margin: 1em;
-}
-
-h1 {
-  border: 2px solid black;
 }
 
 .calendar {
@@ -170,23 +182,36 @@ h1 {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
   grid-auto-rows: 40px;
-  cursor: pointer;
-  justify-content: center;
-  align-items: center;
 }
-
-.days-of-month > li:hover {
+.days-of-month > li {
+  padding: 25% 25%;
+}
+.days-of-month > .empty-list {
+  background: none;
+}
+.days-of-month > .not-empty-list:hover {
+  font-size: 1.07rem;
   font-weight: bolder;
+  color: darkblue;
   background-color: lightblue;
-  border-radius: 45%;
+  border-radius: 50%;
+  cursor: pointer;
 }
 .name-month {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
+.name-month > h2 {
+  text-decoration: underline;
+  cursor: pointer;
+}
 .button-last-month,
 .button-next-month {
-  width: 40px;
+  width: 50px;
+}
+
+.underline-today {
+  text-decoration: underline double;
 }
 </style>
