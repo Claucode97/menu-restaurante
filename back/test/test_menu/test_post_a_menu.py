@@ -11,20 +11,27 @@ def test_should_save_a_menu():
     body = {
         "id": "01",
         "date": "2022-03-03",
-        "desc": {"id_dish": "01", "name_dish": "Ensalada mixta",
-                 "desc_dish": "Ensalada con cebolla"}
+        "desc": {
+            "id_dish": "01",
+            "name_dish": "Ensalada mixta",
+            "desc_dish": "Ensalada con cebolla",
+        },
+        "id_restaurant": "11",
     }
 
     response = client.post("/api/menus", json=body)
 
-
-# ASSERT (then)
+    # ASSERT (then)
     assert response.status_code == 200
     response_get = client.get("/api/menus/01")
 
     assert response_get.json == {
         "id": "01",
         "date": "2022-03-03",
-        "desc": {"id_dish": "01", "name_dish": "Ensalada mixta",
-                 "desc_dish": "Ensalada con cebolla"}
+        "desc": {
+            "id_dish": "01",
+            "name_dish": "Ensalada mixta",
+            "desc_dish": "Ensalada con cebolla",
+        },
+        "id_restaurant": "11",
     }

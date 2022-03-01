@@ -19,7 +19,8 @@ def create_app(repositories):
 
     @app.route("/api/menus", methods=["GET"])
     def show_menu():
-        menu = repositories["menu"].get_all()
+        id_restaurant = request.headers.get("Authorization")
+        menu = repositories["menu"].search_by_id_restaurant(id_restaurant)
         return object_to_json(menu)
 
     @app.route("/api/menus", methods=["POST"])

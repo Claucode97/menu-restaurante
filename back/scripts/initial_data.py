@@ -1,6 +1,4 @@
 import sys
-import json
-from unicodedata import name
 
 sys.path.insert(0, "")
 from src.domain.Restaurant import RestaurantRepository, Restaurant
@@ -13,20 +11,23 @@ database_path = "data/database.db"
 restaurant_reposotory = RestaurantRepository(database_path)
 menu_repository = MenuRepository(database_path)
 
-
 menu_repository.save(
-    Menu(id="MM", date="2022-01-03", desc=dict_menu, id_restaurant="01")
+    Menu(id="MM", date="2022-01-03", desc=dict_menu, id_restaurant="0001")
 )
 
-
 menu_repository.save(
-    Menu(id="MT", date="2022-02-03", desc=dict_menu_2, id_restaurant="02")
+    Menu(id="MT", date="2022-02-03", desc=dict_menu_2, id_restaurant="0001")
 )
 
-menu_repository.save(Menu(id="MX", date="2022-03-03", desc=dict_menu_3))
+menu_repository.save(
+    Menu(id="MX", date="2022-03-03", desc=dict_menu_3, id_restaurant="0002")
+)
 
 
 restaurante_repository = RestaurantRepository(database_path)
 restaurante_repository.save_restaurants(
-    Restaurant(id_restaurant="01", name="Tia Maruca")
+    Restaurant(id_restaurant="0001", name="Tia Maruca")
+)
+restaurante_repository.save_restaurants(
+    Restaurant(id_restaurant="0002", name="Don Satur")
 )

@@ -16,6 +16,7 @@ def test_should_modify_a_menu():
             "name_dish": "Ensalada mixta",
             "desc_dish": "Ensalada con cebolla",
         },
+        "id_restaurant": "11",
     }
 
     body2 = {
@@ -26,6 +27,7 @@ def test_should_modify_a_menu():
             "name_dish": "Ensalada atunada",
             "desc_dish": "Ensalada con chichos",
         },
+        "id_restaurant": "11",
     }
 
     client.post("/api/menus", json=body)
@@ -42,4 +44,5 @@ def test_should_modify_a_menu():
             "name_dish": "Ensalada atunada",
             "desc_dish": "Ensalada con chichos",
         },
+        "id_restaurant": "11",
     }
