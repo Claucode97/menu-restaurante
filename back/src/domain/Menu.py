@@ -84,7 +84,8 @@ class MenuRepository:
         menu_class = Menu(
             id=data["id"],
             date=data["date"],
-            desc=json.loads(data["desc"], id_restaurant=data["id_restaurant"]),
+            desc=json.loads(data["desc"]),
+            id_restaurant=data["id_restaurant"],
         )
         return menu_class
 
