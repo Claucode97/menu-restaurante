@@ -21,27 +21,22 @@ def test_should_return_one_menu_by_id():
                 }
             ]
         },
-        id_restaurant="11",
-    )
+        id_restaurant="11")
     plate_02 = Menu(
         id="MM",
         date="2022-10-15",
         desc={
-            "firsts": [
-                {
+            "firsts": [{
                     "id_dish": "01",
                     "name_dish": "ensalada mixta",
                     "desc_dish": "ensalada con cebolla",
-                }
-            ]
-        },
-        id_restaurant="11",
-    )
+                }]},
+        id_restaurant="11")
     menu_repository.save(plate_01)
     menu_repository.save(plate_02)
 
     response = client.get("/api/menus/MM")
-    print("respuesta JSON: ", response.json)
+    print("respuesta JSON: ", response)
 
     assert response.json == {
         "id": "MM",
@@ -55,5 +50,5 @@ def test_should_return_one_menu_by_id():
                 }
             ]
         },
-        "id_restaurant": "11",
+        "id_restaurant": "11"
     }

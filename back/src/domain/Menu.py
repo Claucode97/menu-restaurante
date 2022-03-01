@@ -36,9 +36,7 @@ class MenuRepository:
                 desc varchar,
                 id_restaurant varchar,
                 FOREIGN KEY (id_restaurant) REFERENCES restaurants(id_restaurant)
-                ON DELETE  CASCADE           
-            )
-        """
+                ON DELETE  CASCADE)"""
 
         conn = self.create_conn()
         cursor = conn.cursor()
@@ -57,7 +55,7 @@ class MenuRepository:
                 id=item["id"],
                 date=item["date"],
                 desc=json.loads(item["desc"]),
-                id_restaurant=item[" id_restaurant"],
+                id_restaurant=item["id_restaurant"],
             )
             dict_menu.append(menu_class)
         return dict_menu
@@ -72,8 +70,7 @@ class MenuRepository:
         menu_class = Menu(
             id=data["id"],
             date=data["date"],
-            desc=json.loads(data["desc"], id_restaurant=data[" id_restaurant"]),
-        )
+            desc=json.loads(data["desc"]), id_restaurant=data["id_restaurant"])
         return menu_class
 
     def get_by_date(self, date):
@@ -108,18 +105,8 @@ class MenuRepository:
 
     def modify_a_menu(self, menu):
         sql = """UPDATE menus SET desc = :desc 
-             WHERE id = :id, id_restaurant =:id_restaurant
-        
-        """
+             WHERE id = :id, id_restaurant =:id_restaurant"""
         conn = self.create_conn()
         cursor = conn.cursor()
-        cursor.execute(
-            sql,
-            {
-                "id": menu.id,
-                "date": menu.date,
-                "desc": json.dumps(menu.desc),
-                "id_restaurant": menu.id_restaurant,
-            },
-        )
+        cursor.execute(sql,{"id": menu.id,"date": menu.date,"desc": json.dumps(menu.desc),"id_restaurant": menu.id_restaurant})
         conn.commit()
