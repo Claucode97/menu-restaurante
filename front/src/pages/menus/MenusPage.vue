@@ -130,8 +130,20 @@ export default {
     },
     onClickDay(day) {
       let month = this.currentMonth + 1;
-      const clickedDay = this.currentYear + "-" + month + "-" + day;
-      console.log(clickedDay);
+      if (day < 10) {
+        day = "0" + day
+      }
+      if (month < 10){
+        month = "0" + month
+      }
+      const clickedDay = this.currentYear + "-" +day + "-" + month;
+      const settings = {
+        method: "GET",
+        headers: {
+          Authorization: localStorage.id_restaurant,
+        },
+      } 
+      this.$router.push("/menus/by-date/" + clickedDay,settings)
     },
     async loadData() {
       const settings = {
