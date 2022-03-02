@@ -4,6 +4,7 @@
         <input type="date" v-model="date" name="date" id="date" @click="getMenuFromDate">
     </div> -->
     <!-- <button @click.prevent="getMenuFromDate">Cargar menu</button> -->
+    <p>{{loggedRestaurant}}</p>
     <section class="plates_info"  >
         <p>Primeros</p>
         <div class="firsts">
@@ -59,7 +60,8 @@ export default {
                               {'name_dish':'','desc_dish':'','id_dish':'09'},
                               {'name_dish':'','desc_dish':'','id_dish':'10'}]          
                     }
-                    }
+                    },
+        loggedRestaurant:localStorage.name
     };
   },
 
@@ -103,6 +105,7 @@ export default {
             method:"PUT",
             body: JSON.stringify(this.dictToSend),
             headers:{
+                Authorization: localStorage.id_restaurant,
                 'Content-Type':'application/json'
                 }
             }
@@ -110,7 +113,7 @@ export default {
             // console.log(response)
             if (response.status===200){
             alert('Menu modificado con éxito!')
-            this.$router.push("/")
+            this.$router.push("/menus")
             }
         }
         else{

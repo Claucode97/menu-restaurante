@@ -2,7 +2,7 @@
   <router-link :to="{ name: 'Menu', params: { date: getToday } }">
     <button>Menú del día</button>
   </router-link>
-<!-- {{localStorage.id_restaurant}} -->
+  <p>{{loggedRestaurant}}</p>
   <article class="calendar">
     <section class="name-month">
       <button class="button-last-month" @click="prevMonth">⬅</button>
@@ -67,6 +67,7 @@ export default {
         "Diciembre",
       ],
       listOfMenus: [],
+      loggedRestaurant: localStorage.name
     };
   },
 
@@ -129,8 +130,20 @@ export default {
     },
     onClickDay(day) {
       let month = this.currentMonth + 1;
-      const clickedDay = this.currentYear + "-" + month + "-" + day;
-      console.log(clickedDay);
+      if (day < 10) {
+        day = "0" + day
+      }
+      if (month < 10){
+        month = "0" + month
+      }
+      const clickedDay = this.currentYear + "-" +day + "-" + month;
+      const settings = {
+        method: "GET",
+        headers: {
+          Authorization: localStorage.id_restaurant,
+        },
+      } 
+      this.$router.push("/menus/by-date/" + clickedDay,settings)
     },
     async loadData() {
       const settings = {

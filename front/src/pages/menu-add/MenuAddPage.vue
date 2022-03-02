@@ -1,5 +1,6 @@
 <template>
 <form action="">
+    <p>{{loggedRestaurant}}</p>
     <div class="date">
         <input type="date" name="date" id="date" v-model="date">
     </div>
@@ -57,7 +58,8 @@ export default {
                               {'name_dish':'','desc_dish':'','id_dish':'08'},
                               {'name_dish':'','desc_dish':'','id_dish':'09'},
                               {'name_dish':'','desc_dish':'','id_dish':'10'}]          
-                    }
+                    },
+        loggedRestaurant:localStorage.name
     };
   },
 
@@ -94,14 +96,16 @@ export default {
             method:"POST",
             body: JSON.stringify(this.dictToSend),
             headers:{
+                Authorization: localStorage.id_restaurant,
                 'Content-Type':'application/json'
                 }
             }
+            console.log('headers', settings.headers)
             var response = await fetch(`${config.API_PATH}/menus`,settings)
-            // console.log(response)
+            
             if (response.status===200){
             alert('Menu agregado con éxito!')
-            this.$router.push("/")
+            this.$router.push("/menus")
             }
         }
         else{
