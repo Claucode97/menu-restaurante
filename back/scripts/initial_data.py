@@ -1,14 +1,12 @@
 import sys
 
 sys.path.insert(0, "")
-from src.domain.Restaurant import RestaurantRepository, Restaurant
 from src.domain.Menu import MenuRepository, Menu
 from src.example_menu import dict_menu, dict_menu_2, dict_menu_3
 from src.domain.Restaurant import RestaurantRepository, Restaurant
 
 
 database_path = "data/database.db"
-restaurant_reposotory = RestaurantRepository(database_path)
 menu_repository = MenuRepository(database_path)
 
 menu_repository.save(
