@@ -19,19 +19,21 @@ def test_should_save_a_menu():
         "id_restaurant": "11",
     }
 
-    response = client.post("/api/menus", json=body)
+    headers = {"Authorization": "11"}
+    response = client.post("/api/menus", headers=headers, json=body)
 
-    # ASSERT (then)
     assert response.status_code == 200
-    response_get = client.get("/api/menus/01")
+    response_get = client.get("/api/menus", headers=headers)
 
-    assert response_get.json == {
-        "id": "01",
-        "date": "2022-03-03",
-        "desc": {
-            "id_dish": "01",
-            "name_dish": "Ensalada mixta",
-            "desc_dish": "Ensalada con cebolla",
-        },
-        "id_restaurant": "11",
-    }
+    assert response_get.json == [
+        {
+            "id": "01",
+            "date": "2022-03-03",
+            "desc": {
+                "id_dish": "01",
+                "name_dish": "Ensalada mixta",
+                "desc_dish": "Ensalada con cebolla",
+            },
+            "id_restaurant": "11",
+        }
+    ]

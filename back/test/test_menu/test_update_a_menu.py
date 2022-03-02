@@ -3,7 +3,7 @@ from src.webserver import create_app
 from src.domain.Menu import MenuRepository
 
 
-def test_should_modify_a_menu():
+def test_should_update_a_menu():
     menu_repository = MenuRepository(temp_file())
     app = create_app(repositories={"menu": menu_repository})
     client = app.test_client()
@@ -31,9 +31,9 @@ def test_should_modify_a_menu():
     }
 
     headers = {"Authorization": "11"}
-    client.post("/api/menus", json=body)
+    client.post("/api/menus", headers=headers, json=body)
     response = client.put("/api/menus", headers=headers, json=body2)
-    # ASSERT (then)
+
     assert response.status_code == 200
     response_get = client.get("/api/menus/01")
 

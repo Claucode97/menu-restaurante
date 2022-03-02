@@ -60,8 +60,6 @@ class MenuRepository:
             dict_menu.append(menu_class)
         return dict_menu
 
-    # ---------------------------------------------------
-
     def get_by_id(self, id):
         conn = self.create_conn()
         cursor = conn.cursor()
