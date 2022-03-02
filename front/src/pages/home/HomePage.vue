@@ -12,7 +12,7 @@
 </template>
 
 <script>
-
+import config from "@/config.js"
 export default {
   name: 'Home',
   data(){
@@ -26,15 +26,9 @@ export default {
   },
   methods:{
     async loadData(){
-      this.restaurants=[{
-        id_restaurant:"restaurant-1",
-        name:"rest x"
-        },
-        {
-        id_restaurant:"restaurant-2",
-        name:"rest y"
-        },
-        ]
+      var response = await fetch(`${config.API_PATH}/restaurants`)
+      this.restaurants = await response.json()
+      console.log('restaurants', this.restaurants)
     },
   onButtonClicked(){
       const settings = {
@@ -45,9 +39,9 @@ export default {
       }
       localStorage.id_restaurant=this.selectedRestaurant.id_restaurant
       localStorage.name=this.selectedRestaurant.name
-      console.log('name',localStorage.name)
-      console.log('id',localStorage.id_restaurant)
-      console.log('settings',settings)
+      // console.log('name',localStorage.name)
+      // console.log('id',localStorage.id_restaurant)
+      // console.log('settings',settings)
       this.$router.push('/menus',settings)
     }
   }
