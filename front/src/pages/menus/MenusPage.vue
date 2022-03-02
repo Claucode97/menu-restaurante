@@ -2,7 +2,7 @@
   <router-link :to="{ name: 'Menu', params: { date: getToday } }">
     <button>Menú del día</button>
   </router-link>
-<!-- {{localStorage.id_restaurant}} -->
+  <p>{{loggedRestaurant}}</p>
   <article class="calendar">
     <section class="name-month">
       <button class="button-last-month" @click="prevMonth">⬅</button>
@@ -67,6 +67,7 @@ export default {
         "Diciembre",
       ],
       listOfMenus: [],
+      loggedRestaurant: localStorage.name
     };
   },
 

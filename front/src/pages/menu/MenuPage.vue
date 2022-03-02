@@ -1,7 +1,9 @@
 <template>
-  <h2>
-    MENÚ DEL DÍA: <span>???:{{ dateParsed }}</span>
-  </h2>
+<h2>-{{loggedRestaurant}}-</h2>
+  <h3>
+    Menú del día 
+  </h3>
+  <p>{{ dateParsed }}</p>
   <div class="modify_div_btn">
     <router-link :to="{name: 'MenuModifyPage', params: {date: this.$route.params.date}}">
     <button>Modificar menu</button>
@@ -40,7 +42,8 @@ export default {
       seconds: [],
       desserts: [],
       date: this.$route.params.date,
-      parsedDate:''
+      parsedDate:'',
+      loggedRestaurant:localStorage.name
     };
   },
 
@@ -70,7 +73,7 @@ export default {
       let month=this.date.slice(5,7)
       let months={'01':'Enero','02':'Febrero','03':'Marzo','04':'Abril','05':'Mayo','06':'Junio','07':'Julio','08':'Agosto','09':'Septiembre','10':'Octubre','11':'Noviembre','12':'Diciembre'}
       console.log('Fecha',day,'-',months[month],'-',year)
-      let fullDate=day+'-'+months[month]+'-'+year
+      let fullDate=day+' de '+months[month]+' de '+year
       return fullDate
     }
   }
