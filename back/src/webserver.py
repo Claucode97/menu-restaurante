@@ -1,6 +1,5 @@
 from flask import Flask, request
 from flask_cors import CORS
-from h11 import Data
 from src.lib.utils import object_to_json
 from src.domain.Menu import Menu
 
