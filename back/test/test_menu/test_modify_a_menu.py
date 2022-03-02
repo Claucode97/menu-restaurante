@@ -1,3 +1,4 @@
+from email import header
 from src.lib.utils import temp_file
 from src.webserver import create_app
 from src.domain.Menu import MenuRepository
@@ -30,8 +31,9 @@ def test_should_modify_a_menu():
         "id_restaurant": "11",
     }
 
+    headers = {"Authorization": "11"}
     client.post("/api/menus", json=body)
-    response = client.put("/api/menus", json=body2)
+    response = client.put("/api/menus", headers=headers, json=body2)
     # ASSERT (then)
     assert response.status_code == 200
     response_get = client.get("/api/menus/01")

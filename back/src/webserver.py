@@ -1,5 +1,6 @@
 from flask import Flask, request
 from flask_cors import CORS
+from h11 import Data
 from src.lib.utils import object_to_json
 from src.domain.Menu import Menu
 
@@ -32,8 +33,14 @@ def create_app(repositories):
 
     @app.route("/api/menus", methods=["PUT"])
     def modify_menu():
+        id_restaurant_01 = request.headers.get("Authorization")
         body = request.json
-        modified_menu = Menu(**body)
+        modified_menu = Menu(
+            id=body["id"],
+            date=body["date"],
+            desc=body["desc"],
+            id_restaurant=id_restaurant_01,
+        )
         repositories["menu"].modify_a_menu(modified_menu)
         return ""
 
