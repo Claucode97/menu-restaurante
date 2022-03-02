@@ -28,5 +28,7 @@ def test_should_return_list_of_restaurants():
 
     response = client.get("/api/restaurants")
 
-    assert response.json == [{"id_restaurant": "restaurant_01", "name": "Tía Maruca"},
-                            {"id_restaurant": "restaurant_02", "name": "Don Satur"}]
+    assert response.json == [
+        {"id_restaurant": "restaurant_01", "name": "Tía Maruca"},
+        {"id_restaurant": "restaurant_02", "name": "Don Satur"},
+    ]

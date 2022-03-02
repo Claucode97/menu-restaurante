@@ -1,7 +1,5 @@
 from src.lib.utils import temp_file
 from src.webserver import create_app
-import json
-
 from src.domain.Menu import Menu, MenuRepository
 
 
