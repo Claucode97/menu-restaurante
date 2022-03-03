@@ -79,7 +79,6 @@ export default {
          this.dict_plates.desserts[2].name_dish==="" || this.dict_plates.desserts[2].desc_dish==="" ||
          this.dict_plates.desserts[3].name_dish==="" || this.dict_plates.desserts[3].desc_dish==="")
         {
-            console.log('Inputs vacios!')
             return false
         }
       else{
@@ -91,7 +90,6 @@ export default {
             let desc=this.dict_plates
             this.dictToSend={'date':this.date,'desc':desc}
             this.dictToSend.id=uuidv4();
-            // console.log(JSON.stringify(this.dictToSend))
             const settings={
             method:"POST",
             body: JSON.stringify(this.dictToSend),
@@ -100,7 +98,6 @@ export default {
                 'Content-Type':'application/json'
                 }
             }
-            console.log('headers', settings.headers)
             var response = await fetch(`${config.API_PATH}/menus`,settings)
             
             if (response.status===200){
