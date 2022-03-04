@@ -1,8 +1,8 @@
 <template>
+<h2>{{loggedRestaurant}}</h2>
   <router-link :to="{ name: 'Menu', params: { date: getToday } }">
-    <button>Menú del día</button>
+    <button class="menu-day">Menú del día</button>
   </router-link>
-  <p>{{loggedRestaurant}}</p>
   <article class="calendar">
     <section class="name-month">
       <button class="button-last-month" @click="prevMonth">⬅</button>
@@ -152,7 +152,7 @@ export default {
           Authorization: localStorage.id_restaurant,
         },
       };
-      console.log("id restaurant-settings: ", settings);
+      console.log('Headers:',settings.headers)
       const response = await fetch(`${config.API_PATH}/menus`, settings);
       this.listOfMenus = await response.json();
     },
@@ -226,5 +226,8 @@ export default {
 
 .underline-today {
   text-decoration: underline double;
+}
+.menu-day{
+  margin-top:1em
 }
 </style>

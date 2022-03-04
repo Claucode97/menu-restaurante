@@ -28,21 +28,11 @@ export default {
     async loadData(){
       var response = await fetch(`${config.API_PATH}/restaurants`)
       this.restaurants = await response.json()
-      console.log('restaurants', this.restaurants)
     },
   onButtonClicked(){
-      const settings = {
-        method: "GET",
-        headers: {
-          Authorization: localStorage.id_restaurant,
-        },
-      }
       localStorage.id_restaurant=this.selectedRestaurant.id_restaurant
       localStorage.name=this.selectedRestaurant.name
-      // console.log('name',localStorage.name)
-      // console.log('id',localStorage.id_restaurant)
-      // console.log('settings',settings)
-      this.$router.push('/menus',settings)
+      this.$router.push('/menus')
     }
   }
 }
