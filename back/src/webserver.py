@@ -33,8 +33,8 @@ def create_app(repositories):
             desc=body["desc"],
             id_restaurant=body["id_restaurant"],
         )
-        repositories["menu"].save(save_menu)
         if id_restaurant == save_menu.id_restaurant:
+            repositories["menu"].save(save_menu)
             return "", 200
         else:
             return "", 403

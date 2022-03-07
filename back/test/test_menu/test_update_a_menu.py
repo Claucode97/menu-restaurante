@@ -49,7 +49,7 @@ def test_should_update_a_menu():
     }
 
 
-def test_should_update_a_menu():
+def test_should_return_forbidden_put():
     menu_repository = MenuRepository(temp_file())
     app = create_app(repositories={"menu": menu_repository})
     client = app.test_client()

@@ -3,7 +3,7 @@ from src.webserver import create_app
 from src.domain.Menu import MenuRepository
 
 
-def test_should_save_a_menu():
+def test_should_return_forbidden():
     menu_repository = MenuRepository(temp_file())
     app = create_app(repositories={"menu": menu_repository})
     client = app.test_client()
