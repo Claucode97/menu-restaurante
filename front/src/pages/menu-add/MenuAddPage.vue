@@ -8,31 +8,31 @@
         <p>Primeros</p>
         <div class="firsts">
             <input class="input_plate" type="text" placeholder="Introducir plato" v-model="dict_plates.firsts[0].name_dish">
-            <input class="input_plate" type="text" placeholder="Introducir descripción" v-model="dict_plates.firsts[0].desc_dish">
+            <input class="input_plate" type="text" placeholder="Introducir descripción" v-model="dict_plates.firsts[0].allergens">
             <input class="input_plate" type="text" placeholder="Introducir plato" v-model="dict_plates.firsts[1].name_dish">
-            <input class="input_plate" type="text" placeholder="Introducir descripción" v-model="dict_plates.firsts[1].desc_dish">
+            <input class="input_plate" type="text" placeholder="Introducir descripción" v-model="dict_plates.firsts[1].allergens">
             <input class="input_plate" type="text" placeholder="Introducir plato" v-model="dict_plates.firsts[2].name_dish">
-            <input class="input_plate" type="text" placeholder="Introducir descripción" v-model="dict_plates.firsts[2].desc_dish">
+            <input class="input_plate" type="text" placeholder="Introducir descripción" v-model="dict_plates.firsts[2].allergens">
         </div>
         <p>Segundos</p>
         <div class="seconds">
             <input class="input_plate" type="text" placeholder="Introducir plato" v-model="dict_plates.seconds[0].name_dish">
-            <input class="input_plate" type="text" placeholder="Introducir descripción" v-model="dict_plates.seconds[0].desc_dish">
+            <input class="input_plate" type="text" placeholder="Introducir descripción" v-model="dict_plates.seconds[0].allergens">
             <input class="input_plate" type="text" placeholder="Introducir plato" v-model="dict_plates.seconds[1].name_dish">
-            <input class="input_plate" type="text" placeholder="Introducir descripción" v-model="dict_plates.seconds[1].desc_dish">
+            <input class="input_plate" type="text" placeholder="Introducir descripción" v-model="dict_plates.seconds[1].allergens">
             <input class="input_plate" type="text" placeholder="Introducir plato" v-model="dict_plates.seconds[2].name_dish">
-            <input class="input_plate" type="text" placeholder="Introducir descripción" v-model="dict_plates.seconds[2].desc_dish">
+            <input class="input_plate" type="text" placeholder="Introducir descripción" v-model="dict_plates.seconds[2].allergens">
         </div>
         <p>Postres</p>
         <div class="desserts">
             <input class="input_plate" type="text" placeholder="Introducir plato" v-model="dict_plates.desserts[0].name_dish">
-            <input class="input_plate" type="text" placeholder="Introducir descripción" v-model="dict_plates.desserts[0].desc_dish">
+            <input class="input_plate" type="text" placeholder="Introducir descripción" v-model="dict_plates.desserts[0].allergens">
             <input class="input_plate" type="text" placeholder="Introducir plato" v-model="dict_plates.desserts[1].name_dish">
-            <input class="input_plate" type="text" placeholder="Introducir descripción" v-model="dict_plates.desserts[1].desc_dish">
+            <input class="input_plate" type="text" placeholder="Introducir descripción" v-model="dict_plates.desserts[1].allergens">
             <input class="input_plate" type="text" placeholder="Introducir plato" v-model="dict_plates.desserts[2].name_dish">
-            <input class="input_plate" type="text" placeholder="Introducir descripción" v-model="dict_plates.desserts[2].desc_dish">
+            <input class="input_plate" type="text" placeholder="Introducir descripción" v-model="dict_plates.desserts[2].allergens">
             <input class="input_plate" type="text" placeholder="Introducir plato" v-model="dict_plates.desserts[3].name_dish">
-            <input class="input_plate" type="text" placeholder="Introducir descripción" v-model="dict_plates.desserts[3].desc_dish">
+            <input class="input_plate" type="text" placeholder="Introducir descripción" v-model="dict_plates.desserts[3].allergens">
         </div>
     </section>
     <button @click.prevent="onSaveClicked">Agregar Menú</button>
@@ -48,16 +48,16 @@ export default {
   data() {
     return {
        date:'',
-       dict_plates:{'firsts':[{'name_dish':'','desc_dish':'', 'id_dish':'01'},
-                              {'name_dish':'','desc_dish':'', 'id_dish':'02'},
-                              {'name_dish':'','desc_dish':'', 'id_dish':'03'}],
-                     'seconds':[{'name_dish':'','desc_dish':'','id_dish':'04'},
-                              {'name_dish':'','desc_dish':'', 'id_dish':'05'},
-                              {'name_dish':'','desc_dish':'','id_dish':'06'}],
-                     'desserts':[{'name_dish':'','desc_dish':'','id_dish':'07'},
-                              {'name_dish':'','desc_dish':'','id_dish':'08'},
-                              {'name_dish':'','desc_dish':'','id_dish':'09'},
-                              {'name_dish':'','desc_dish':'','id_dish':'10'}]          
+       dict_plates:{'firsts':[{'name_dish':'','allergens':'', 'id_dish':'01'},
+                              {'name_dish':'','allergens':'', 'id_dish':'02'},
+                              {'name_dish':'','allergens':'', 'id_dish':'03'}],
+                     'seconds':[{'name_dish':'','allergens':'','id_dish':'04'},
+                              {'name_dish':'','allergens':'', 'id_dish':'05'},
+                              {'name_dish':'','allergens':'','id_dish':'06'}],
+                     'desserts':[{'name_dish':'','allergens':'','id_dish':'07'},
+                              {'name_dish':'','allergens':'','id_dish':'08'},
+                              {'name_dish':'','allergens':'','id_dish':'09'},
+                              {'name_dish':'','allergens':'','id_dish':'10'}]          
                     },
         loggedRestaurant:localStorage.name
     };
@@ -68,16 +68,16 @@ export default {
   },
   methods: {
     areValidInputsFromMenu(){
-      if(this.dict_plates.firsts[0].name_dish==="" || this.dict_plates.firsts[0].desc_dish==="" ||
-         this.dict_plates.firsts[1].name_dish==="" || this.dict_plates.firsts[1].desc_dish==="" ||
-         this.dict_plates.firsts[2].name_dish==="" || this.dict_plates.firsts[2].desc_dish==="" ||
-         this.dict_plates.seconds[0].name_dish==="" || this.dict_plates.seconds[0].desc_dish==="" ||
-         this.dict_plates.seconds[1].name_dish==="" || this.dict_plates.seconds[1].desc_dish==="" ||
-         this.dict_plates.seconds[2].name_dish==="" || this.dict_plates.seconds[2].desc_dish==="" ||
-         this.dict_plates.desserts[0].name_dish==="" || this.dict_plates.desserts[0].desc_dish==="" ||
-         this.dict_plates.desserts[1].name_dish==="" || this.dict_plates.desserts[1].desc_dish==="" ||
-         this.dict_plates.desserts[2].name_dish==="" || this.dict_plates.desserts[2].desc_dish==="" ||
-         this.dict_plates.desserts[3].name_dish==="" || this.dict_plates.desserts[3].desc_dish==="")
+      if(this.dict_plates.firsts[0].name_dish==="" || this.dict_plates.firsts[0].allergens==="" ||
+         this.dict_plates.firsts[1].name_dish==="" || this.dict_plates.firsts[1].allergens==="" ||
+         this.dict_plates.firsts[2].name_dish==="" || this.dict_plates.firsts[2].allergens==="" ||
+         this.dict_plates.seconds[0].name_dish==="" || this.dict_plates.seconds[0].allergens==="" ||
+         this.dict_plates.seconds[1].name_dish==="" || this.dict_plates.seconds[1].allergens==="" ||
+         this.dict_plates.seconds[2].name_dish==="" || this.dict_plates.seconds[2].allergens==="" ||
+         this.dict_plates.desserts[0].name_dish==="" || this.dict_plates.desserts[0].allergens==="" ||
+         this.dict_plates.desserts[1].name_dish==="" || this.dict_plates.desserts[1].allergens==="" ||
+         this.dict_plates.desserts[2].name_dish==="" || this.dict_plates.desserts[2].allergens==="" ||
+         this.dict_plates.desserts[3].name_dish==="" || this.dict_plates.desserts[3].allergens==="")
         {
             return false
         }
