@@ -14,7 +14,7 @@ def test_should_update_a_menu():
         "desc": {
             "id_dish": "01",
             "name_dish": "Ensalada mixta",
-            "desc_dish": "Ensalada con cebolla",
+            "allergens": "Ensalada con cebolla",
         },
         "id_restaurant": "11",
     }
@@ -25,7 +25,7 @@ def test_should_update_a_menu():
         "desc": {
             "id_dish": "01",
             "name_dish": "Ensalada atunada",
-            "desc_dish": "Ensalada con chichos",
+            "allergens": "Ensalada con chichos",
         },
         "id_restaurant": "11",
     }
@@ -43,7 +43,7 @@ def test_should_update_a_menu():
         "desc": {
             "id_dish": "01",
             "name_dish": "Ensalada atunada",
-            "desc_dish": "Ensalada con chichos",
+            "allergens": "Ensalada con chichos",
         },
         "id_restaurant": "11",
     }
@@ -60,7 +60,7 @@ def test_should_return_forbidden_put():
         "desc": {
             "id_dish": "01",
             "name_dish": "Ensalada mixta",
-            "desc_dish": "Ensalada con cebolla",
+            "allergens": "Ensalada con cebolla",
         },
         "id_restaurant": "11",
     }
@@ -71,7 +71,7 @@ def test_should_return_forbidden_put():
         "desc": {
             "id_dish": "01",
             "name_dish": "Ensalada atunada",
-            "desc_dish": "Ensalada con chichos",
+            "allergens": "Ensalada con chichos",
         },
         "id_restaurant": "11",
     }

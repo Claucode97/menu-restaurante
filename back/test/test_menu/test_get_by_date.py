@@ -19,7 +19,7 @@ def test_should_return_one_menu_by_date():
                 {
                     "id_dish": "01",
                     "name_dish": "ensalada mixta",
-                    "desc_dish": "ensalada con cebolla",
+                    "allergens": "ensalada con cebolla",
                 }
             ]
         },
@@ -39,7 +39,7 @@ def test_should_return_one_menu_by_date():
                 {
                     "id_dish": "01",
                     "name_dish": "ensalada mixta",
-                    "desc_dish": "ensalada con cebolla",
+                    "allergens": "ensalada con cebolla",
                 }
             ]
         },
@@ -63,7 +63,7 @@ def test_should_return_forbidden():
                 {
                     "id_dish": "01",
                     "name_dish": "ensalada mixta",
-                    "desc_dish": "ensalada con cebolla",
+                    "allergens": "ensalada con cebolla",
                 }
             ]
         },

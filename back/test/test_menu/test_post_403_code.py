@@ -14,7 +14,7 @@ def test_should_return_forbidden():
         "desc": {
             "id_dish": "01",
             "name_dish": "Ensalada mixta",
-            "desc_dish": "Ensalada con cebolla",
+            "allergens": "Ensalada con cebolla",
         },
         "id_restaurant": "11",
     }

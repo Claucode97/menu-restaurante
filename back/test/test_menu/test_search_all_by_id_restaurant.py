@@ -27,7 +27,7 @@ def test_should_return_list_of_menus_by_id_restaurant():
                 {
                     "id_dish": "01",
                     "name_dish": "ensalada mixta",
-                    "desc_dish": "ensalada con cebolla",
+                    "allergens": "ensalada con cebolla",
                 }
             ]
         },
@@ -41,7 +41,7 @@ def test_should_return_list_of_menus_by_id_restaurant():
                 {
                     "id_dish": "01",
                     "name_dish": "ensalada mixta",
-                    "desc_dish": "ensalada con cebolla",
+                    "allergens": "ensalada con cebolla",
                 }
             ]
         },
@@ -63,7 +63,7 @@ def test_should_return_list_of_menus_by_id_restaurant():
                     {
                         "id_dish": "01",
                         "name_dish": "ensalada mixta",
-                        "desc_dish": "ensalada con cebolla",
+                        "allergens": "ensalada con cebolla",
                     }
                 ]
             },

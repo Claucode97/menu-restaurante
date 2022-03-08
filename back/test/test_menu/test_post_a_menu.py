@@ -14,7 +14,7 @@ def test_should_save_a_menu():
         "desc": {
             "id_dish": "01",
             "name_dish": "Ensalada mixta",
-            "desc_dish": "Ensalada con cebolla",
+            "allergens": "Ensalada con cebolla",
         },
         "id_restaurant": "11",
     }
@@ -33,7 +33,7 @@ def test_should_save_a_menu():
             "desc": {
                 "id_dish": "01",
                 "name_dish": "Ensalada mixta",
-                "desc_dish": "Ensalada con cebolla",
+                "allergens": "Ensalada con cebolla",
             },
             "id_restaurant": "11",
         }
