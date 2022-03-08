@@ -1,4 +1,5 @@
 <template>
+{{extractMenusOfTheMonth()}}
 <h2>{{loggedRestaurant}}</h2>
   <router-link :to="{ name: 'Menu', params: { date: getToday } }">
     <button class="menu-day">Menú del día</button>
@@ -20,18 +21,11 @@
         v-for="i in initialPositionOfFirstDay"
         :key="i"
       ></li>
-      <li
-        @click="onClickDay(index)"
-        v-for="index in daysOfMonthSelected"
-        :key="index"
-        class="not-empty-list"
-        :class="{
-          'underline-today':
-            index === this.currentDay &&
-            new Date().getMonth() === this.currentMonth,
-        }"
-      >
-        {{ index }}
+      <li @click="onClickDay(index.day)"
+        v-for="index of daysOfMonthSelected"
+        :key="index" v-bind:class="{underline:index.menuExists}">
+                     <!-- {'day':dayToStr,'menuExists':menuExists} -->
+         {{index.day}}
       </li>
     </ul>
   </article>
@@ -53,24 +47,16 @@ export default {
       currentYear: new Date().getFullYear(),
       nameDaysOfWeek: ["Lun", "Mar", "Mié", "Jue", "Vie", "Sáb", "Dom"],
       nameMonths: [
-        "Enero",
-        "Febrero",
-        "Marzo",
-        "Abril",
-        "Mayo",
-        "Junio",
-        "Julio",
-        "Agosto",
-        "Septiembre",
-        "Octubre",
-        "Noviembre",
-        "Diciembre",
-      ],
+        "Enero","Febrero","Marzo","Abril","Mayo","Junio",
+        "Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"],
       listOfMenus: [],
-      loggedRestaurant: localStorage.name
+      loggedRestaurant: localStorage.name,
+      days:[],
+      months:[],
+      dates:[],
+     
     };
   },
-
   mounted() {
     this.loadData();
   },
@@ -103,18 +89,47 @@ export default {
       return currentInitialDayweek;
     },
     daysOfMonthSelected() {
+      let bindMenusOfMonthToCal=[]
       let totaldays = new Date(
         this.currentYear,
-        this.currentMonth + 1,
-        0
-      ).getDate();
-      return totaldays;
+        this.currentMonth + 1,0).getDate();
+      let menusOfTheMonth=this.extractMenusOfTheMonth()
+      for (let i=1;i<=totaldays;i++){
+        let menuExists=false
+        let dayToStr=i.toString()
+        if (menusOfTheMonth.includes(dayToStr)){ menuExists=true }
+        if (dayToStr < 10) { dayToStr = "0" + dayToStr }
+        bindMenusOfMonthToCal.push({'day':dayToStr,'menuExists':menuExists})
+      }
+      // console.log(bindMenusOfMonthToCal)
+      return bindMenusOfMonthToCal
     },
   },
   methods: {
+    extractMenusOfTheMonth(){
+      let monthExtracted=''
+      let daysConnected=[]
+      let current_month=this.currentMonth+1
+      let day=''
+      if (current_month < 10) {
+        current_month = "0" + current_month;
+      }
+      for (let menu of this.listOfMenus){
+        monthExtracted=menu.date.slice(5,7)
+        if (monthExtracted===current_month){
+          day=menu.date.slice(8,10)
+          if (day.slice(0,1)==='0') {
+              day = day.slice(1,2);
+           }
+          daysConnected.push(day)
+        }
+      }
+      return daysConnected
+    },
     comeBackCurrentMonth() {
       let comebackMonth = new Date().getMonth();
       this.currentMonth = comebackMonth;
+      
     },
     nextMonth() {
       this.currentMonth = this.currentMonth + 1;
@@ -130,13 +145,10 @@ export default {
     },
     onClickDay(day) {
       let month = this.currentMonth + 1;
-      if (day < 10) {
-        day = "0" + day
-      }
       if (month < 10){
         month = "0" + month
       }
-      const clickedDay = this.currentYear + "-" +day + "-" + month;
+      const clickedDay = this.currentYear + "-" +month + "-" + day;
       const settings = {
         method: "GET",
         headers: {
@@ -144,6 +156,7 @@ export default {
         },
       } 
       this.$router.push("/menus/by-date/" + clickedDay,settings)
+      console.log(clickedDay)
     },
     async loadData() {
       const settings = {
@@ -156,6 +169,7 @@ export default {
       const response = await fetch(`${config.API_PATH}/menus`, settings);
       this.listOfMenus = await response.json();
     },
+    
   },
 };
 </script>
@@ -224,8 +238,9 @@ export default {
   width: 50px;
 }
 
-.underline-today {
+.underline {
   text-decoration: underline double;
+  cursor:pointer;
 }
 .menu-day{
   margin-top:1em

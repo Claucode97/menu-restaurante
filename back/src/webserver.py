@@ -31,7 +31,7 @@ def create_app(repositories):
             id=body["id"],
             date=body["date"],
             desc=body["desc"],
-            id_restaurant=body["id_restaurant"],
+            id_restaurant=id_restaurant,
         )
         if id_restaurant == save_menu.id_restaurant:
             repositories["menu"].save(save_menu)
