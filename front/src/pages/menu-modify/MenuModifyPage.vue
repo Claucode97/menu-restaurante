@@ -68,7 +68,13 @@ export default {
   },
   methods: {
     async loadData(){
-      const response = await fetch(`${config.API_PATH}/menus/by-date/` + this.dateReceived);
+      const settings = {
+         method: "GET",
+         headers: {
+           Authorization: localStorage.id_restaurant,
+         },
+      }        
+      const response = await fetch(`${config.API_PATH}/menus/by-date/` + this.dateReceived,settings);
       this.dict_plates = await response.json();
     },
     areValidInputsFromMenu(){
@@ -93,7 +99,7 @@ export default {
     async onSaveClicked(){
         if (this.areValidInputsFromMenu()===true){
             let desc=this.dict_plates.desc
-            this.dictToSend={'date':this.dateReceived,'desc':desc, 'id':this.dict_plates.id}
+            this.dictToSend={'date':this.dateReceived,'desc':desc, 'id':this.dict_plates.id, 'id_restaurant':localStorage.id_restaurant}
             const settings={
             method:"PUT",
             body: JSON.stringify(this.dictToSend),
