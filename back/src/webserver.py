@@ -1,3 +1,4 @@
+from xml.dom.minidom import Identified
 from flask import Flask, request
 from flask_cors import CORS
 from src.lib.utils import object_to_json
@@ -53,7 +54,7 @@ def create_app(repositories):
     @app.route("/api/menus/by-date/<date>", methods=["GET"])
     def show_menu_by_date(date):
         id_restaurant = request.headers.get("Authorization")
-        menu = repositories["menu"].get_by_date(date)
+        menu = repositories["menu"].get_by_date(date, id_restaurant)
         if id_restaurant == menu.id_restaurant:
             return object_to_json(menu), 200
         else:

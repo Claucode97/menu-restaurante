@@ -73,10 +73,13 @@ class MenuRepository:
         )
         return menu_class
 
-    def get_by_date(self, date):
+    def get_by_date(self, date, id_restaurant):
         conn = self.create_conn()
         cursor = conn.cursor()
-        cursor.execute("""SELECT * FROM menus WHERE date =?""", (date,))
+        cursor.execute(
+            """SELECT * FROM menus WHERE date =? AND id_restaurant = ?""",
+            (date, id_restaurant),
+        )
         data = cursor.fetchone()
         menu_class = Menu(
             id=data["id"],

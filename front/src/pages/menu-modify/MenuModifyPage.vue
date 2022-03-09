@@ -5,31 +5,31 @@
     <p>Primeros</p>
     <div class="firsts">
         <input class="input_plate" type="text"  v-model="dict_plates.desc.firsts[0].name_dish">
-        <input class="input_plate" type="text"  v-model="dict_plates.desc.firsts[0].desc_dish">
+        <input class="input_plate" type="text"  v-model="dict_plates.desc.firsts[0].allergens">
         <input class="input_plate" type="text"  v-model="dict_plates.desc.firsts[1].name_dish">
-        <input class="input_plate" type="text"  v-model="dict_plates.desc.firsts[1].desc_dish">
+        <input class="input_plate" type="text"  v-model="dict_plates.desc.firsts[1].allergens">
         <input class="input_plate" type="text"  v-model="dict_plates.desc.firsts[2].name_dish">
-        <input class="input_plate" type="text"  v-model="dict_plates.desc.firsts[2].desc_dish">
+        <input class="input_plate" type="text"  v-model="dict_plates.desc.firsts[2].allergens">
     </div>
     <p>Segundos</p>
     <div class="seconds">
         <input class="input_plate" type="text"  v-model="dict_plates.desc.seconds[0].name_dish">
-        <input class="input_plate" type="text"  v-model="dict_plates.desc.seconds[0].desc_dish">
+        <input class="input_plate" type="text"  v-model="dict_plates.desc.seconds[0].allergens">
         <input class="input_plate" type="text"  v-model="dict_plates.desc.seconds[1].name_dish">
-        <input class="input_plate" type="text"  v-model="dict_plates.desc.seconds[1].desc_dish">
+        <input class="input_plate" type="text"  v-model="dict_plates.desc.seconds[1].allergens">
         <input class="input_plate" type="text"  v-model="dict_plates.desc.seconds[2].name_dish">
-        <input class="input_plate" type="text"  v-model="dict_plates.desc.seconds[2].desc_dish">
+        <input class="input_plate" type="text"  v-model="dict_plates.desc.seconds[2].allergens">
     </div>
     <p>Postres</p>
     <div class="desserts">
         <input class="input_plate" type="text"  v-model="dict_plates.desc.desserts[0].name_dish">
-        <input class="input_plate" type="text"  v-model="dict_plates.desc.desserts[0].desc_dish">
+        <input class="input_plate" type="text"  v-model="dict_plates.desc.desserts[0].allergens">
         <input class="input_plate" type="text"  v-model="dict_plates.desc.desserts[1].name_dish">
-        <input class="input_plate" type="text"  v-model="dict_plates.desc.desserts[1].desc_dish">
+        <input class="input_plate" type="text"  v-model="dict_plates.desc.desserts[1].allergens">
         <input class="input_plate" type="text"  v-model="dict_plates.desc.desserts[2].name_dish">
-        <input class="input_plate" type="text"  v-model="dict_plates.desc.desserts[2].desc_dish">
+        <input class="input_plate" type="text"  v-model="dict_plates.desc.desserts[2].allergens">
         <input class="input_plate" type="text"  v-model="dict_plates.desc.desserts[3].name_dish">
-        <input class="input_plate" type="text"  v-model="dict_plates.desc.desserts[3].desc_dish">
+        <input class="input_plate" type="text"  v-model="dict_plates.desc.desserts[3].allergens">
     </div>
     </section>
     <button @click.prevent="onSaveClicked">Modificar Menú</button>
@@ -45,16 +45,16 @@ export default {
     return {
        dateReceived:this.$route.params.date,
        idReceived:this.$route.params.id,
-       dict_plates:{'desc':{'firsts':[{'name_dish':'','desc_dish':'', 'id_dish':'01'},
-                              {'name_dish':'','desc_dish':'', 'id_dish':'02'},
-                              {'name_dish':'','desc_dish':'', 'id_dish':'03'}],
-                     'seconds':[{'name_dish':'','desc_dish':'','id_dish':'04'},
-                              {'name_dish':'','desc_dish':'', 'id_dish':'05'},
-                              {'name_dish':'','desc_dish':'','id_dish':'06'}],
-                     'desserts':[{'name_dish':'','desc_dish':'','id_dish':'07'},
-                              {'name_dish':'','desc_dish':'','id_dish':'08'},
-                              {'name_dish':'','desc_dish':'','id_dish':'09'},
-                              {'name_dish':'','desc_dish':'','id_dish':'10'}]          
+       dict_plates:{'desc':{'firsts':[{'name_dish':'','allergens':'', 'id_dish':'01'},
+                              {'name_dish':'','allergens':'', 'id_dish':'02'},
+                              {'name_dish':'','allergens':'', 'id_dish':'03'}],
+                     'seconds':[{'name_dish':'','allergens':'','id_dish':'04'},
+                              {'name_dish':'','allergens':'', 'id_dish':'05'},
+                              {'name_dish':'','allergens':'','id_dish':'06'}],
+                     'desserts':[{'name_dish':'','allergens':'','id_dish':'07'},
+                              {'name_dish':'','allergens':'','id_dish':'08'},
+                              {'name_dish':'','allergens':'','id_dish':'09'},
+                              {'name_dish':'','allergens':'','id_dish':'10'}]          
                     }
                     },
         loggedRestaurant:localStorage.name
@@ -74,20 +74,20 @@ export default {
            Authorization: localStorage.id_restaurant,
          },
       }        
-      const response = await fetch(`${config.API_PATH}/menus/by-date/` + this.dateReceived,settings);
+      const response = await fetch(`${config.API_PATH}/menus/` + localStorage.id_menu,settings);
       this.dict_plates = await response.json();
     },
     areValidInputsFromMenu(){
-      if(this.dict_plates.desc.firsts[0].name_dish==="" || this.dict_plates.desc.firsts[0].desc_dish==="" ||
-         this.dict_plates.desc.firsts[1].name_dish==="" || this.dict_plates.desc.firsts[1].desc_dish==="" ||
-         this.dict_plates.desc.firsts[2].name_dish==="" || this.dict_plates.desc.firsts[2].desc_dish==="" ||
-         this.dict_plates.desc.seconds[0].name_dish===""||this.dict_plates.desc.seconds[0].desc_dish==="" ||
-         this.dict_plates.desc.seconds[1].name_dish===""||this.dict_plates.desc.seconds[1].desc_dish==="" ||
-         this.dict_plates.desc.seconds[2].name_dish===""||this.dict_plates.desc.seconds[2].desc_dish==="" ||
-         this.dict_plates.desc.desserts[0].name_dish===""|| this.dict_plates.desc.desserts[0].desc_dish===""||
-         this.dict_plates.desc.desserts[1].name_dish==="" ||this.dict_plates.desc.desserts[1].desc_dish==="" ||
-         this.dict_plates.desc.desserts[2].name_dish==="" ||this.dict_plates.desc.desserts[2].desc_dish==="" ||
-         this.dict_plates.desc.desserts[3].name_dish==="" ||this.dict_plates.desc.desserts[3].desc_dish==="")
+      if(this.dict_plates.desc.firsts[0].name_dish==="" || this.dict_plates.desc.firsts[0].allergens==="" ||
+         this.dict_plates.desc.firsts[1].name_dish==="" || this.dict_plates.desc.firsts[1].allergens==="" ||
+         this.dict_plates.desc.firsts[2].name_dish==="" || this.dict_plates.desc.firsts[2].allergens==="" ||
+         this.dict_plates.desc.seconds[0].name_dish===""||this.dict_plates.desc.seconds[0].allergens==="" ||
+         this.dict_plates.desc.seconds[1].name_dish===""||this.dict_plates.desc.seconds[1].allergens==="" ||
+         this.dict_plates.desc.seconds[2].name_dish===""||this.dict_plates.desc.seconds[2].allergens==="" ||
+         this.dict_plates.desc.desserts[0].name_dish===""|| this.dict_plates.desc.desserts[0].allergens===""||
+         this.dict_plates.desc.desserts[1].name_dish==="" ||this.dict_plates.desc.desserts[1].allergens==="" ||
+         this.dict_plates.desc.desserts[2].name_dish==="" ||this.dict_plates.desc.desserts[2].allergens==="" ||
+         this.dict_plates.desc.desserts[3].name_dish==="" ||this.dict_plates.desc.desserts[3].allergens==="")
         {
             console.log('Inputs vacios!')
             return false

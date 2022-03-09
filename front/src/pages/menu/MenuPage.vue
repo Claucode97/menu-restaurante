@@ -6,7 +6,7 @@
   <p>{{ dateParsed }}</p>
   <div class="modify_div_btn">
     <router-link :to="{name: 'MenuModifyPage', params: {date: this.$route.params.date}}">
-    <button>Modificar menu</button>
+    <button @click="saveMenuId">Modificar menu</button>
     </router-link>
   </div> 
   <h3>Primeros</h3>
@@ -43,7 +43,8 @@ export default {
       desserts: [],
       date: this.$route.params.date,
       parsedDate:'',
-      loggedRestaurant:localStorage.name
+      loggedRestaurant:localStorage.name,
+      menus : {}
     };
   },
 
@@ -59,11 +60,14 @@ export default {
         },
       }
       const response = await fetch(`${config.API_PATH}/menus/by-date/` + this.$route.params.date,settings);
-      let menus = await response.json();
+      this.menus = await response.json();
       console.log('Headers', settings.headers)
-      this.firsts = menus.desc.firsts;
-      this.seconds = menus.desc.seconds;
-      this.desserts = menus.desc.desserts;
+      this.firsts = this.menus.desc.firsts;
+      this.seconds = this.menus.desc.seconds;
+      this.desserts = this.menus.desc.desserts;
+    },
+    saveMenuId(){
+      localStorage.id_menu = this.menus.id
     },
   },
   computed:{
