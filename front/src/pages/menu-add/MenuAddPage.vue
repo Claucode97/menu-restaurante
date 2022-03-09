@@ -4,84 +4,88 @@
     <div class="date">
       <input type="date" name="date" id="date" v-model="date" />
     </div>
+
     <section class="plates_info">
-      <label for="first-dish">Primeros</label>
-      <button class="btn">+</button>
+      <select
+        name="category-dishes"
+        id="category-dishes"
+        v-model="categoryDishes"
+      >
+        <option value="firsts">Primeros</option>
+        <option value="seconds">Segundos</option>
+        <option value="desserts">Postres</option>
+      </select>
+
       <input
         id="first-dish"
         class="input_plate"
         type="text"
         placeholder="Introducir plato"
-        v-model="dict_plates.firsts[0].name_dish"
+        v-model="nameDish"
       />
-      <fieldset>
-        <legend>Alérgenos</legend>
-        <label for="lactose">Lactosa</label>
-        <input id="lactose" type="checkbox" value="lactose" />
-        <label for="gluten">Gluten</label>
-        <input id="gluten" type="checkbox" value="gluten" />
-        <label for="egg">Huevo</label>
-        <input id="egg" type="checkbox" value="egg" />
-        <label for="seafood">Marisco</label>
-        <input id="seafood" type="checkbox" value="seafood" />
-        <label for="soy">Soja</label>
-        <input id="soy" type="checkbox" value="soy" />
-        <label for="nuts">Frutos de cascara</label>
-        <input id="nuts" type="checkbox" value="nuts" />
-      </fieldset>
 
-      <label for="second-dish">Segundos</label>
-      <button class="btn">+</button>
-      <input
-        id="second-dish"
-        class="input_plate"
-        type="text"
-        placeholder="Introducir plato"
-        v-model="dict_plates.seconds[0].name_dish"
-      />
       <fieldset>
         <legend>Alérgenos</legend>
         <label for="lactose">Lactosa</label>
-        <input id="lactose" type="checkbox" value="lactose" />
+        <input
+          id="lactose"
+          type="checkbox"
+          value="lactose"
+          v-model="this.allergens"
+        />
         <label for="gluten">Gluten</label>
-        <input id="gluten" type="checkbox" value="gluten" />
+        <input
+          id="gluten"
+          type="checkbox"
+          value="gluten"
+          v-model="this.allergens"
+        />
         <label for="egg">Huevo</label>
-        <input id="egg" type="checkbox" value="egg" />
+        <input id="egg" type="checkbox" value="egg" v-model="this.allergens" />
         <label for="seafood">Marisco</label>
-        <input id="seafood" type="checkbox" value="seafood" />
+        <input
+          id="seafood"
+          type="checkbox"
+          value="seafood"
+          v-model="this.allergens"
+        />
         <label for="soy">Soja</label>
-        <input id="soy" type="checkbox" value="soy" />
+        <input id="soy" type="checkbox" value="soy" v-model="this.allergens" />
         <label for="nuts">Frutos de cascara</label>
-        <input id="nuts" type="checkbox" value="nuts" />
-      </fieldset>
-
-      <label for="dessert-dish">Postres</label>
-      <button class="btn">+</button>
-      <input
-        id="dessert-dish"
-        type="text"
-        placeholder="Introducir plato"
-        v-model="dict_plates.desserts[0].name_dish"
-      />
-      <fieldset>
-        <legend>Alérgenos</legend>
-        <label for="lactose">Lactosa</label>
-        <input id="lactose" type="checkbox" value="lactose" />
-        <label for="gluten">Gluten</label>
-        <input id="gluten" type="checkbox" value="gluten" />
-        <label for="egg">Huevo</label>
-        <input id="egg" type="checkbox" value="egg" />
-        <label for="seafood">Marisco</label>
-        <input id="seafood" type="checkbox" value="seafood" />
-        <label for="soy">Soja</label>
-        <input id="soy" type="checkbox" value="soy" />
-        <label for="nuts">Frutos de cascara</label>
-        <input id="nuts" type="checkbox" value="nuts" />
+        <input
+          id="nuts"
+          type="checkbox"
+          value="nuts"
+          v-model="this.allergens"
+        />
       </fieldset>
     </section>
-    <button @click.prevent="onSaveClicked">Agregar Menú</button>
+    <button @click.prevent="buttonAddDish()" class="btn">Guardar Plato</button>
   </form>
-  <!-- {{$data}} -->
+
+  <h3>Primeros:</h3>
+  <dl v-for="dish of this.dict_plates.firsts" :key="dish.id">
+    <dt>{{ dish.name_dish }}</dt>
+    <dd v-for="allergen of dish.allergens" :key="allergen.id">
+      {{ allergen }}
+    </dd>
+  </dl>
+  <h3>Segundos:</h3>
+  <dl v-for="dish of this.dict_plates.seconds" :key="dish.id">
+    <dt>{{ dish.name_dish }}</dt>
+    <dd v-for="allergen of dish.allergens" :key="allergen.id">
+      {{ allergen }}
+    </dd>
+  </dl>
+  <h3>Postres:</h3>
+  <dl v-for="dish of this.dict_plates.desserts" :key="dish.id">
+    <dt>{{ dish.name_dish }}</dt>
+    <dd v-for="allergen of dish.allergens" :key="allergen.id">
+      {{ allergen }}
+    </dd>
+  </dl>
+
+  <button @click.prevent="onSaveClicked">Agregar Menú</button>
 </template>
 
 <script>
@@ -92,23 +96,13 @@ export default {
   data() {
     return {
       date: "",
+      categoryDishes: "",
+      nameDish: "",
+      allergens: [],
       dict_plates: {
-        firsts: [
-          { name_dish: "", desc_dish: "", id_dish: "01" },
-          { name_dish: "", desc_dish: "", id_dish: "02" },
-          { name_dish: "", desc_dish: "", id_dish: "03" },
-        ],
-        seconds: [
-          { name_dish: "", desc_dish: "", id_dish: "04" },
-          { name_dish: "", desc_dish: "", id_dish: "05" },
-          { name_dish: "", desc_dish: "", id_dish: "06" },
-        ],
-        desserts: [
-          { name_dish: "", desc_dish: "", id_dish: "07" },
-          { name_dish: "", desc_dish: "", id_dish: "08" },
-          { name_dish: "", desc_dish: "", id_dish: "09" },
-          { name_dish: "", desc_dish: "", id_dish: "10" },
-        ],
+        firsts: [],
+        seconds: [],
+        desserts: [],
       },
       loggedRestaurant: localStorage.name,
     };
@@ -117,28 +111,45 @@ export default {
   mounted() {},
   computed: {},
   methods: {
+    buttonAddDish() {
+      console.log("CLICK ADDBUTTON");
+      if (this.categoryDishes === "firsts") {
+        let dictOfCategory = {
+          name_dish: this.nameDish,
+          allergens: this.allergens,
+          id: "01",
+        };
+        this.dict_plates["firsts"].push(dictOfCategory);
+        this.nameDish = "";
+        this.allergens = [];
+      }
+      if (this.categoryDishes === "seconds") {
+        let dictOfCategory = {
+          name_dish: this.nameDish,
+          allergens: this.allergens,
+          id: "01",
+        };
+        this.dict_plates["seconds"].push(dictOfCategory);
+        this.nameDish = "";
+        this.allergens = [];
+      }
+      if (this.categoryDishes === "desserts") {
+        let dictOfCategory = {
+          name_dish: this.nameDish,
+          allergens: this.allergens,
+          id: "01",
+        };
+        this.dict_plates["desserts"].push(dictOfCategory);
+        this.nameDish = "";
+        this.allergens = [];
+      }
+    },
+
     areValidInputsFromMenu() {
       if (
-        this.dict_plates.firsts[0].name_dish === "" ||
-        this.dict_plates.firsts[0].desc_dish === "" ||
-        this.dict_plates.firsts[1].name_dish === "" ||
-        this.dict_plates.firsts[1].desc_dish === "" ||
-        this.dict_plates.firsts[2].name_dish === "" ||
-        this.dict_plates.firsts[2].desc_dish === "" ||
-        this.dict_plates.seconds[0].name_dish === "" ||
-        this.dict_plates.seconds[0].desc_dish === "" ||
-        this.dict_plates.seconds[1].name_dish === "" ||
-        this.dict_plates.seconds[1].desc_dish === "" ||
-        this.dict_plates.seconds[2].name_dish === "" ||
-        this.dict_plates.seconds[2].desc_dish === "" ||
-        this.dict_plates.desserts[0].name_dish === "" ||
-        this.dict_plates.desserts[0].desc_dish === "" ||
-        this.dict_plates.desserts[1].name_dish === "" ||
-        this.dict_plates.desserts[1].desc_dish === "" ||
-        this.dict_plates.desserts[2].name_dish === "" ||
-        this.dict_plates.desserts[2].desc_dish === "" ||
-        this.dict_plates.desserts[3].name_dish === "" ||
-        this.dict_plates.desserts[3].desc_dish === ""
+        this.dict_plates.firsts ||
+        this.dict_plates.seconds ||
+        this.dict_plates.desserts
       ) {
         return false;
       } else {
