@@ -15,8 +15,11 @@ dict_menu = {
             "name_dish": "Spaguetti a la bolognesa",
             "allergens": "Salsa de tomate",
         },
-    ],
-    "seconds": [
+        {
+            "id_dish": "10",
+            "name_dish": "Natilla de chocolate",
+            "allergens": "Derivado lacteo",
+        },
         {
             "id_dish": "04",
             "name_dish": "Lomo con patatas",
@@ -27,6 +30,8 @@ dict_menu = {
             "name_dish": "Arroz cremoso de carne",
             "allergens": "Verduras, curry",
         },
+    ],
+    "seconds": [
         {
             "id_dish": "06",
             "name_dish": "Muslo de pollo relleno",
@@ -41,11 +46,6 @@ dict_menu = {
         },
         {"id_dish": "08", "name_dish": "Helado", "allergens": "Sin tacc"},
         {"id_dish": "09", "name_dish": "Lemon pie", "allergens": "Bizcocho"},
-        {
-            "id_dish": "10",
-            "name_dish": "Natilla de chocolate",
-            "allergens": "Derivado lacteo",
-        },
     ],
 }
 
