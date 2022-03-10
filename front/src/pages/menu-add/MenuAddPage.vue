@@ -1,93 +1,92 @@
 <template>
-  <form action="">
-    <h2>{{ loggedRestaurant }}</h2>
-    <div class="date">
-      <input type="date" name="date" id="date" v-model="date" />
-    </div>
-
-    <section class="plates_info">
-      <select
-        name="category-dishes"
-        id="category-dishes"
-        v-model="categoryDishes"
-      >
-        <option value="firsts">Primeros</option>
-        <option value="seconds">Segundos</option>
-        <option value="desserts">Postres</option>
-      </select>
-
-      <input
-        id="name-dish"
-        type="text"
-        placeholder="Introducir plato"
-        v-model="nameDish"
-      />
-
-      <fieldset>
-        <legend>Alérgenos</legend>
-        <label for="lactose">Lactosa</label>
+  <div id="add-menu-container">
+    <form action="">
+      <h2>{{ loggedRestaurant }}</h2>
+      <div class="date">
+        <input type="date" name="date" id="date" v-model="date" />
+      </div>
+      <section class="plates_info">
+        <select
+          name="category-dishes"
+          id="category-dishes"
+          v-model="categoryDishes"
+        >
+          <option :value="null" disabled>Elige tipo de plato</option>
+          <option value="firsts">Primeros</option>
+          <option value="seconds">Segundos</option>
+          <option value="desserts">Postres</option>
+        </select>
         <input
-          id="lactose"
-          type="checkbox"
-          value="lactose"
-          v-model="this.allergens"
+          id="name-dish"
+          type="text"
+          placeholder="Introducir plato"
+          v-model="nameDish"
         />
-        <label for="gluten">Gluten</label>
-        <input
-          id="gluten"
-          type="checkbox"
-          value="gluten"
-          v-model="this.allergens"
-        />
-        <label for="egg">Huevo</label>
-        <input id="egg" type="checkbox" value="egg" v-model="this.allergens" />
-        <label for="seafood">Marisco</label>
-        <input
-          id="seafood"
-          type="checkbox"
-          value="seafood"
-          v-model="this.allergens"
-        />
-        <label for="soy">Soja</label>
-        <input id="soy" type="checkbox" value="soy" v-model="this.allergens" />
-        <label for="nuts">Frutos de cascara</label>
-        <input
-          id="nuts"
-          type="checkbox"
-          value="nuts"
-          v-model="this.allergens"
-        />
-      </fieldset>
-    </section>
-    <button @click.prevent="buttonAddDish()" class="btn">Guardar Plato</button>
-  </form>
+        <fieldset>
+          <legend>Alérgenos</legend>
+          <label for="lactose">Lactosa</label>
+          <input
+            id="lactose"
+            type="checkbox"
+            value="lactose"
+            v-model="this.allergens"
+          />
+          <label for="gluten">Gluten</label>
+          <input
+            id="gluten"
+            type="checkbox"
+            value="gluten"
+            v-model="this.allergens"
+          />
+          <label for="egg">Huevo</label>
+          <input id="egg" type="checkbox" value="egg" v-model="this.allergens" />
+          <label for="seafood">Marisco</label>
+          <input
+            id="seafood"
+            type="checkbox"
+            value="seafood"
+            v-model="this.allergens"
+          />
+          <label for="soy">Soja</label>
+          <input id="soy" type="checkbox" value="soy" v-model="this.allergens" />
+          <label for="nuts">Frutos de cascara</label>
+          <input
+            id="nuts"
+            type="checkbox"
+            value="nuts"
+            v-model="this.allergens"
+          />
+        </fieldset>
+      </section>
+      <button @click.prevent="buttonAddDish()" class="btn">Guardar Plato</button>
+    </form>
     
-  <h3>Primeros:</h3>
-  <dl v-for="dish of this.dict_plates.firsts" :key="dish.id">
-    <dt>{{ dish.name_dish }}</dt>
-    <dd v-for="allergen of dish.allergens" :key="allergen.id">
-      {{ allergen }}
-    </dd>
-    <button @click="deleteDishFrists(dish)">borrar plato</button>
-  </dl>
-  <h3>Segundos:</h3>
-  <dl v-for="dish of this.dict_plates.seconds" :key="dish.id">
-    <dt>{{ dish.name_dish }}</dt>
-    <dd v-for="allergen of dish.allergens" :key="allergen.id">
-      {{ allergen }}
-    </dd>
-    <button @click="deleteDishSeconds(dish)">borrar plato</button>
-  </dl>
-  <h3>Postres:</h3>
-  <dl v-for="dish of this.dict_plates.desserts" :key="dish.id">
-    <dt>{{ dish.name_dish }}</dt>
-    <dd v-for="allergen of dish.allergens" :key="allergen.id">
-      {{ allergen }}
-    </dd>
-    <button @click="deleteDishDesserts(dish)">borrar plato</button>
-  </dl>
-
-  <button @click.prevent="onSaveClicked">Agregar Menú</button>
+    <h3>Primeros:</h3>
+    <dl v-for="dish of this.dict_plates.firsts" :key="dish.id">
+      <dt>{{ dish.name_dish }}</dt>
+      <dd v-for="allergen of dish.allergens" :key="allergen.id">
+        {{ allergen }}
+      </dd>
+      <button @click="deleteDishFrists(dish)">borrar plato</button>
+    </dl>
+    <h3>Segundos:</h3>
+    <dl v-for="dish of this.dict_plates.seconds" :key="dish.id">
+      <dt>{{ dish.name_dish }}</dt>
+      <dd v-for="allergen of dish.allergens" :key="allergen.id">
+        {{ allergen }}
+      </dd>
+      <button @click="deleteDishSeconds(dish)">borrar plato</button>
+    </dl>
+    <h3>Postres:</h3>
+    <dl v-for="dish of this.dict_plates.desserts" :key="dish.id">
+      <dt>{{ dish.name_dish }}</dt>
+      <dd v-for="allergen of dish.allergens" :key="allergen.id">
+        {{ allergen }}
+      </dd>
+      <button @click="deleteDishDesserts(dish)">borrar plato</button>
+    </dl>
+    <button @click.prevent="onSaveClicked">Agregar Menú</button>
+  </div>
 </template>
 
 <script>
@@ -98,7 +97,7 @@ export default {
   data() {
     return {
       date: "",
-      categoryDishes: "",
+      categoryDishes: null,
       nameDish: "",
       allergens: [],
       dict_plates: {
@@ -213,6 +212,11 @@ body {
   justify-content: flex-end;
 }
 form *{margin-bottom: 0.5em;}
+
+#add-menu-container {
+  text-align: left;
+}
+#name-dish{width:60%}
 
 
 </style>
