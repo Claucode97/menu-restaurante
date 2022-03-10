@@ -68,6 +68,7 @@
     <dd v-for="allergen of dish.allergens" :key="allergen.id">
       {{ allergen }}
     </dd>
+    <button @click="deleteDishFrists(dish)">borrar plato</button>
   </dl>
   <h3>Segundos:</h3>
   <dl v-for="dish of this.dict_plates.seconds" :key="dish.id">
@@ -75,6 +76,7 @@
     <dd v-for="allergen of dish.allergens" :key="allergen.id">
       {{ allergen }}
     </dd>
+    <button @click="deleteDishSeconds(dish)">borrar plato</button>
   </dl>
   <h3>Postres:</h3>
   <dl v-for="dish of this.dict_plates.desserts" :key="dish.id">
@@ -82,6 +84,7 @@
     <dd v-for="allergen of dish.allergens" :key="allergen.id">
       {{ allergen }}
     </dd>
+    <button @click="deleteDishDesserts(dish)">borrar plato</button>
   </dl>
 
   <button @click.prevent="onSaveClicked">Agregar Menú</button>
@@ -107,9 +110,19 @@ export default {
     };
   },
 
-  mounted() {},
-  computed: {},
   methods: {
+    deleteDishFrists(dish){
+      let indice = this.dict_plates.firsts.indexOf(dish)
+      this.dict_plates.firsts.splice(indice,1)
+    },
+    deleteDishSeconds(dish){
+      let indice = this.dict_plates.seconds.indexOf(dish)
+      this.dict_plates.seconds.splice(indice,1)
+    },
+    deleteDishDesserts(dish){
+      let indice = this.dict_plates.desserts.indexOf(dish)
+      this.dict_plates.desserts.splice(indice,1)
+    },
     buttonAddDish() {
       if (this.categoryDishes === "firsts" && this.nameDish != "") {
             let dictOfCategory = {
@@ -149,9 +162,9 @@ export default {
 
     areValidInputsFromMenu() {
       if (
-        this.dict_plates.firsts ||
-        this.dict_plates.seconds ||
-        this.dict_plates.desserts
+        this.dict_plates.firsts.name_dish ||
+        this.dict_plates.seconds.name_dish ||
+        this.dict_plates.desserts.name_dish
       ) {
         return false;
       } else {
