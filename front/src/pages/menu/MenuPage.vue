@@ -13,21 +13,27 @@
   <section v-for="menu in this.firsts" :key="menu.id_dish">
     <ul class="split_the_dishes">
       <li>{{ menu.name_dish }}</li>
-      <li class="menu_detail">{{ menu.allergens }}</li>
+      <div v-for="allergens in menu.allergens" :key="allergens">
+      <li class="menu_detail">{{ allergens }}</li>
+      </div>
     </ul>
   </section>
   <h3>Segundos</h3>
   <section v-for="menu in this.seconds" :key="menu.id_dish">
     <ul class="split_the_dishes">
       <li>{{ menu.name_dish }}</li>
-      <li class="menu_detail">{{ menu.allergens }}</li>
+      <div v-for="allergens in menu.allergens" :key="allergens">
+      <li class="menu_detail">{{ allergens }}</li>
+      </div>
     </ul>
   </section>
   <h3>Postres</h3>
   <section v-for="menu in this.desserts" :key="menu.id_dish">
     <ul class="split_the_dishes">
       <li>{{ menu.name_dish }}</li>
-      <li class="menu_detail">{{ menu.allergens }}</li>
+      <div v-for="allergens in menu.allergens" :key="allergens">
+      <li class="menu_detail">{{ allergens }}</li>
+      </div>
     </ul>
   </section>
 </template>
