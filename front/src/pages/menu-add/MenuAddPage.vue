@@ -1,6 +1,6 @@
 <template>
   <form action="">
-    <p>{{ loggedRestaurant }}</p>
+    <h2>{{ loggedRestaurant }}</h2>
     <div class="date">
       <input type="date" name="date" id="date" v-model="date" />
     </div>
@@ -17,8 +17,7 @@
       </select>
 
       <input
-        id="first-dish"
-        class="input_plate"
+        id="name-dish"
         type="text"
         placeholder="Introducir plato"
         v-model="nameDish"
@@ -62,7 +61,7 @@
     </section>
     <button @click.prevent="buttonAddDish()" class="btn">Guardar Plato</button>
   </form>
-
+    
   <h3>Primeros:</h3>
   <dl v-for="dish of this.dict_plates.firsts" :key="dish.id">
     <dt>{{ dish.name_dish }}</dt>
@@ -112,36 +111,39 @@ export default {
   computed: {},
   methods: {
     buttonAddDish() {
-      console.log("CLICK ADDBUTTON");
-      if (this.categoryDishes === "firsts") {
+      if (this.categoryDishes === "firsts" && this.nameDish != "") {
+            let dictOfCategory = {
+            name_dish: this.nameDish,
+            allergens: this.allergens,
+            id: uuidv4(),
+            };
+            this.dict_plates["firsts"].push(dictOfCategory);
+            this.nameDish = "";
+            this.allergens = [];
+        }
+      else if (this.categoryDishes === "seconds" && this.nameDish != "") {
         let dictOfCategory = {
-          name_dish: this.nameDish,
-          allergens: this.allergens,
-          id: "01",
-        };
-        this.dict_plates["firsts"].push(dictOfCategory);
-        this.nameDish = "";
-        this.allergens = [];
-      }
-      if (this.categoryDishes === "seconds") {
-        let dictOfCategory = {
-          name_dish: this.nameDish,
-          allergens: this.allergens,
-          id: "01",
+        name_dish: this.nameDish,
+        allergens: this.allergens,
+        id: uuidv4(),
         };
         this.dict_plates["seconds"].push(dictOfCategory);
         this.nameDish = "";
         this.allergens = [];
-      }
-      if (this.categoryDishes === "desserts") {
-        let dictOfCategory = {
+        }
+        
+      else if (this.categoryDishes === "desserts" && this.nameDish != "") {
+          let dictOfCategory = {
           name_dish: this.nameDish,
           allergens: this.allergens,
-          id: "01",
-        };
-        this.dict_plates["desserts"].push(dictOfCategory);
-        this.nameDish = "";
-        this.allergens = [];
+          id: uuidv4(),
+          };
+          this.dict_plates["desserts"].push(dictOfCategory);
+          this.nameDish = "";
+          this.allergens = [];
+      }
+      else{
+          alert("Faltan datos por rellenar")
       }
     },
 
@@ -197,22 +199,7 @@ body {
   display: flex;
   justify-content: flex-end;
 }
-.firsts,
-.seconds,
-.desserts {
-  display: grid;
-  grid-template-columns: 1fr 3fr;
-  margin-top: 0.5em;
-  padding: 0.2em;
-}
-.input_plate {
-  margin-bottom: 0.3em;
-  margin-right: 0.1em;
-}
-p {
-  text-align: left;
-}
-button {
-  margin-top: 1em;
-}
+form *{margin-bottom: 0.5em;}
+
+
 </style>
