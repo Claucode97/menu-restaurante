@@ -25,15 +25,17 @@
         v-for="index of daysOfMonthSelected"
         :key="index" v-bind:class="{underline:index.menuExists}">
                      <!-- {'day':dayToStr,'menuExists':menuExists} -->
-         {{index.day}}
+        {{index.day}}
       </li>
     </ul>
   </article>
 
   <ul class="menu-date" v-for="menu in listOfMenus" :key="menu.id">
+    <div>
     <router-link :to="{ name: 'Menu', params: { date: menu.date } }">
       <li>{{ menu.date }}</li>
     </router-link>
+    </div>
   </ul>
 </template>
 
@@ -119,12 +121,15 @@ export default {
         if (monthExtracted===current_month){
           day=menu.date.slice(8,10)
           if (day.slice(0,1)==='0') {
-              day = day.slice(1,2);
+            day = day.slice(1,2);
            }
           daysConnected.push(day)
         }
       }
       return daysConnected
+    },
+    a(i){
+      console.log(i)
     },
     comeBackCurrentMonth() {
       let comebackMonth = new Date().getMonth();
@@ -155,8 +160,15 @@ export default {
           Authorization: localStorage.id_restaurant,
         },
       } 
+      for (let menu of this.listOfMenus){
+      if (menu.date === clickedDay){ 
       this.$router.push("/menus/by-date/" + clickedDay,settings)
-      console.log(clickedDay)
+      return
+      }
+      }
+      this.$router.push("/menu/add")
+
+      
     },
     async loadData() {
       const settings = {
@@ -168,6 +180,7 @@ export default {
       console.log('Headers:',settings.headers)
       const response = await fetch(`${config.API_PATH}/menus`, settings);
       this.listOfMenus = await response.json();
+      
     },
     
   },
