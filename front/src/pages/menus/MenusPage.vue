@@ -1,5 +1,4 @@
 <template>
-{{extractMenusOfTheMonth()}}
 <h2>{{loggedRestaurant}}</h2>
   <router-link :to="{ name: 'Menu', params: { date: getToday } }">
     <button class="menu-day">Menú del día</button>
@@ -24,7 +23,6 @@
       <li @click="onClickDay(index.day)"
         v-for="index of daysOfMonthSelected"
         :key="index" v-bind:class="{underline:index.menuExists}">
-                     <!-- {'day':dayToStr,'menuExists':menuExists} -->
         {{index.day}}
       </li>
     </ul>
@@ -103,7 +101,6 @@ export default {
         if (dayToStr < 10) { dayToStr = "0" + dayToStr }
         bindMenusOfMonthToCal.push({'day':dayToStr,'menuExists':menuExists})
       }
-      // console.log(bindMenusOfMonthToCal)
       return bindMenusOfMonthToCal
     },
   },
@@ -127,9 +124,6 @@ export default {
         }
       }
       return daysConnected
-    },
-    a(i){
-      console.log(i)
     },
     comeBackCurrentMonth() {
       let comebackMonth = new Date().getMonth();
@@ -177,7 +171,6 @@ export default {
           Authorization: localStorage.id_restaurant,
         },
       };
-      console.log('Headers:',settings.headers)
       const response = await fetch(`${config.API_PATH}/menus`, settings);
       this.listOfMenus = await response.json();
       
