@@ -13,21 +13,21 @@
   <section v-for="menu in this.firsts" :key="menu.id_dish">
     <ul class="split_the_dishes">
       <li>{{ menu.name_dish }}</li>
-      <li class="menu_detail">{{ menu.allergens }}</li>
+      <li class="allergen-detail" v-for="allergen in menu.allergens" :key="allergen.id" >{{ allergen }}</li>
     </ul>
   </section>
   <h3>Segundos</h3>
   <section v-for="menu in this.seconds" :key="menu.id_dish">
     <ul class="split_the_dishes">
       <li>{{ menu.name_dish }}</li>
-      <li class="menu_detail">{{ menu.allergens }}</li>
-    </ul>
+      <li class="allergen-detail" v-for="allergen in menu.allergens" :key="allergen.id" >{{ allergen }}</li>
+    </ul> 
   </section>
   <h3>Postres</h3>
   <section v-for="menu in this.desserts" :key="menu.id_dish">
     <ul class="split_the_dishes">
       <li>{{ menu.name_dish }}</li>
-      <li class="menu_detail">{{ menu.allergens }}</li>
+      <li class="allergen-detail" v-for="allergen in menu.allergens" :key="allergen.id">{{ allergen}}</li>
     </ul>
   </section>
 </template>
@@ -44,6 +44,7 @@ export default {
       date: this.$route.params.date,
       parsedDate:'',
       loggedRestaurant:localStorage.name,
+      menu : {}
     };
   },
 
@@ -59,11 +60,11 @@ export default {
         },
       }
       const response = await fetch(`${config.API_PATH}/menus/by-date/` + this.$route.params.date,settings);
-      let menus = await response.json();
+      this.menus = await response.json();
       console.log('Headers', settings.headers)
-      this.firsts = menus.desc.firsts;
-      this.seconds = menus.desc.seconds;
-      this.desserts = menus.desc.desserts;
+      this.firsts = this.menus.desc.firsts;
+      this.seconds = this.menus.desc.seconds;
+      this.desserts = this.menus.desc.desserts;
     },
     saveMenuId(){
       localStorage.id_menu = this.menus.id
@@ -98,9 +99,10 @@ li {
 .split_the_dishes {
   margin: 0.8em;
 }
-.menu_detail{
+.allergen-detail{
   font-size:11px;
   font-style: italic;
+  display: inline;
 }
 .modify_div_btn{
   display:flex;
