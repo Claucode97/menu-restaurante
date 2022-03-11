@@ -6,19 +6,26 @@
   </div>
     <section class="plates_info"  >
     <p>Primeros</p>
+    <button  type="button" @click="addNewInput(firsts)">+</button>
     <div class="firsts" v-for="dish in firsts" :key="dish.id_dish">
         <input class="input_plate" type="text"  v-model="dish.name_dish">
         <input class="input_plate" type="text"  v-model="dish.allergens">
+        <button @click="deleteDish(dish,firsts)">-</button>
     </div>
-    <p>Segundos</p>
+    
+    <p >Segundos</p>
+    <button  type="button" @click="addNewInput(seconds)">+</button>
     <div class="seconds" v-for="dish in seconds" :key="dish.id_dish">
         <input class="input_plate" type="text"  v-model="dish.name_dish">
         <input class="input_plate" type="text"  v-model="dish.allergens">
+        <button @click="deleteDish(dish,seconds)">-</button>
     </div>
-    <p>Postres</p>
+    <p class="boton_plus">Postres</p>
+    <button class="boton_plus" type="button" @click="addNewInput(desserts)">+ </button>    
     <div class="desserts" v-for="dish in desserts" :key="dish.id_dish">
         <input class="input_plate" type="text"  v-model="dish.name_dish">
         <input class="input_plate" type="text"  v-model="dish.allergens">
+        <button @click="deleteDish(dish,desserts)">-</button>
     </div>
     </section>
     <p v-show="!this.areThereEmpties">Existen vacíos!</p>
@@ -48,6 +55,13 @@ export default {
   },
   computed:{},
   methods: {
+    addNewInput(menu){
+    menu.push({name_dish:"", allergens:""})
+    },
+    deleteDish(dish,menu){
+      let indice = menu.indexOf(dish)
+      menu.splice(indice,1)
+    },
     async loadData(){
       const settings = {
          method: "GET",
@@ -136,7 +150,7 @@ body{
 .seconds,
 .desserts{
     display:grid;
-    grid-template-columns:1fr 3fr;
+    grid-template-columns:1fr 3fr 0.001fr;
     padding: 0.2em
 }
 .input_plate{
@@ -154,5 +168,10 @@ button{
 }
 .empty{
     border-color:solid 1px red;
+}
+
+.boton_plus{
+ float: right;
+
 }
 </style>

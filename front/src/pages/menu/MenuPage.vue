@@ -44,6 +44,7 @@ export default {
       date: this.$route.params.date,
       parsedDate:'',
       loggedRestaurant:localStorage.name,
+      menus:{}
     };
   },
 
@@ -59,11 +60,11 @@ export default {
         },
       }
       const response = await fetch(`${config.API_PATH}/menus/by-date/` + this.$route.params.date,settings);
-      let menus = await response.json();
+      this.menus = await response.json();
       console.log('Headers', settings.headers)
-      this.firsts = menus.desc.firsts;
-      this.seconds = menus.desc.seconds;
-      this.desserts = menus.desc.desserts;
+      this.firsts = this.menus.desc.firsts;
+      this.seconds = this.menus.desc.seconds;
+      this.desserts = this.menus.desc.desserts;
     },
     saveMenuId(){
       localStorage.id_menu = this.menus.id
