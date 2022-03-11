@@ -22,7 +22,7 @@
           placeholder="Introducir plato"
           v-model="nameDish"
         />
-        <fieldset>
+        <fieldset class="allergens-box">
           <legend>Alérgenos</legend>
           <label for="lactose">Lactosa</label>
           <input
@@ -61,31 +61,33 @@
       <button @click.prevent="buttonAddDish()" class="btn">Guardar Plato</button>
     </form>
     
-    <h3>Primeros:</h3>
-    <dl v-for="dish of this.dict_plates.firsts" :key="dish.id">
-      <dt>{{ dish.name_dish }}</dt>
-      <dd v-for="allergen of dish.allergens" :key="allergen.id">
-        {{ allergen }}
-      </dd>
-      <button @click="deleteDishFrists(dish)">borrar plato</button>
-    </dl>
-    <h3>Segundos:</h3>
-    <dl v-for="dish of this.dict_plates.seconds" :key="dish.id">
-      <dt>{{ dish.name_dish }}</dt>
-      <dd v-for="allergen of dish.allergens" :key="allergen.id">
-        {{ allergen }}
-      </dd>
-      <button @click="deleteDishSeconds(dish)">borrar plato</button>
-    </dl>
-    <h3>Postres:</h3>
-    <dl v-for="dish of this.dict_plates.desserts" :key="dish.id">
-      <dt>{{ dish.name_dish }}</dt>
-      <dd v-for="allergen of dish.allergens" :key="allergen.id">
-        {{ allergen }}
-      </dd>
-      <button @click="deleteDishDesserts(dish)">borrar plato</button>
-    </dl>
-    <button @click.prevent="onSaveClicked">Agregar Menú</button>
+    <section class="menu-container">
+      <h3>Primeros:</h3>
+      <dl v-for="dish of this.dict_plates.firsts" :key="dish.id">
+        <dt>{{ dish.name_dish }}</dt>
+        <dd v-for="allergen of dish.allergens" :key="allergen.id">
+          {{ allergen }}
+        </dd>
+        <button @click="deleteDishFrists(dish)" class="btn btn-delete-dish"> - </button>
+      </dl>
+      <h3>Segundos:</h3>
+      <dl v-for="dish of this.dict_plates.seconds" :key="dish.id">
+        <dt>{{ dish.name_dish }}</dt>
+        <dd v-for="allergen of dish.allergens" :key="allergen.id">
+          {{ allergen }}
+        </dd>
+        <button @click="deleteDishSeconds(dish)" class="btn btn-delete-dish"> - </button>
+      </dl>
+      <h3>Postres:</h3>
+      <dl v-for="dish of this.dict_plates.desserts" :key="dish.id">
+        <dt>{{ dish.name_dish }}</dt>
+        <dd v-for="allergen of dish.allergens" :key="allergen.id">
+          {{ allergen }}
+        </dd>
+        <button @click="deleteDishDesserts(dish)" class="btn btn-delete-dish"> - </button>
+      </dl>
+    </section>
+    <button @click.prevent="onSaveClicked" class="btn">Agregar Menú</button>
   </div>
 </template>
 
@@ -202,21 +204,63 @@ export default {
 };
 </script>
 <style scoped>
-body {
+* {
   padding: 0;
   margin: 0;
+  box-sizing: border-box;
 }
-
+h2{text-align: center;}
 .date {
   display: flex;
   justify-content: flex-end;
 }
-form *{margin-bottom: 0.5em;}
+form *{margin-bottom: 0.6em;}
+.plates_info *{
+  padding: 0.4em;
+}
 
 #add-menu-container {
   text-align: left;
 }
-#name-dish{width:60%}
+#name-dish{width:100%}
 
+.allergens-box {
+  font-size: 0.8em;
+  padding: 0 0.5em;
+}
+.allergens-box input {margin-right: 0.5em}
+.allergens-box label {margin-right: 0.3em}
 
+.btn {
+  cursor:pointer;
+  user-select: none;
+  margin: 0 auto;
+  display: block;
+  padding: 0.5em;
+}
+.menu-container dt {
+  font-weight: bold;
+;}
+.menu-container h3 {
+  text-decoration: underline double;
+  margin-bottom: 0.8em;
+  }
+
+.menu-container dd{
+  display: inline;
+  margin-right: 0.2em;
+  font-size: 0.9em;
+}
+
+.menu-container dl{
+  position: relative;
+  margin-bottom: 0.6em;
+}
+.menu-container .btn{
+  position: absolute;
+  top: 50%;
+  right: 5%;
+  transform: translateY(-50%);
+  padding: 0.1em 0.5em;
+}
 </style>
