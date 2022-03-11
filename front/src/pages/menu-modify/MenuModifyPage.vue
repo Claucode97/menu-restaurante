@@ -7,7 +7,6 @@
     <section class="plates_info"  >
     <p>Primeros</p>
     <div class="firsts" v-for="dish in firsts" :key="dish.id_dish">
-        
         <input class="input_plate" type="text"  v-model="dish.name_dish">
         <input class="input_plate" type="text"  v-model="dish.allergens">
     </div>
@@ -16,15 +15,15 @@
         <input class="input_plate" type="text"  v-model="dish.name_dish">
         <input class="input_plate" type="text"  v-model="dish.allergens">
     </div>
-    <p>terceros</p>
+    <p>Postres</p>
     <div class="desserts" v-for="dish in desserts" :key="dish.id_dish">
         <input class="input_plate" type="text"  v-model="dish.name_dish">
         <input class="input_plate" type="text"  v-model="dish.allergens">
     </div>
     </section>
+    <p v-show="!this.areThereEmpties">Existen vacíos!</p>
     <button @click.prevent="onSaveClicked">Modificar Menú</button>
 </form>
-    <!-- {{$data}} -->
 </template>
 
 <script>
@@ -40,16 +39,14 @@ export default {
        seconds:[],
        desserts:[],
        loggedRestaurant:localStorage.name,
+       areThereEmpties:true
     };
   },
 
   mounted() {
     this.loadData()
-    
   },
-  computed:{
-      
-  },
+  computed:{},
   methods: {
     async loadData(){
       const settings = {
@@ -68,33 +65,38 @@ export default {
     },
     dateParsed(){
         let completeDate =  this.dateReceived
-        console.log(this.dict_plates)
         let year = completeDate.slice(0,4)
         let day = completeDate.slice(8,10)
         let month = completeDate.slice(5,7)
         return day + "-" + month + "-" + year
       },
-    /* areValidInputsFromMenu(){
-      if(this.dict_plates.desc.firsts[0].name_dish==="" || this.dict_plates.desc.firsts[0].allergens==="" ||
-         this.dict_plates.desc.firsts[1].name_dish==="" || this.dict_plates.desc.firsts[1].allergens==="" ||
-         this.dict_plates.desc.firsts[2].name_dish==="" || this.dict_plates.desc.firsts[2].allergens==="" ||
-         this.dict_plates.desc.seconds[0].name_dish===""||this.dict_plates.desc.seconds[0].allergens==="" ||
-         this.dict_plates.desc.seconds[1].name_dish===""||this.dict_plates.desc.seconds[1].allergens==="" ||
-         this.dict_plates.desc.seconds[2].name_dish===""||this.dict_plates.desc.seconds[2].allergens==="" ||
-         this.dict_plates.desc.desserts[0].name_dish===""|| this.dict_plates.desc.desserts[0].allergens===""||
-         this.dict_plates.desc.desserts[1].name_dish==="" ||this.dict_plates.desc.desserts[1].allergens==="" ||
-         this.dict_plates.desc.desserts[2].name_dish==="" ||this.dict_plates.desc.desserts[2].allergens==="" ||
-         this.dict_plates.desc.desserts[3].name_dish==="" ||this.dict_plates.desc.desserts[3].allergens==="")
-        {
-            console.log('Inputs vacios!')
-            return false
+    areValidInputsFromMenu(){
+        let platesTot=[]
+        let countEmpties=0
+        for (let plate of this.firsts){
+            let platesFirsts=String(plate.name_dish)
+            platesTot.push(platesFirsts)
         }
-      else{
-            return true
+        for (let plate of this.seconds){
+            let platesSeconds=String(plate.name_dish)
+            platesTot.push(platesSeconds)
         }
-    }, */
+        for (let plate of this.desserts){
+            let platesDesserts=String(plate.name_dish)
+            platesTot.push(platesDesserts)
+        }
+        for (let dish of platesTot){
+            if (dish===''){
+                countEmpties+=1
+            }
+        }
+        if (countEmpties===0){
+            return true}
+        else{return false}
+    }, 
+
     async onSaveClicked(){
-       /*  if (this.areValidInputsFromMenu()===true){ */
+       if (this.areValidInputsFromMenu()===true){ 
             let desc=this.dict_plates.desc
             this.dictToSend={'date':this.dateReceived,'desc':desc, 'id':this.dict_plates.id, 'id_restaurant':localStorage.id_restaurant}
             const settings={
@@ -110,10 +112,14 @@ export default {
             alert('Menu modificado con éxito!')
             this.$router.push("/menus")
             }
-        
+        }
+        else{
+            this.areThereEmpties=false
+        }
+    },
     }
-  },
 }
+
 
 </script>
 <style scoped>
@@ -131,12 +137,9 @@ body{
 .desserts{
     display:grid;
     grid-template-columns:1fr 3fr;
-    margin-top:0.5em;
     padding: 0.2em
 }
 .input_plate{
-
-    margin-bottom:0.3em;
     margin-right:0.1em;
 }
 p{
@@ -148,5 +151,8 @@ button{
 .dateNameRestaurant{
   display: flex;
   justify-content: space-between;
+}
+.empty{
+    border-color:solid 1px red;
 }
 </style>
