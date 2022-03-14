@@ -34,8 +34,8 @@
 </template>
 
 <script>
-
-import {getMenuModify,updateMenu} from "@/services/api.js"
+import config from "@/config.js"
+import {getMenuModify} from "@/services/api.js"
 export default {
   name: "modifymenu",
   data() {
@@ -108,8 +108,15 @@ export default {
        if (this.areValidInputsFromMenu()===true){ 
             let desc=this.dict_plates.desc
             this.dictToSend={'date':this.dateReceived,'desc':desc, 'id':this.dict_plates.id, 'id_restaurant':localStorage.id_restaurant}
-            
-            var response = updateMenu(this.dictToSend)
+            const settings={
+            method:"PUT",
+            body: JSON.stringify(this.dictToSend),
+            headers:{
+                Authorization: localStorage.id_restaurant,
+                'Content-Type':'application/json'
+                }
+            }
+            var response = await fetch(`${config.API_PATH}/menus`,settings)
             if (response.status===200){
             alert('Menu modificado con éxito!')
             this.$router.push("/menus")
