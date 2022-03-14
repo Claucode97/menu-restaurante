@@ -34,7 +34,8 @@
 </template>
 
 <script>
-import config from "@/config.js"
+
+import {getMenuModify,updateMenu} from "@/services/api.js"
 export default {
   name: "modifymenu",
   data() {
@@ -63,14 +64,8 @@ export default {
       menu.splice(indice,1)
     },
     async loadData(){
-      const settings = {
-         method: "GET",
-         headers: {
-           Authorization: localStorage.id_restaurant,
-         },
-      }        
-      const response = await fetch(`${config.API_PATH}/menus/` + localStorage.id_menu,settings);
-      this.dict_plates = await response.json();
+      
+      this.dict_plates = await getMenuModify();
       this.firsts = this.dict_plates.desc.firsts;
       this.seconds = this.dict_plates.desc.seconds;
       this.desserts = this.dict_plates.desc.desserts;
@@ -113,15 +108,8 @@ export default {
        if (this.areValidInputsFromMenu()===true){ 
             let desc=this.dict_plates.desc
             this.dictToSend={'date':this.dateReceived,'desc':desc, 'id':this.dict_plates.id, 'id_restaurant':localStorage.id_restaurant}
-            const settings={
-            method:"PUT",
-            body: JSON.stringify(this.dictToSend),
-            headers:{
-                Authorization: localStorage.id_restaurant,
-                'Content-Type':'application/json'
-                }
-            }
-            var response = await fetch(`${config.API_PATH}/menus`,settings)
+            
+            var response = updateMenu(this.dictToSend)
             if (response.status===200){
             alert('Menu modificado con éxito!')
             this.$router.push("/menus")

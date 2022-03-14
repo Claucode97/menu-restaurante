@@ -33,7 +33,7 @@
 </template>
 
 <script>
-import config from "@/config.js"
+import {getMenuByDate} from "@/services/api.js"
 export default {
   
   data() {
@@ -53,15 +53,8 @@ export default {
   },
   methods: {
     async loadData() {
-      const settings = {
-        method: "GET",
-        headers: {
-          Authorization: localStorage.id_restaurant,
-        },
-      }
-      const response = await fetch(`${config.API_PATH}/menus/by-date/` + this.$route.params.date,settings);
-      this.menus = await response.json();
-      console.log('Headers', settings.headers)
+      this.menus = await getMenuByDate(this.date)
+      
       this.firsts = this.menus.desc.firsts;
       this.seconds = this.menus.desc.seconds;
       this.desserts = this.menus.desc.desserts;

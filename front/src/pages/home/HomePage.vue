@@ -12,7 +12,8 @@
 </template>
 
 <script>
-import config from "@/config.js"
+import {getRestaurants} from "@/services/api.js"
+
 export default {
   name: 'Home',
   data(){
@@ -26,8 +27,8 @@ export default {
   },
   methods:{
     async loadData(){
-      var response = await fetch(`${config.API_PATH}/restaurants`)
-      this.restaurants = await response.json()
+      
+      this.restaurants = await getRestaurants()
     },
   onButtonClicked(){
       localStorage.id_restaurant=this.selectedRestaurant.id_restaurant

@@ -38,7 +38,7 @@
 </template>
 
 <script>
-import config from "@/config.js";
+import {getListOfMenus} from "@/services/api.js"
 export default {
   data() {
     return {
@@ -165,17 +165,8 @@ export default {
       
     },
     async loadData() {
-      const settings = {
-        method: "GET",
-        headers: {
-          Authorization: localStorage.id_restaurant,
-        },
-      };
-      const response = await fetch(`${config.API_PATH}/menus`, settings);
-      this.listOfMenus = await response.json();
-      
-    },
-    
+      this.listOfMenus = await getListOfMenus();
+      },
   },
 };
 </script>
