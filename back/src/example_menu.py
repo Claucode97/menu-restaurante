@@ -3,142 +3,154 @@ dict_menu = {
         {
             "id_dish": "01",
             "name_dish": "Ensalada mixta",
-            "allergens": "Ensalada con cebolla",
+            "allergens": ["lactose", "Gluten", "seafood", "nuts", "egg", "soy"],
         },
         {
             "id_dish": "02",
             "name_dish": "Alubias con sus sacramentos",
-            "allergens": "Tocino, chorizo, morcilla",
+            "allergens": ["nuts", "egg", "soy"],
         },
         {
             "id_dish": "03",
             "name_dish": "Spaguetti a la bolognesa",
-            "allergens": "Salsa de tomate",
+            "allergens": ["nuts", "egg", "soy"],
         },
         {
             "id_dish": "10",
             "name_dish": "Natilla de chocolate",
-            "allergens": "Derivado lacteo",
+            "allergens": ["nuts", "egg", "soy"],
         },
         {
             "id_dish": "04",
             "name_dish": "Lomo con patatas",
-            "allergens": "Asado a las brasas",
+            "allergens": ["nuts", "egg", "soy"],
         },
         {
             "id_dish": "05",
             "name_dish": "Arroz cremoso de carne",
-            "allergens": "Verduras, curry",
+            "allergens": ["nuts", "egg", "soy"],
         },
     ],
     "seconds": [
         {
             "id_dish": "06",
             "name_dish": "Muslo de pollo relleno",
-            "allergens": "Asado a las brasas, verduras salteadas",
+            "allergens": ["nuts", "egg", "soy"],
         },
     ],
     "desserts": [
         {
             "id_dish": "07",
             "name_dish": "Flan horneado",
-            "allergens": "Alto contenido de huevo",
+            "allergens": ["nuts", "egg", "soy"],
         },
-        {"id_dish": "08", "name_dish": "Helado", "allergens": "Sin tacc"},
-        {"id_dish": "09", "name_dish": "Lemon pie", "allergens": "Bizcocho"},
+        {"id_dish": "08", "name_dish": "Helado", "allergens": ["nuts", "egg", "soy"]},
+        {
+            "id_dish": "09",
+            "name_dish": "Lemon pie",
+            "allergens": ["nuts", "egg", "soy"],
+        },
     ],
 }
 
 dict_menu_2 = {
     "firsts": [
-        {"id_dish": "01", "name_dish": "Pizza", "allergens": "Ensalada con cebolla"},
+        {"id_dish": "01", "name_dish": "Pizza", "allergens": ["nuts", "egg", "soy"]},
         {
             "id_dish": "02",
             "name_dish": "Alubias con sus sacramentos",
-            "allergens": "Tocino, chorizo, morcilla",
+            "allergens": ["nuts", "egg", "soy"],
         },
         {
             "id_dish": "03",
             "name_dish": "Spaguetti a la bolognesa",
-            "allergens": "Salsa de tomate",
+            "allergens": ["nuts", "egg", "soy"],
         },
     ],
     "seconds": [
         {
             "id_dish": "04",
             "name_dish": "Lomo con patatas",
-            "allergens": "Asado a las brasas",
+            "allergens": ["nuts", "egg", "soy"],
         },
         {
             "id_dish": "05",
             "name_dish": "Arroz cremoso de carne",
-            "allergens": "Verduras, curry",
+            "allergens": ["nuts", "egg", "soy"],
         },
         {
             "id_dish": "06",
             "name_dish": "Muslo de pollo relleno",
-            "allergens": "Asado a las brasas, verduras salteadas",
+            "allergens": ["nuts", "egg", "soy"],
         },
     ],
     "desserts": [
         {
             "id_dish": "07",
             "name_dish": "Flan horneado",
-            "allergens": "Alto contenido de huevo",
+            "allergens": ["nuts", "egg", "soy"],
         },
-        {"id_dish": "08", "name_dish": "Helado", "allergens": "Sin tacc"},
-        {"id_dish": "09", "name_dish": "Lemon pie", "allergens": "Bizcocho"},
+        {"id_dish": "08", "name_dish": "Helado", "allergens": ["nuts", "egg", "soy"]},
+        {
+            "id_dish": "09",
+            "name_dish": "Lemon pie",
+            "allergens": ["nuts", "egg", "soy"],
+        },
         {
             "id_dish": "10",
             "name_dish": "Natilla de chocolate",
-            "allergens": "Derivado lacteo",
+            "allergens": ["nuts", "egg", "soy"],
         },
     ],
 }
 
 dict_menu_3 = {
     "firsts": [
-        {"id_dish": "01", "name_dish": "Omelette", "allergens": "Ensalada con cebolla"},
+        {"id_dish": "01", "name_dish": "Omelette", "allergens": ["nuts", "egg", "soy"]},
         {
             "id_dish": "02",
             "name_dish": "Alubias con sus sacramentos",
-            "allergens": "Tocino, chorizo, morcilla",
+            "allergens": ["nuts", "egg", "soy"],
         },
         {
             "id_dish": "03",
             "name_dish": "Spaguetti a la bolognesa",
-            "allergens": "Salsa de tomate",
+            "allergens": ["nuts", "egg", "soy"],
         },
     ],
     "seconds": [
         {
             "id_dish": "04",
             "name_dish": "Lomo con patatas",
-            "allergens": "Asado a las brasas",
+            "allergens": ["nuts", "egg", "soy"],
         },
         {
             "id_dish": "05",
             "name_dish": "Arroz cremoso de carne",
-            "allergens": "Verduras, curry",
+            "allergens": ["nuts", "egg", "soy"],
         },
         {
             "id_dish": "06",
             "name_dish": "Muslo de pollo relleno",
-            "allergens": "Asado a las brasas, verduras salteadas",
+            "allergens": ["nuts", "egg", "soy"],
         },
     ],
     "desserts": [
         {
             "id_dish": "07",
             "name_dish": "Flan horneado",
-            "allergens": "Alto contenido de huevo",
+            "allergens": ["nuts", "egg", "soy"],
         },
-        {"id_dish": "08", "name_dish": "Helado", "allergens": "Sin tacc"},
-        {"id_dish": "09", "name_dish": "Lemon pie", "allergens": "Bizcocho"},
+        {"id_dish": "08", "name_dish": "Helado", "allergens": ["nuts", "egg", "soy"]},
+        {
+            "id_dish": "09",
+            "name_dish": "Lemon pie",
+            "allergens": ["nuts", "egg", "soy"],
+        },
         {
             "id_dish": "10",
             "name_dish": "Natilla de chocolate",
-            "allergens": "Derivado lacteo",
+            "allergens": ["nuts", "egg", "soy"],
         },
     ],
 }
