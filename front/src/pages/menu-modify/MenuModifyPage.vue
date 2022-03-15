@@ -2,37 +2,32 @@
 <form >
   <div class="dateNameRestaurant">
     <p>{{loggedRestaurant}}</p>
-    <p >{{dateParsed()}}</p>
+    <p>{{dateParsed()}}</p>
   </div>
-    <section class="plates_info"  >
-    <p>Primeros</p>
-    <button  type="button" @click="addNewInput(firsts)">+</button>
+    <section class="plates_info">
+    <div class="wrappedNameDish"><p>Primeros</p> <button class="addDish" @click.prevent="addNewInput(firsts)">Añadir plato</button></div>
     <div class="firsts" v-for="dish in firsts" :key="dish.id_dish">
         <input class="input_plate" type="text"  v-model="dish.name_dish">
         <input class="input_plate" type="text"  v-model="dish.allergens">
-        <button @click="deleteDish(dish,firsts)">-</button>
+        <button @click.prevent="deleteDish(dish,firsts)"> - </button>
     </div>
-    
-    <p >Segundos</p>
-    <button  type="button" @click="addNewInput(seconds)">+</button>
+    <div class="wrappedNameDish"><p>Segundos</p> <button class="addDish" @click.prevent="addNewInput(seconds)">Añadir plato</button></div>
     <div class="seconds" v-for="dish in seconds" :key="dish.id_dish">
         <input class="input_plate" type="text"  v-model="dish.name_dish">
         <input class="input_plate" type="text"  v-model="dish.allergens">
-        <button @click="deleteDish(dish,seconds)">-</button>
+        <button @click.prevent="deleteDish(dish,seconds)"> - </button>
     </div>
-    <p class="boton_plus">Postres</p>
-    <button class="boton_plus" type="button" @click="addNewInput(desserts)">+ </button>    
+    <div class="wrappedNameDish"><p>Postres</p> <button class="addDish" @click.prevent="addNewInput(desserts)">Añadir plato</button></div>  
     <div class="desserts" v-for="dish in desserts" :key="dish.id_dish">
         <input class="input_plate" type="text"  v-model="dish.name_dish">
         <input class="input_plate" type="text"  v-model="dish.allergens">
-        <button @click="deleteDish(dish,desserts)">-</button>
+        <button @click.prevent="deleteDish(dish,desserts)"> - </button>
     </div>
     </section>
     <p v-show="!this.areThereEmpties">Existen vacíos!</p>
     <button @click.prevent="onSaveClicked">Modificar Menú</button>
 </form>
 </template>
-
 <script>
 import config from "@/config.js"
 import {getMenuModify} from "@/services/api.js"
@@ -119,7 +114,7 @@ export default {
             var response = await fetch(`${config.API_PATH}/menus`,settings)
             if (response.status===200){
             alert('Menu modificado con éxito!')
-            this.$router.push("/menus")
+            this.$router.push("/menus/by-date/"+ this.dateReceived)
             }
         }
         else{
@@ -132,11 +127,10 @@ export default {
 
 </script>
 <style scoped>
-body{
+*{
     padding:0;
     margin:0;
 }
-
 .date{
     display:flex;
     justify-content: flex-end;
@@ -154,19 +148,16 @@ body{
 p{
     text-align:left
 }
-button{
-    margin-top:1em
-}
 .dateNameRestaurant{
   display: flex;
   justify-content: space-between;
 }
-.empty{
-    border-color:solid 1px red;
+.wrappedNameDish{
+    display:flex;
+    justify-content: space-between;
 }
-
-.boton_plus{
- float: right;
-
+.wrappedNameDish .addDish{
+    padding:0.2em;
+    display:block;
 }
 </style>
