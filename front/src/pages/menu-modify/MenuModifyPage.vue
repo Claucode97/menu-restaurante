@@ -4,14 +4,15 @@
     <p>{{loggedRestaurant}}</p>
     <p>{{dateParsed()}}</p>
   </div>
+  
     <section class="plates_info">
     <div class="wrappedNameDish">
         <p>Primeros</p> 
-        <button class="addDish" @click.prevent="addNewInput(firsts)">Añadir plato</button>
+        <button class="addDish" @click.prevent="addNewFirst()">Añadir plato</button>
     </div>
     <div class="firsts" v-for="dish in firsts" :key="dish.id_dish">
         <input class="input_plate" type="text"  v-model="dish.name_dish">
-        <button @click.prevent="deleteDish(dish,firsts)"> - </button>
+        <button @click.prevent="deleteDish(dish,firsts)" class="delete-button"> x </button>
         <div class="allergens-wrapped">
             <label for="lactose">Lactosa</label>
             <input id="lactose" type="checkbox" value="lactose" v-model="dish.allergens"/>
@@ -28,17 +29,47 @@
         </div>
         
     </div>
-    <div class="wrappedNameDish"><p>Segundos</p> <button class="addDish" @click.prevent="addNewInput(seconds)">Añadir plato</button></div>
+    <div class="wrappedNameDish"><p>Segundos</p> <button class="addDish" @click.prevent="addNewSecond()">Añadir plato</button></div>
     <div class="seconds" v-for="dish in seconds" :key="dish.id_dish">
         <input class="input_plate" type="text"  v-model="dish.name_dish">
-        <input class="input_plate" type="text"  v-model="dish.allergens">
-        <button @click.prevent="deleteDish(dish,seconds)"> - </button>
+        <button @click.prevent="deleteDish(dish,seconds)" class="delete-button"> x </button>
+
+        <div class="allergens-wrapped">
+            <label for="lactose">Lactosa</label>
+            <input id="lactose" type="checkbox" value="lactose" v-model="dish.allergens"/>
+            <label for="gluten">Gluten</label>
+            <input id="gluten" type="checkbox" value="gluten" v-model="dish.allergens"/>
+            <label for="egg">Huevo</label>
+            <input id="egg" type="checkbox" value="egg" v-model="dish.allergens" />
+            <label for="seafood">Marisco</label>
+            <input id="seafood" type="checkbox" value="seafood" v-model="dish.allergens"/>
+            <label for="soy">Soja</label>
+            <input id="soy" type="checkbox" value="soy" v-model="dish.allergens" />
+            <label for="nuts">Frutos de cascara</label>
+            <input id="nuts" type="checkbox" value="nuts" v-model="dish.allergens"/>
+        </div>
     </div>
-    <div class="wrappedNameDish"><p>Postres</p> <button class="addDish" @click.prevent="addNewInput(desserts)">Añadir plato</button></div>  
+    <div class="wrappedNameDish">
+        <p>Postres</p> 
+        <button class="addDish" @click.prevent="addNewDessert()">Añadir plato</button></div>  
     <div class="desserts" v-for="dish in desserts" :key="dish.id_dish">
         <input class="input_plate" type="text"  v-model="dish.name_dish">
-        <input class="input_plate" type="text"  v-model="dish.allergens">
-        <button @click.prevent="deleteDish(dish,desserts)"> - </button>
+        <button @click.prevent="deleteDish(dish,desserts)" class="delete-button"> x </button>
+        <div class="allergens-wrapped">
+            <label for="lactose">Lactosa</label>
+            <input id="lactose" type="checkbox" value="lactose" v-model="dish.allergens"/>
+            <label for="gluten">Gluten</label>
+            <input id="gluten" type="checkbox" value="gluten" v-model="dish.allergens"/>
+            <label for="egg">Huevo</label>
+            <input id="egg" type="checkbox" value="egg" v-model="dish.allergens" />
+            <label for="seafood">Marisco</label>
+            <input id="seafood" type="checkbox" value="seafood" v-model="dish.allergens"/>
+            <label for="soy">Soja</label>
+            <input id="soy" type="checkbox" value="soy" v-model="dish.allergens" />
+            <label for="nuts">Frutos de cascara</label>
+            <input id="nuts" type="checkbox" value="nuts" v-model="dish.allergens"/>
+        </div>
+        
     </div>
     </section>
     <p v-show="!this.areThereEmpties">Existen vacíos!</p>
@@ -69,8 +100,14 @@ export default {
   },
   computed:{},
   methods: {
-    addNewInput(menu){
-        menu.push({name_dish:"", allergens:''})
+    addNewFirst(){
+        this.firsts.push({name_dish:"", allergens:[]})
+    },
+    addNewSecond(){
+        this.seconds.push({name_dish:"", allergens:[]})
+    },
+    addNewDessert(){
+        this.desserts.push({name_dish:"", allergens:[]})
     },
     deleteDish(dish,menu){
       let indice = menu.indexOf(dish)
@@ -162,8 +199,12 @@ export default {
 } */
 .input_plate{
     margin:0.4em 0;
-    width:100%;
-
+    width:96%;
+    margin-right: 0.3em;
+}
+.delete-button{
+    width: 20px;
+    height: 20px;
 }
 p{
     text-align:left
