@@ -16,43 +16,52 @@
         v-for="i in initialPositionOfFirstDay"
         :key="i"
       ></li>
-      <li @click="onClickDay(index.day)"
+      <li
+        @click="onClickDay(index.day)"
         v-for="index of daysOfMonthSelected"
-        class="not-empty-list:hover"
-        :key="index" v-bind:class="{underline:index.menuExists}">
-        {{index.day}}
+        class="not-empty-list"
+        :key="index"
+        v-bind:class="{ underline: index.menuExists }"
+      >
+        {{ index.day }}
       </li>
     </ul>
   </article>
 </template>
 
 <script>
-import {getListOfMenus} from "@/services/api.js"
+import { getListOfMenus } from "@/services/api.js";
 export default {
-    name : "Calendar",
-    data() {
+  name: "Calendar",
+  data() {
     return {
       currentMonth: new Date().getMonth(),
       currentYear: new Date().getFullYear(),
       nameDaysOfWeek: ["Lun", "Mar", "Mié", "Jue", "Vie", "Sáb", "Dom"],
       nameMonths: [
-        "Enero","Febrero","Marzo","Abril","Mayo","Junio",
-        "Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"],
-      listOfMenus : [],
-      days:[],
-      months:[],
-
-     
+        "Enero",
+        "Febrero",
+        "Marzo",
+        "Abril",
+        "Mayo",
+        "Junio",
+        "Julio",
+        "Agosto",
+        "Septiembre",
+        "Octubre",
+        "Noviembre",
+        "Diciembre",
+      ],
+      listOfMenus: [],
+      days: [],
+      months: [],
     };
   },
- mounted(){
-     this.loadData();
- },
+  mounted() {
+    this.loadData();
+  },
 
-
-
-computed: {
-    
+  computed: {
     initialPositionOfFirstDay() {
       let initialDayWeek = new Date(
         this.currentYear,
@@ -66,49 +75,54 @@ computed: {
       return currentInitialDayweek;
     },
     daysOfMonthSelected() {
-      let bindMenusOfMonthToCal=[]
+      let bindMenusOfMonthToCal = [];
       let totaldays = new Date(
         this.currentYear,
-        this.currentMonth + 1,0).getDate();
-      let menusOfTheMonth=this.extractMenusOfTheMonth()
-      for (let i=1;i<=totaldays;i++){
-        let menuExists=false
-        let dayToStr=i.toString()
-        if (menusOfTheMonth.includes(dayToStr)){ menuExists=true }
-        if (dayToStr < 10) { dayToStr = "0" + dayToStr }
-        bindMenusOfMonthToCal.push({'day':dayToStr,'menuExists':menuExists})
+        this.currentMonth + 1,
+        0
+      ).getDate();
+      let menusOfTheMonth = this.extractMenusOfTheMonth();
+      for (let i = 1; i <= totaldays; i++) {
+        let menuExists = false;
+        let dayToStr = i.toString();
+        if (menusOfTheMonth.includes(dayToStr)) {
+          menuExists = true;
+        }
+        if (dayToStr < 10) {
+          dayToStr = "0" + dayToStr;
+        }
+        bindMenusOfMonthToCal.push({ day: dayToStr, menuExists: menuExists });
       }
-      return bindMenusOfMonthToCal
+      return bindMenusOfMonthToCal;
     },
   },
   methods: {
     async loadData() {
       this.listOfMenus = await getListOfMenus();
     },
-    extractMenusOfTheMonth(){
-      let monthExtracted=''
-      let daysConnected=[]
-      let current_month=this.currentMonth+1
-      let day=''
+    extractMenusOfTheMonth() {
+      let monthExtracted = "";
+      let daysConnected = [];
+      let current_month = this.currentMonth + 1;
+      let day = "";
       if (current_month < 10) {
         current_month = "0" + current_month;
       }
-      for (let menu of this.listOfMenus){
-        monthExtracted=menu.date.slice(5,7)
-        if (monthExtracted===current_month){
-          day=menu.date.slice(8,10)
-          if (day.slice(0,1)==='0') {
-            day = day.slice(1,2);
-           }
-          daysConnected.push(day)
+      for (let menu of this.listOfMenus) {
+        monthExtracted = menu.date.slice(5, 7);
+        if (monthExtracted === current_month) {
+          day = menu.date.slice(8, 10);
+          if (day.slice(0, 1) === "0") {
+            day = day.slice(1, 2);
+          }
+          daysConnected.push(day);
         }
       }
-      return daysConnected
+      return daysConnected;
     },
     comeBackCurrentMonth() {
       let comebackMonth = new Date().getMonth();
       this.currentMonth = comebackMonth;
-      
     },
     nextMonth() {
       this.currentMonth = this.currentMonth + 1;
@@ -124,30 +138,26 @@ computed: {
     },
     onClickDay(day) {
       let month = this.currentMonth + 1;
-      if (month < 10){
-        month = "0" + month
+      if (month < 10) {
+        month = "0" + month;
       }
-      const clickedDay = this.currentYear + "-" +month + "-" + day;
+      const clickedDay = this.currentYear + "-" + month + "-" + day;
       const settings = {
         method: "GET",
         headers: {
           Authorization: localStorage.id_restaurant,
         },
-      } 
-      for (let menu of this.listOfMenus){
-      if (menu.date === clickedDay){ 
-      this.$router.push("/menus/by-date/" + clickedDay,settings)
-      return
+      };
+      for (let menu of this.listOfMenus) {
+        if (menu.date === clickedDay) {
+          this.$router.push("/menus/by-date/" + clickedDay, settings);
+          return;
+        }
       }
-      }
-      this.$router.push("/menu/add")
-
-      
+      this.$router.push("/menu/add");
     },
   },
 };
-
-
 </script>
 
 <style scoped>
@@ -157,7 +167,6 @@ computed: {
   font-size: 16px;
   box-sizing: border-box;
 }
-
 
 .calendar {
   width: 100%;
@@ -212,7 +221,6 @@ computed: {
 
 .underline {
   text-decoration: underline double;
-  cursor:pointer;
+  cursor: pointer;
 }
-
 </style>
