@@ -5,11 +5,28 @@
     <p>{{dateParsed()}}</p>
   </div>
     <section class="plates_info">
-    <div class="wrappedNameDish"><p>Primeros</p> <button class="addDish" @click.prevent="addNewInput(firsts)">Añadir plato</button></div>
+    <div class="wrappedNameDish">
+        <p>Primeros</p> 
+        <button class="addDish" @click.prevent="addNewInput(firsts)">Añadir plato</button>
+    </div>
     <div class="firsts" v-for="dish in firsts" :key="dish.id_dish">
         <input class="input_plate" type="text"  v-model="dish.name_dish">
-        <input class="input_plate" type="text"  v-model="dish.allergens">
         <button @click.prevent="deleteDish(dish,firsts)"> - </button>
+        <div class="allergens-wrapped">
+            <label for="lactose">Lactosa</label>
+            <input id="lactose" type="checkbox" value="lactose" v-model="dish.allergens"/>
+            <label for="gluten">Gluten</label>
+            <input id="gluten" type="checkbox" value="gluten" v-model="dish.allergens"/>
+            <label for="egg">Huevo</label>
+            <input id="egg" type="checkbox" value="egg" v-model="dish.allergens" />
+            <label for="seafood">Marisco</label>
+            <input id="seafood" type="checkbox" value="seafood" v-model="dish.allergens"/>
+            <label for="soy">Soja</label>
+            <input id="soy" type="checkbox" value="soy" v-model="dish.allergens" />
+            <label for="nuts">Frutos de cascara</label>
+            <input id="nuts" type="checkbox" value="nuts" v-model="dish.allergens"/>
+        </div>
+        
     </div>
     <div class="wrappedNameDish"><p>Segundos</p> <button class="addDish" @click.prevent="addNewInput(seconds)">Añadir plato</button></div>
     <div class="seconds" v-for="dish in seconds" :key="dish.id_dish">
@@ -42,7 +59,8 @@ export default {
        seconds:[],
        desserts:[],
        loggedRestaurant:localStorage.name,
-       areThereEmpties:true
+       areThereEmpties:true,
+       newAllergens:[]
     };
   },
 
@@ -52,7 +70,7 @@ export default {
   computed:{},
   methods: {
     addNewInput(menu){
-    menu.push({name_dish:"", allergens:""})
+        menu.push({name_dish:"", allergens:''})
     },
     deleteDish(dish,menu){
       let indice = menu.indexOf(dish)
@@ -135,15 +153,17 @@ export default {
     display:flex;
     justify-content: flex-end;
 }
-.firsts,
+/* .firsts,
 .seconds,
 .desserts{
     display:grid;
     grid-template-columns:1fr 3fr 0.001fr;
     padding: 0.2em
-}
+} */
 .input_plate{
-    margin-right:0.1em;
+    margin:0.4em 0;
+    width:100%;
+
 }
 p{
     text-align:left
@@ -159,5 +179,11 @@ p{
 .wrappedNameDish .addDish{
     padding:0.2em;
     display:block;
+}
+.allergens-wrapped label{
+    margin-right:0.3em
+}
+.allergens-wrapped input{
+    margin-right:1em
 }
 </style>
