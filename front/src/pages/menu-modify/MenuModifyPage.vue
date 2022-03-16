@@ -72,7 +72,7 @@
         
     </div>
     </section>
-    <p v-show="!this.areThereEmpties">Existen vacíos!</p>
+    <p class="empty-input" v-show="!this.areThereEmpties">Existen vacíos!</p>
     <button @click.prevent="onSaveClicked">Modificar Menú</button>
 </form>
 </template>
@@ -190,13 +190,7 @@ export default {
     display:flex;
     justify-content: flex-end;
 }
-/* .firsts,
-.seconds,
-.desserts{
-    display:grid;
-    grid-template-columns:1fr 3fr 0.001fr;
-    padding: 0.2em
-} */
+
 .input_plate{
     margin:0.4em 0;
     width:96%;
@@ -226,5 +220,8 @@ p{
 }
 .allergens-wrapped input{
     margin-right:1em
+}
+.empty-input{
+    color:red;
 }
 </style>
