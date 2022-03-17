@@ -228,8 +228,8 @@ form *{margin-bottom: 0.6em;}
   font-size: 0.8em;
   padding: 0 0.5em;
 }
-.allergens-box input {margin-right: 0.5em}
-.allergens-box label {margin-right: 0.3em}
+.allergens-box input {margin-right: 0.7em}
+.allergens-box label {margin-right: 0.2em}
 
 .btn {
   cursor:pointer;
