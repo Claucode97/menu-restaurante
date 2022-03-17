@@ -72,8 +72,8 @@
         
     </div>
     </section>
-    <p v-show="!this.areThereEmpties">Existen vacíos!</p>
-    <button @click.prevent="onSaveClicked">Modificar Menú</button>
+
+    <button @click.prevent="onSaveClicked" class="add-menu-button">Modificar Menú</button>
 </form>
 </template>
 <script>
@@ -151,7 +151,7 @@ export default {
         }
         if (countEmpties===0){
             return true}
-        else{return false}
+        else{return false, alert("Hay campos vacios")}
     }, 
 
     async onSaveClicked(){
@@ -190,13 +190,7 @@ export default {
     display:flex;
     justify-content: flex-end;
 }
-/* .firsts,
-.seconds,
-.desserts{
-    display:grid;
-    grid-template-columns:1fr 3fr 0.001fr;
-    padding: 0.2em
-} */
+
 .input_plate{
     margin:0.4em 0;
     width:96%;
@@ -216,15 +210,23 @@ p{
 .wrappedNameDish{
     display:flex;
     justify-content: space-between;
+    margin-top: 2em;
 }
 .wrappedNameDish .addDish{
     padding:0.2em;
     display:block;
 }
 .allergens-wrapped label{
-    margin-right:0.3em
+    margin-right:0.3em;
+    font-size: 0.8em;
 }
 .allergens-wrapped input{
-    margin-right:1em
+    margin-right:1em;
+    
 }
+.add-menu-button {
+    padding: 0.5em;
+    margin: 2em 0;
+}
+
 </style>
