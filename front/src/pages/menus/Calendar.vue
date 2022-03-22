@@ -154,7 +154,7 @@ export default {
           return;
         }
       }
-      this.$router.push("/menu/add");
+      this.$router.push("/menu/add/" + clickedDay);
     },
   },
 };

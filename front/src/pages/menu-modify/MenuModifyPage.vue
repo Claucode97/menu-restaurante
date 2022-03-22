@@ -193,7 +193,7 @@ export default {
 
 .input_plate{
     margin:0.4em 0;
-    width:96%;
+    width:95%;
     margin-right: 0.3em;
 }
 .delete-button{
@@ -208,9 +208,11 @@ p{
   justify-content: space-between;
 }
 .wrappedNameDish{
-    display:flex;
-    justify-content: space-between;
-    margin-top: 2em;
+     margin-top: 2em;
+     margin-bottom: 1em;
+}
+.wrappedNameDish p{
+    margin-bottom: 0.5em;
 }
 .wrappedNameDish .addDish{
     padding:0.2em;
