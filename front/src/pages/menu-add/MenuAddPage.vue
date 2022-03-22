@@ -1,9 +1,10 @@
 <template>
   <div id="add-menu-container">
+    <pre>{{$data}}</pre>
     <form action="">
       <h2>{{ loggedRestaurant }}</h2>
       <div class="date">
-        <input type="date" name="date" id="date" v-model="date" />
+        <p>{{this.date}}</p>
       </div>
       <section class="plates_info">
         <select
@@ -98,7 +99,7 @@ export default {
   name: "MenuAdd",
   data() {
     return {
-      date: "",
+      date: this.$route.params.date,
       categoryDishes: null,
       nameDish: "",
       allergens: [],

@@ -114,7 +114,6 @@ export default {
     margin: 2em 0;
 }
 
-
 p{
     text-align:left
 }

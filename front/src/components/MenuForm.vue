@@ -126,6 +126,15 @@ export default {
     padding:0;
     margin:0;
 }
+.input_plate{
+    margin:0.4em 0;
+    width:95%;
+    margin-right: 0.3em;
+}
+.delete-button{
+    width: 20px;
+    height: 20px;
+}
 .wrappedNameDish{
     display:flex;
     justify-content: space-between;

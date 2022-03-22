@@ -22,7 +22,7 @@ const routes = [
     component: menus
   },
   {
-    path: '/menu/add',
+    path: '/menu/add/:date',
     name: 'MenuAddPage',
     component: MenuAddPage
   },
