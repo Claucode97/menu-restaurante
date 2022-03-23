@@ -4,6 +4,7 @@ import home from '../pages/home/HomePage.vue'
 import menus from '../pages/menus/MenusPage.vue'
 import MenuAddPage from '../pages/menu-add/MenuAddPage.vue'
 import MenuModifyPage from '../pages/menu-modify/MenuModifyPage.vue'
+import SelectDateCopyMenu from '../pages/menu-add/SelectDateCopyMenu'
 
 const routes = [
   {
@@ -30,6 +31,11 @@ const routes = [
     path: '/menu/modify',
     name: 'MenuModifyPage',
     component: MenuModifyPage
+  },
+  {
+    path: '/menu/copy',
+    name: 'CopyCalendar',
+    component: SelectDateCopyMenu
   },
 ]
 
