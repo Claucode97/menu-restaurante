@@ -4,121 +4,44 @@
     <p>{{loggedRestaurant}}</p>
     <p>{{dateParsed()}}</p>
   </div>
-  
-    <section class="plates_info">
-    <div class="wrappedNameDish">
-        <p>Primeros</p> 
-        <button class="addDish" @click.prevent="addNewFirst()">Añadir plato</button>
-    </div>
-    <div class="firsts" v-for="dish in firsts" :key="dish.id_dish">
-        <input class="input_plate" type="text"  v-model="dish.name_dish">
-        <button @click.prevent="deleteDish(dish,firsts)" class="delete-button"> x </button>
-        <div class="allergens-wrapped">
-            <label for="lactose">Lactosa</label>
-            <input id="lactose" type="checkbox" value="lactose" v-model="dish.allergens"/>
-            <label for="gluten">Gluten</label>
-            <input id="gluten" type="checkbox" value="gluten" v-model="dish.allergens"/>
-            <label for="egg">Huevo</label>
-            <input id="egg" type="checkbox" value="egg" v-model="dish.allergens" />
-            <label for="seafood">Marisco</label>
-            <input id="seafood" type="checkbox" value="seafood" v-model="dish.allergens"/>
-            <label for="soy">Soja</label>
-            <input id="soy" type="checkbox" value="soy" v-model="dish.allergens" />
-            <label for="nuts">Frutos de cascara</label>
-            <input id="nuts" type="checkbox" value="nuts" v-model="dish.allergens"/>
-        </div>
-        
-    </div>
-    <div class="wrappedNameDish"><p>Segundos</p> <button class="addDish" @click.prevent="addNewSecond()">Añadir plato</button></div>
-    <div class="seconds" v-for="dish in seconds" :key="dish.id_dish">
-        <input class="input_plate" type="text"  v-model="dish.name_dish">
-        <button @click.prevent="deleteDish(dish,seconds)" class="delete-button"> x </button>
 
-        <div class="allergens-wrapped">
-            <label for="lactose">Lactosa</label>
-            <input id="lactose" type="checkbox" value="lactose" v-model="dish.allergens"/>
-            <label for="gluten">Gluten</label>
-            <input id="gluten" type="checkbox" value="gluten" v-model="dish.allergens"/>
-            <label for="egg">Huevo</label>
-            <input id="egg" type="checkbox" value="egg" v-model="dish.allergens" />
-            <label for="seafood">Marisco</label>
-            <input id="seafood" type="checkbox" value="seafood" v-model="dish.allergens"/>
-            <label for="soy">Soja</label>
-            <input id="soy" type="checkbox" value="soy" v-model="dish.allergens" />
-            <label for="nuts">Frutos de cascara</label>
-            <input id="nuts" type="checkbox" value="nuts" v-model="dish.allergens"/>
-        </div>
-    </div>
-    <div class="wrappedNameDish">
-        <p>Postres</p> 
-        <button class="addDish" @click.prevent="addNewDessert()">Añadir plato</button></div>  
-    <div class="desserts" v-for="dish in desserts" :key="dish.id_dish">
-        <input class="input_plate" type="text"  v-model="dish.name_dish">
-        <button @click.prevent="deleteDish(dish,desserts)" class="delete-button"> x </button>
-        <div class="allergens-wrapped">
-            <label for="lactose">Lactosa</label>
-            <input id="lactose" type="checkbox" value="lactose" v-model="dish.allergens"/>
-            <label for="gluten">Gluten</label>
-            <input id="gluten" type="checkbox" value="gluten" v-model="dish.allergens"/>
-            <label for="egg">Huevo</label>
-            <input id="egg" type="checkbox" value="egg" v-model="dish.allergens" />
-            <label for="seafood">Marisco</label>
-            <input id="seafood" type="checkbox" value="seafood" v-model="dish.allergens"/>
-            <label for="soy">Soja</label>
-            <input id="soy" type="checkbox" value="soy" v-model="dish.allergens" />
-            <label for="nuts">Frutos de cascara</label>
-            <input id="nuts" type="checkbox" value="nuts" v-model="dish.allergens"/>
-        </div>
-        
-    </div>
-    </section>
+  <MenuForm :dictMenu="dict_plates" @changed="onMenuChanged"/>
+  
 
     <button @click.prevent="onSaveClicked" class="add-menu-button">Modificar Menú</button>
 </form>
+{{$data}}
 </template>
 <script>
 import config from "@/config.js"
 import {getMenuModify} from "@/services/api.js"
+import MenuForm from "@/components/MenuForm.vue"
 export default {
   name: "modifymenu",
+  components:{MenuForm},
   data() {
     return {
        dateReceived:this.$route.params.date,
-       idReceived:this.$route.params.id,
        dict_plates:{},
-       firsts:[],
-       seconds:[],
-       desserts:[],
        loggedRestaurant:localStorage.name,
        areThereEmpties:true,
-       newAllergens:[]
+       
     };
   },
 
-  mounted() {
-    this.loadData()
-  },
-  computed:{},
-  methods: {
-    addNewFirst(){
-        this.firsts.push({name_dish:"", allergens:[]})
+    mounted() {
+       this.loadData()
     },
-    addNewSecond(){
-        this.seconds.push({name_dish:"", allergens:[]})
+
+   methods: {
+    onMenuChanged(newValue){
+        this.dict_plates = newValue
+
     },
-    addNewDessert(){
-        this.desserts.push({name_dish:"", allergens:[]})
-    },
-    deleteDish(dish,menu){
-      let indice = menu.indexOf(dish)
-      menu.splice(indice,1)
-    },
+
     async loadData(){
       
       this.dict_plates = await getMenuModify();
-      this.firsts = this.dict_plates.desc.firsts;
-      this.seconds = this.dict_plates.desc.seconds;
-      this.desserts = this.dict_plates.desc.desserts;
       return this.dict_plates
       
     },
@@ -132,15 +55,15 @@ export default {
     areValidInputsFromMenu(){
         let platesTot=[]
         let countEmpties=0
-        for (let plate of this.firsts){
+        for (let plate of this.dict_plates.desc.firsts){
             let platesFirsts=String(plate.name_dish)
             platesTot.push(platesFirsts)
         }
-        for (let plate of this.seconds){
+        for (let plate of this.dict_plates.desc.seconds){
             let platesSeconds=String(plate.name_dish)
             platesTot.push(platesSeconds)
         }
-        for (let plate of this.desserts){
+        for (let plate of this.dict_plates.desc.desserts){
             let platesDesserts=String(plate.name_dish)
             platesTot.push(platesDesserts)
         }
@@ -186,20 +109,11 @@ export default {
     padding:0;
     margin:0;
 }
-.date{
-    display:flex;
-    justify-content: flex-end;
+.add-menu-button {
+    padding: 0.5em;
+    margin: 2em 0;
 }
 
-.input_plate{
-    margin:0.4em 0;
-    width:95%;
-    margin-right: 0.3em;
-}
-.delete-button{
-    width: 20px;
-    height: 20px;
-}
 p{
     text-align:left
 }
@@ -207,28 +121,7 @@ p{
   display: flex;
   justify-content: space-between;
 }
-.wrappedNameDish{
-     margin-top: 2em;
-     margin-bottom: 1em;
-}
-.wrappedNameDish p{
-    margin-bottom: 0.5em;
-}
-.wrappedNameDish .addDish{
-    padding:0.2em;
-    display:block;
-}
-.allergens-wrapped label{
-    margin-right:0.3em;
-    font-size: 0.8em;
-}
-.allergens-wrapped input{
-    margin-right:1em;
-    
-}
-.add-menu-button {
-    padding: 0.5em;
-    margin: 2em 0;
-}
+
+
 
 </style>
