@@ -5,12 +5,11 @@
     <p>{{dateParsed()}}</p>
   </div>
 
-  <MenuForm :dictMenu="dict_plates" @changed="onMenuChanged"/>
+  <MenuForm :dictMenu="dict_menu.desc" @changed="onMenuChanged"/>
   
 
     <button @click.prevent="onSaveClicked" class="add-menu-button">Modificar Menú</button>
 </form>
-{{$data}}
 </template>
 <script>
 import config from "@/config.js"
@@ -22,7 +21,7 @@ export default {
   data() {
     return {
        dateReceived:this.$route.params.date,
-       dict_plates:{},
+       dict_menu:{},
        loggedRestaurant:localStorage.name,
        areThereEmpties:true,
        
@@ -35,14 +34,14 @@ export default {
 
    methods: {
     onMenuChanged(newValue){
-        this.dict_plates = newValue
+        this.dict_menu.desc = newValue
 
     },
 
     async loadData(){
       
-      this.dict_plates = await getMenuModify();
-      return this.dict_plates
+      this.dict_menu = await getMenuModify();
+      return this.dict_menu
       
     },
     dateParsed(){
@@ -55,15 +54,15 @@ export default {
     areValidInputsFromMenu(){
         let platesTot=[]
         let countEmpties=0
-        for (let plate of this.dict_plates.desc.firsts){
+        for (let plate of this.dict_menu.desc.firsts){
             let platesFirsts=String(plate.name_dish)
             platesTot.push(platesFirsts)
         }
-        for (let plate of this.dict_plates.desc.seconds){
+        for (let plate of this.dict_menu.desc.seconds){
             let platesSeconds=String(plate.name_dish)
             platesTot.push(platesSeconds)
         }
-        for (let plate of this.dict_plates.desc.desserts){
+        for (let plate of this.dict_menu.desc.desserts){
             let platesDesserts=String(plate.name_dish)
             platesTot.push(platesDesserts)
         }
@@ -79,8 +78,8 @@ export default {
 
     async onSaveClicked(){
        if (this.areValidInputsFromMenu()===true){ 
-            let desc=this.dict_plates.desc
-            this.dictToSend={'date':this.dateReceived,'desc':desc, 'id':this.dict_plates.id, 'id_restaurant':localStorage.id_restaurant}
+            let desc=this.dict_menu.desc
+            this.dictToSend={'date':this.dateReceived,'desc':desc, 'id':this.dict_menu.id, 'id_restaurant':localStorage.id_restaurant}
             const settings={
             method:"PUT",
             body: JSON.stringify(this.dictToSend),
