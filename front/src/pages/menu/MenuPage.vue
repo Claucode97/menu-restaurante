@@ -8,7 +8,10 @@
     <router-link :to="{name: 'MenuModifyPage', params: {date: this.$route.params.date}}">
     <button @click="saveMenuId">Modificar menu</button>
     </router-link>
+    
+    
   </div> 
+  <button class="copy-button" @click="copyModalClicked">Copiar Menu</button>
   <h3>Primeros</h3>
   <section v-for="menu in this.firsts" :key="menu.id_dish">
     <ul class="split_the_dishes">
@@ -30,12 +33,18 @@
       <li class="allergen-detail" v-for="allergen in menu.allergens" :key="allergen.id">{{ allergen}}</li>
     </ul>
   </section>
+
+<SelectDateCopyMenu title="calendar-copy" v-show="modalOpened"  @modaltoFALSE="modaltoFalse()" @newDate="goToAddPage()" 
+/>
 </template>
 
 <script>
 import {getMenuByDate} from "@/services/api.js"
+import SelectDateCopyMenu from "@/pages/menu-add/SelectDateCopyMenu.vue"
+
 export default {
   
+  components: { SelectDateCopyMenu },
   data() {
     return {
       firsts: [],
@@ -44,7 +53,8 @@ export default {
       date: this.$route.params.date,
       parsedDate:'',
       loggedRestaurant:localStorage.name,
-      menu : {}
+      menu : {},
+      modalOpened: false
     };
   },
 
@@ -52,6 +62,7 @@ export default {
     this.loadData();
   },
   methods: {
+    
     async loadData() {
       this.menus = await getMenuByDate(this.date)
       
@@ -62,6 +73,20 @@ export default {
     saveMenuId(){
       localStorage.id_menu = this.menus.id
     },
+    copyModalClicked(){
+      this.modalOpened = true
+      console.log("clicc modal" + this.modalOpened)
+
+    },
+  
+    modaltoFalse(newvalue){
+      this.modalOpened = newvalue
+    },
+    goToAddPage(newdate){
+      let date = newdate
+      
+
+    }
   },
   computed:{
     dateParsed() {
@@ -72,7 +97,7 @@ export default {
       let fullDate=day+' de '+months[month]+' de '+year
       return fullDate
     }
-  }
+  },
 };
 </script>
 
@@ -101,4 +126,5 @@ li {
   display:flex;
   justify-content: flex-end
 }
+
 </style>
