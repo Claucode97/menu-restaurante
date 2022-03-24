@@ -2,11 +2,11 @@
    <section>
    <div class="wrappedNameDish">
         <p>Primeros</p> 
-        <button class="addDish" @click.prevent="addNewDish(firsts)">Añadir plato</button>
+        <button class="addDish" @click.prevent="addNewDish(dict_plates.firsts)">Añadir plato</button>
     </div>
-    <div class="firsts" v-for="dish in firsts" :key="dish.id_dish">
+    <div class="firsts" v-for="dish in dict_plates.firsts" :key="dish.id_dish">
         <input @keyup="onMenuChanges" class="input_plate" type="text"  v-model="dish.name_dish">
-        <button @click.prevent="deleteDish(dish,firsts)" class="delete-button"> x </button>
+        <button @click.prevent="deleteDish(dish,dict_plates.firsts)" class="delete-button"> x </button>
         <div class="allergens-wrapped">
             <label for="lactose">Lactosa</label>
             <input @change="onMenuChanges" id="lactose" type="checkbox" value="lactose" v-model="dish.allergens"/>
@@ -23,10 +23,10 @@
         </div>
         
     </div>
-    <div class="wrappedNameDish"><p>Segundos</p> <button class="addDish" @click.prevent="addNewDish(seconds)">Añadir plato</button></div>
-    <div class="seconds" v-for="dish in seconds" :key="dish.id_dish">
+    <div class="wrappedNameDish"><p>Segundos</p> <button class="addDish" @click.prevent="addNewDish(dict_plates.seconds)">Añadir plato</button></div>
+    <div class="seconds" v-for="dish in dict_plates.seconds" :key="dish.id_dish">
         <input @keyup="onMenuChanges" class="input_plate" type="text"  v-model="dish.name_dish">
-        <button @click.prevent="deleteDish(dish,seconds)" class="delete-button"> x </button>
+        <button @click.prevent="deleteDish(dish,dict_plates.seconds)" class="delete-button"> x </button>
 
         <div class="allergens-wrapped">
             <label for="lactose">Lactosa</label>
@@ -45,10 +45,10 @@
     </div>
     <div class="wrappedNameDish">
         <p>Postres</p> 
-        <button class="addDish" @click.prevent="addNewDish(desserts)">Añadir plato</button></div>  
-    <div class="desserts" v-for="dish in desserts" :key="dish.id_dish">
+        <button class="addDish" @click.prevent="addNewDish(dict_plates.desserts)">Añadir plato</button></div>  
+    <div class="desserts" v-for="dish in dict_plates.desserts" :key="dish.id_dish">
         <input @keyup="onMenuChanges" class="input_plate" type="text"  v-model="dish.name_dish">
-        <button @click.prevent="deleteDish(dish,desserts)" class="delete-button"> x </button>
+        <button @click.prevent="deleteDish(dish,dict_plates.desserts)" class="delete-button"> x </button>
         <div class="allergens-wrapped">
             <label for="lactose">Lactosa</label>
             <input @change="onMenuChanges" id="lactose" type="checkbox" value="lactose" v-model="dish.allergens"/>
@@ -66,7 +66,6 @@
         
     </div>
     </section>
-{{$data}}
 </template>
 
 <script>
@@ -83,19 +82,15 @@ export default {
             handler(newValue){
                 let menuAsJson = JSON.stringify(newValue)
                 this.dict_plates = JSON.parse(menuAsJson)
-                this.firsts = this.dict_plates.desc.firsts;
-                this.seconds = this.dict_plates.desc.seconds;
-                this.desserts = this.dict_plates.desc.desserts;
+
             },
             inmediate: true
         }
     },
     data(){
         return{
-            dict_plates:this.dictMenu,
-            firsts:[],
-            seconds:[],
-            desserts:[],
+            dict_plates:{firsts: [],seconds: [],desserts: [],},
+
         }
     },
 
