@@ -1,126 +1,124 @@
 <template>
-<form >
-  <div class="dateNameRestaurant">
-    <p>{{loggedRestaurant}}</p>
-    <p>{{dateParsed()}}</p>
-  </div>
+  <form>
+    <div class="dateNameRestaurant">
+      <p>{{ loggedRestaurant }}</p>
+      <p>{{ dateParsed() }}</p>
+    </div>
 
-  <MenuForm :dictMenu="dict_menu.desc" @changed="onMenuChanged"/>
-  
+    <MenuForm :dictMenu="dict_menu.desc" @changed="onMenuChanged" />
 
-    <button @click.prevent="onSaveClicked" class="add-menu-button">Modificar Menú</button>
-</form>
+    <button @click.prevent="onSaveClicked" class="add-menu-button">
+      Modificar Menú
+    </button>
+  </form>
 </template>
 <script>
-import config from "@/config.js"
-import {getMenuModify} from "@/services/api.js"
-import MenuForm from "@/components/MenuForm.vue"
+import config from "@/config.js";
+import { getMenuModify } from "@/services/api.js";
+import MenuForm from "@/components/MenuForm.vue";
 export default {
   name: "modifymenu",
-  components:{MenuForm},
+  components: { MenuForm },
   data() {
     return {
-       dateReceived:this.$route.params.date,
-       dict_menu:{},
-       loggedRestaurant:localStorage.name,
-       areThereEmpties:true,
-       
+      dateReceived: this.$route.params.date,
+      dict_menu: { desc: {} },
+      loggedRestaurant: localStorage.name,
+      areThereEmpties: true,
     };
   },
 
-    mounted() {
-       this.loadData()
+  mounted() {
+    this.loadData();
+  },
+
+  methods: {
+    onMenuChanged(newValue) {
+      this.dict_menu.desc = newValue;
     },
 
-   methods: {
-    onMenuChanged(newValue){
-        this.dict_menu.desc = newValue
-
-    },
-
-    async loadData(){
-      
+    async loadData() {
       this.dict_menu = await getMenuModify();
-      return this.dict_menu
-      
+      return this.dict_menu;
     },
-    dateParsed(){
-        let completeDate =  this.dateReceived
-        let year = completeDate.slice(0,4)
-        let day = completeDate.slice(8,10)
-        let month = completeDate.slice(5,7)
-        return day + "-" + month + "-" + year
-      },
-    areValidInputsFromMenu(){
-        let platesTot=[]
-        let countEmpties=0
-        for (let plate of this.dict_menu.desc.firsts){
-            let platesFirsts=String(plate.name_dish)
-            platesTot.push(platesFirsts)
-        }
-        for (let plate of this.dict_menu.desc.seconds){
-            let platesSeconds=String(plate.name_dish)
-            platesTot.push(platesSeconds)
-        }
-        for (let plate of this.dict_menu.desc.desserts){
-            let platesDesserts=String(plate.name_dish)
-            platesTot.push(platesDesserts)
-        }
-        for (let dish of platesTot){
-            if (dish===''){
-                countEmpties+=1
-            }
-        }
-        if (countEmpties===0){
-            return true}
-        else{return false, alert("Hay campos vacios")}
-    }, 
-
-    async onSaveClicked(){
-       if (this.areValidInputsFromMenu()===true){ 
-            let desc=this.dict_menu.desc
-            this.dictToSend={'date':this.dateReceived,'desc':desc, 'id':this.dict_menu.id, 'id_restaurant':localStorage.id_restaurant}
-            const settings={
-            method:"PUT",
-            body: JSON.stringify(this.dictToSend),
-            headers:{
-                Authorization: localStorage.id_restaurant,
-                'Content-Type':'application/json'
-                }
-            }
-            var response = await fetch(`${config.API_PATH}/menus`,settings)
-            if (response.status===200){
-            alert('Menu modificado con éxito!')
-            this.$router.push("/menus/by-date/"+ this.dateReceived)
-            }
-        }
-        else{
-            this.areThereEmpties=false
-        }
+    dateParsed() {
+      let completeDate = this.dateReceived;
+      let year = completeDate.slice(0, 4);
+      let day = completeDate.slice(8, 10);
+      let month = completeDate.slice(5, 7);
+      return day + "-" + month + "-" + year;
     },
-    }
-}
+    areValidInputsFromMenu() {
+      let platesTot = [];
+      let countEmpties = 0;
+      for (let plate of this.dict_menu.desc.firsts) {
+        let platesFirsts = String(plate.name_dish);
+        platesTot.push(platesFirsts);
+      }
+      for (let plate of this.dict_menu.desc.seconds) {
+        let platesSeconds = String(plate.name_dish);
+        platesTot.push(platesSeconds);
+      }
+      for (let plate of this.dict_menu.desc.desserts) {
+        let platesDesserts = String(plate.name_dish);
+        platesTot.push(platesDesserts);
+      }
+      for (let dish of platesTot) {
+        if (dish === "") {
+          countEmpties += 1;
+        }
+      }
+      if (countEmpties === 0) {
+        return true;
+      } else {
+        return false, alert("Hay campos vacios");
+      }
+    },
 
-
+    async onSaveClicked() {
+      if (this.areValidInputsFromMenu() === true) {
+        let desc = this.dict_menu.desc;
+        this.dictToSend = {
+          date: this.dateReceived,
+          desc: desc,
+          id: this.dict_menu.id,
+          id_restaurant: localStorage.id_restaurant,
+        };
+        const settings = {
+          method: "PUT",
+          body: JSON.stringify(this.dictToSend),
+          headers: {
+            Authorization: localStorage.id_restaurant,
+            "Content-Type": "application/json",
+          },
+        };
+        var response = await fetch(`${config.API_PATH}/menus`, settings);
+        if (response.status === 200) {
+          alert("Menu modificado con éxito!");
+          this.$router.push("/menus/by-date/" + this.dateReceived);
+        }
+      } else {
+        this.areThereEmpties = false;
+      }
+    },
+  },
+};
 </script>
 <style scoped>
-*{
-    padding:0;
-    margin:0;
+* {
+  padding: 0;
+  margin: 0;
 }
 .add-menu-button {
-    padding: 0.5em;
-    margin: 2em 0;
+  padding: 0.5em;
+  margin: 2em 0;
 }
 
-p{
-    text-align:left
+p {
+  text-align: left;
 }
-.dateNameRestaurant{
+.dateNameRestaurant {
   display: flex;
   justify-content: space-between;
 }
-
-
-
 </style>
