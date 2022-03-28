@@ -34,8 +34,7 @@
     </ul>
   </section>
 
-<SelectDateCopyMenu title="calendar-copy" v-show="modalOpened"  @modaltoFALSE="modaltoFalse()" @newDate="goToAddPage()" 
-/>
+<SelectDateCopyMenu :date="date" v-show="modalOpened"  @modaltoFALSE="modaltoFalse()"/>
 </template>
 
 <script>
@@ -82,11 +81,7 @@ export default {
     modaltoFalse(newvalue){
       this.modalOpened = newvalue
     },
-    goToAddPage(newdate){
-      let date = newdate
-      
 
-    }
   },
   computed:{
     dateParsed() {
