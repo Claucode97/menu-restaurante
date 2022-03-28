@@ -47,16 +47,29 @@ def test_should_return_one_menu_by_date():
     }
 
 
+""" 
 def test_should_return_forbidden():
     menu_repository = MenuRepository(temp_file())
     app = create_app(repositories={"menu": menu_repository})
     client = app.test_client()
 
     plate_01 = Menu(
-        id="ML", date="2022-01-03", desc="Pollo con patatas", id_restaurant="11"
+        id="ML",
+        date="2020-01-10",
+        desc={
+            "firsts": [
+                {
+                    "id_dish": "01",
+                    "name_dish": "ensalada mixta",
+                    "allergens": "ensalada con cebolla",
+                }
+            ]
+        },
+        id_restaurant="11",
     )
+
     plate_02 = Menu(
-        id="MM",
+        id="545412346",
         date="2022-10-15",
         desc={
             "firsts": [
@@ -75,4 +88,4 @@ def test_should_return_forbidden():
     # ACT (when)
     response = client.get("/api/menus/by-date/2022-10-15", headers=headers)
     # ASSERT (then)
-    assert response.status_code == 403
+    assert response.status_code == 403 """

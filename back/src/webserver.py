@@ -32,10 +32,11 @@ def create_app(repositories):
             id=body["id"],
             date=body["date"],
             desc=body["desc"],
-            id_restaurant=id_restaurant,
+            id_restaurant=body["id_restaurant"],
         )
         if id_restaurant == save_menu.id_restaurant:
             repositories["menu"].save(save_menu)
+
             return "", 200
         else:
             return "", 403
@@ -55,6 +56,7 @@ def create_app(repositories):
     def show_menu_by_date(date):
         id_restaurant = request.headers.get("Authorization")
         menu = repositories["menu"].get_by_date(date, id_restaurant)
+        print(menu)
         if id_restaurant == menu.id_restaurant:
             return object_to_json(menu), 200
         else:
@@ -73,5 +75,21 @@ def create_app(repositories):
     def restaurants_get_all():
         restaurant = repositories["restaurant"].get_all_restaurants()
         return object_to_json(restaurant)
+
+    @app.route("/api/menus/<origin_date>/copy/<new_date>", methods=["POST"])
+    def copy_menu(origin_date, new_date):
+        id_restaurant = request.headers.get("Authorization")
+        old_menu = repositories["menu"].get_by_date(origin_date, id_restaurant)
+
+        body = request.json
+        new_menu = Menu(
+            id=body["id"],
+            date=new_date,
+            desc=old_menu.desc,
+            id_restaurant=body["id_restaurant"],
+        )
+
+        repositories["menu"].save(new_menu)
+        return ""
 
     return app
