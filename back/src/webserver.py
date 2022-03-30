@@ -3,6 +3,7 @@ from flask import Flask, request
 from flask_cors import CORS
 from src.lib.utils import object_to_json
 from src.domain.Menu import Menu
+from src.domain.Restaurant import Restaurant
 
 
 def create_app(repositories):
@@ -91,5 +92,17 @@ def create_app(repositories):
 
         repositories["menu"].save(new_menu)
         return ""
+
+    @app.route("/auth/login", methods=["POST"])
+    def login():
+        body = request.json
+        restaurant = repositories["restaurant"].get_by_id_restaurant(
+            body["id_restaurant"]
+        )
+        print("*********************", restaurant.password)
+        if restaurant is None or (body["password"]) != restaurant.password:
+            return "", 401
+
+        return object_to_json(restaurant), 200
 
     return app
