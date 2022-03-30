@@ -1,6 +1,6 @@
 <template>
   <div class="modal-wrapper" >
-      <div class="modal-inner-wrapper">
+      <div class="modal-inner-wrapper">cace4155-1205-4cb6-819c-981c0d9bbd56
           {{this.$route.params.date}}
           <button class="close-btn" @click="copyModalClose">x</button>
           <p>¿En qué fecha quieres copiar el menú?</p>
@@ -60,6 +60,7 @@ export default {
         let desc = this.dict_menu.desc;
         this.dictToSend = { date: this.newDate, desc: desc, id_restaurant: localStorage.id_restaurant };
         this.dictToSend.id = uuidv4();
+        localStorage.id_menu = this.dictToSend.id
 
         const settings = {
           method: "POST",
