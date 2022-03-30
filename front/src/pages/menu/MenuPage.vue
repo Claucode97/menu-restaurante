@@ -34,12 +34,14 @@
     </ul>
   </section>
 
-<SelectDateCopyMenu :date="date" v-show="modalOpened"  @modaltoFALSE="modaltoFalse()"/>
+<SelectDateCopyMenu  v-show="modalOpened" @changedDate="copyMenu" @modaltoFALSE="modaltoFalse()"/>
 </template>
 
 <script>
 import {getMenuByDate} from "@/services/api.js"
 import SelectDateCopyMenu from "@/pages/menu-add/SelectDateCopyMenu.vue"
+import config from "@/config.js";
+import { v4 as uuidv4 } from "uuid";
 
 export default {
   
@@ -50,6 +52,7 @@ export default {
       seconds: [],
       desserts: [],
       date: this.$route.params.date,
+      dateToCopy : "",
       parsedDate:'',
       loggedRestaurant:localStorage.name,
       menu : {},
@@ -61,7 +64,27 @@ export default {
     this.loadData();
   },
   methods: {
-    
+
+    async copyMenu(newDate){
+       this.dateToCopy = newDate
+        let desc = this.menu.desc;
+        this.dictToSend = { date: this.dateToCopy, desc: desc, id_restaurant: localStorage.id_restaurant };
+        this.dictToSend.id = uuidv4();
+        localStorage.id_menu = this.dictToSend.id
+
+        const settings = {
+          method: "POST",
+          body: JSON.stringify(this.dictToSend),
+          headers: {
+            Authorization: localStorage.id_restaurant,
+            "Content-Type": "application/json",
+          },
+        };
+        await fetch(`${config.API_PATH}/menus/${this.date}/copy/${this.dateToCopy}`, settings);
+
+   
+
+    },
     async loadData() {
       this.menus = await getMenuByDate(this.date)
       

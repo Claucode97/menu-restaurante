@@ -6,75 +6,42 @@
           <p>¿En qué fecha quieres copiar el menú?</p>
           <input type="date" v-model="newDate">
     <router-link :to="{name: 'MenuModifyPage', params: {date:this.newDate}}">
-          <button class="copy-btn" @click="copyMenu">Copiar en esta fecha</button>
+          <button class="copy-btn" @click="sendDate">Copiar en esta fecha</button>
     </router-link>
       </div>
   </div>
 </template>
 
 <script>
-import config from "@/config.js";
-import { v4 as uuidv4 } from "uuid";
-import {getMenuByDate} from "@/services/api.js"
+
 
 export default {
     
     name: "CopyCalendar",
-    props: {
-        date:{
-            type: String,
-            required: true
-
-        }
-        
-
-    },
     
     data() {
     return {
       newDate: "",
       modalOpened: true,
-      dict_menu: {},
+      
     };
     },
-    mounted() {
-       this.loadData()
-    },
+
 
     methods: {
-    
+    sendDate(){
+      this.$emit("changedDate",this.newDate)
+
+    },
     copyModalClose(){
       this.modalOpened = false
       this.$emit("modaltoFALSE" , this.modalOpened)
       console.log("clicc modal" + this.modalOpened)
 
     },
-     async loadData(){
-      
-      this.dict_menu = await getMenuByDate(this.date);
-      return this.dict_menu
-      
-    },
-    async copyMenu(){
-        console.log(this.date)
-        let desc = this.dict_menu.desc;
-        this.dictToSend = { date: this.newDate, desc: desc, id_restaurant: localStorage.id_restaurant };
-        this.dictToSend.id = uuidv4();
-        localStorage.id_menu = this.dictToSend.id
 
-        const settings = {
-          method: "POST",
-          body: JSON.stringify(this.dictToSend),
-          headers: {
-            Authorization: localStorage.id_restaurant,
-            "Content-Type": "application/json",
-          },
-        };
-        await fetch(`${config.API_PATH}/menus/${this.date}/copy/${this.newDate}`, settings);
 
-   
-
-    }
+    
   },
   
 }
