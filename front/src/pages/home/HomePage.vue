@@ -4,10 +4,14 @@
     <h1>Bienvenido</h1>
   </div>
 
-  <select v-model="selectedRestaurant">
-    <option :value="null" disabled>Selecciona un restaurante</option>
-    <option v-for="restaurant in restaurants" :value="restaurant" :key="restaurant.id_restaurant">{{restaurant.name}}</option>
-    </select>
+  
+    <label for="user-name">Usuario</label>
+    <input type="text" id="user-name" v-model="restaurants.name">
+    <br />
+    <label for="password">Contraseña</label>
+    <input type="password" id="password" v-model="restaurants.password">
+    <br/>
+    
 <button @click="onButtonClicked()">Ver los menus</button> 
 </template>
 
