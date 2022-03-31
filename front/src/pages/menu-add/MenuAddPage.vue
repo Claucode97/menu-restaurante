@@ -51,7 +51,7 @@ export default {
     async onSaveClicked() {
       if (this.areValidInputsFromMenu() === true && this.date !== "") {
         let desc = this.dict_plates;
-        this.dictToSend = { date: this.date, desc: desc };
+        this.dictToSend = { date: this.date, desc: desc,id_restaurant:localStorage.id_restaurant };
         this.dictToSend.id = uuidv4();
         const settings = {
           method: "POST",

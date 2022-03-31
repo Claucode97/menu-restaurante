@@ -63,12 +63,17 @@ class RestaurantRepository:
             """SELECT * FROM restaurants WHERE id_restaurant =?""", (id_restaurant,)
         )
         data = cursor.fetchone()
-        restaurant_class = Restaurant(
-            id_restaurant=data["id_restaurant"],
-            name=data["name"],
-            password=data["password"],
-        )
-        return restaurant_class
+        if data == None:
+            restaurant = None
+
+        else:
+
+            restaurant = Restaurant(
+                id_restaurant=data["id_restaurant"],
+                name=data["name"],
+                password=data["password"],
+            )
+        return restaurant
 
     def save_restaurants(self, restaurant):
         sql = """INSERT INTO restaurants (id_restaurant,name, password) VALUES (

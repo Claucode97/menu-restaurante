@@ -99,8 +99,9 @@ def create_app(repositories):
         restaurant = repositories["restaurant"].get_by_id_restaurant(
             body["id_restaurant"]
         )
-        print("*********************", restaurant.password)
+
         if restaurant is None or (body["password"]) != restaurant.password:
+
             return "", 401
 
         return object_to_json(restaurant), 200

@@ -6,7 +6,7 @@
 
   
     <label for="user-name">Usuario</label>
-    <input type="text" id="user-name" v-model="restaurants.name">
+    <input type="text" id="user-name" v-model="restaurants.id_restaurant">
     <br />
     <label for="password">Contraseña</label>
     <input type="password" id="password" v-model="restaurants.password">
@@ -16,7 +16,10 @@
 </template>
 
 <script>
-import {getRestaurants} from "@/services/api.js"
+
+import { login } from "@/services/auth.js";
+import { useStorage } from "@vueuse/core";
+
 
 export default {
   name: 'Home',
@@ -24,22 +27,30 @@ export default {
     return{
       restaurants:[],
       selectedRestaurant:null,
-    }
-  },
-  mounted(){
-    this.loadData()
-  },
-  methods:{
-    async loadData(){
+      auth: useStorage("auth", {}),
       
-      this.restaurants = await getRestaurants()
-    },
-  onButtonClicked(){
-      localStorage.id_restaurant=this.selectedRestaurant.id_restaurant
-      localStorage.name=this.selectedRestaurant.name
-      this.$router.push('/menus')
     }
-  }
+  },
+  
+  methods:{
+    
+    async onButtonClicked(){
+      const response = await login(this.restaurants.id_restaurant, this.restaurants.password);
+      const loginStatus = response.status;
+      console.log("response", response);
+
+      if (loginStatus === 401) {
+        alert("unauthorized");
+      } else {
+        const auth = await response.json();
+        console.log("auth", auth);
+
+        this.auth = auth;
+
+      this.$router.push('/menus')
+      }
+    }
+  },
 }
 </script>
 
