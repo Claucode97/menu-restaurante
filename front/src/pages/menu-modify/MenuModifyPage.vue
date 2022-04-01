@@ -109,6 +109,9 @@ export default {
   padding: 0;
   margin: 0;
 }
+p{
+  margin: 0 0.5em;
+}
 .add-menu-button {
   padding: 0.5em;
   margin: 2em 0;

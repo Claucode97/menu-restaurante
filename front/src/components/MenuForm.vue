@@ -149,7 +149,13 @@ export default {
     margin-right:1em;
     
 }
-
+p{
+    text-align: left;
+    margin-left: 1em;
+}
+.addDish{
+    margin-left: 1em;
+}
 
 
 .input_plate{
