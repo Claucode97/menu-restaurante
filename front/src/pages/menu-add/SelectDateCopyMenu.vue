@@ -1,8 +1,7 @@
 <template>
   <div class="modal-wrapper" >
-      <div class="modal-inner-wrapper">cace4155-1205-4cb6-819c-981c0d9bbd56
-          {{this.$route.params.date}}
-          <button class="close-btn" @click="copyModalClose">x</button>
+      <div class="modal-inner-wrapper">
+          <p class="close-btn" @click="copyModalClose">x</p>
           <p>¿En qué fecha quieres copiar el menú?</p>
           <input type="date" v-model="newDate">
     <router-link :to="{name: 'MenuModifyPage', params: {date:this.newDate}}">
@@ -54,6 +53,9 @@ export default {
     padding: 0;
     box-sizing: border-box;
 }
+body{
+  overflow: hidden;
+}
 .modal-wrapper{
     width: 100vw;
     height: 100vh;
@@ -61,7 +63,7 @@ export default {
     justify-content: center;
     align-items: center;
     background-color: rgba(250, 246, 246, 0.37);
-    position: absolute;
+    position: fixed;
     top: 0;
     left:0;
     z-index: 999;
@@ -97,7 +99,7 @@ export default {
 .close-btn {
     position: absolute;
     top: 1em;
-    right: 1em;
+    left: 92%;
     width: 25px;
     height: 25px;
     }

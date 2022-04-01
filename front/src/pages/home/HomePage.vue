@@ -5,14 +5,17 @@
   </div>
 
   
-    <label for="user-name">Usuario</label>
-    <input type="text" id="user-name" v-model="restaurants.id_restaurant">
-    <br />
-    <label for="password">Contraseña</label>
-    <input type="password" id="password" v-model="restaurants.password">
-    <br/>
+    <div class="login-wrapper">
+      <label for="user-name">Usuario</label>
+      <input type="text" id="user-name" v-model="restaurants.id_restaurant">
+      <br />
+      <label for="password">Contraseña</label>
+      <input type="password" id="password" v-model="restaurants.password" @keyup.enter="onButtonClicked">
+      
+      <br/>
+    </div>
     
-<button @click="onButtonClicked()">Ver los menus</button> 
+<button @click="onButtonClicked()" @keyup.enter="onButtonClicked">Ver los menus</button> 
 </template>
 
 <script>
@@ -62,4 +65,11 @@ img{
   width: 30vw;
 
 }
+.login-wrapper{
+  display: flex;
+  flex-direction: column;
+  max-width: 300px;
+  margin: 3em auto 0;
+}
+
 </style>
