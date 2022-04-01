@@ -4,15 +4,22 @@
     <h1>Bienvenido</h1>
   </div>
 
-  <select v-model="selectedRestaurant">
-    <option :value="null" disabled>Selecciona un restaurante</option>
-    <option v-for="restaurant in restaurants" :value="restaurant" :key="restaurant.id_restaurant">{{restaurant.name}}</option>
-    </select>
+  
+    <label for="user-name">Usuario</label>
+    <input type="text" id="user-name" v-model="restaurants.id_restaurant">
+    <br />
+    <label for="password">Contraseña</label>
+    <input type="password" id="password" v-model="restaurants.password">
+    <br/>
+    
 <button @click="onButtonClicked()">Ver los menus</button> 
 </template>
 
 <script>
-import {getRestaurants} from "@/services/api.js"
+
+import { login } from "@/services/auth.js";
+import { useStorage } from "@vueuse/core";
+
 
 export default {
   name: 'Home',
@@ -20,22 +27,30 @@ export default {
     return{
       restaurants:[],
       selectedRestaurant:null,
-    }
-  },
-  mounted(){
-    this.loadData()
-  },
-  methods:{
-    async loadData(){
+      auth: useStorage("auth", {}),
       
-      this.restaurants = await getRestaurants()
-    },
-  onButtonClicked(){
-      localStorage.id_restaurant=this.selectedRestaurant.id_restaurant
-      localStorage.name=this.selectedRestaurant.name
-      this.$router.push('/menus')
     }
-  }
+  },
+  
+  methods:{
+    
+    async onButtonClicked(){
+      const response = await login(this.restaurants.id_restaurant, this.restaurants.password);
+      const loginStatus = response.status;
+      console.log("response", response);
+
+      if (loginStatus === 401) {
+        alert("unauthorized");
+      } else {
+        const auth = await response.json();
+        console.log("auth", auth);
+
+        this.auth = auth;
+
+      this.$router.push('/menus')
+      }
+    }
+  },
 }
 </script>
 

@@ -24,8 +24,8 @@ menu_repository.save(
 
 restaurante_repository = RestaurantRepository(database_path)
 restaurante_repository.save_restaurants(
-    Restaurant(id_restaurant="0001", name="Tia Maruca")
+    Restaurant(id_restaurant="0001", name="Tia Maruca", password="password1")
 )
 restaurante_repository.save_restaurants(
-    Restaurant(id_restaurant="0002", name="Don Satur")
+    Restaurant(id_restaurant="0002", name="Don Satur", password="password2")
 )

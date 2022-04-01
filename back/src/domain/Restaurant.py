@@ -3,12 +3,16 @@ import json
 
 
 class Restaurant:
-    def __init__(self, id_restaurant, name):
+    def __init__(self, id_restaurant, name, password="NO PASSWORD"):
         self.id_restaurant = id_restaurant
         self.name = name
+        self.password = password
 
     def to_dict(self):
-        return {"id_restaurant": self.id_restaurant, "name": self.name}
+        return {
+            "id_restaurant": self.id_restaurant,
+            "name": self.name,
+        }
 
 
 class RestaurantRepository:
@@ -25,7 +29,8 @@ class RestaurantRepository:
         sql = """
             CREATE table if not exists restaurants (
                 id_restaurant varchar PRIMARY KEY,
-                name varchar
+                name varchar,
+                password varchar
                
             )
         """
@@ -58,18 +63,30 @@ class RestaurantRepository:
             """SELECT * FROM restaurants WHERE id_restaurant =?""", (id_restaurant,)
         )
         data = cursor.fetchone()
-        restaurant_class = Restaurant(
-            id_restaurant=data["id_restaurant"], name=json.loads(data["name"])
-        )
-        return restaurant_class
+        if data == None:
+            restaurant = None
+
+        else:
+
+            restaurant = Restaurant(
+                id_restaurant=data["id_restaurant"],
+                name=data["name"],
+                password=data["password"],
+            )
+        return restaurant
 
     def save_restaurants(self, restaurant):
-        sql = """INSERT INTO restaurants (id_restaurant,name) VALUES (
-            :id_restaurant, :name
+        sql = """INSERT INTO restaurants (id_restaurant,name, password) VALUES (
+            :id_restaurant, :name, :password
         ) """
         conn = self.create_conn()
         cursor = conn.cursor()
         cursor.execute(
-            sql, {"id_restaurant": restaurant.id_restaurant, "name": restaurant.name}
+            sql,
+            {
+                "id_restaurant": restaurant.id_restaurant,
+                "name": restaurant.name,
+                "password": restaurant.password,
+            },
         )
         conn.commit()
