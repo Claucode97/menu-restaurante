@@ -1,5 +1,11 @@
 import config from "@/config.js";
 
+function getRestaurantId() {
+  const userJson = localStorage.getItem("auth");
+  const user = JSON.parse(userJson);
+  return user.id_restaurant;
+}
+
 export async function getRestaurants() {
   var response = await fetch(`${config.API_PATH}/restaurants`);
   const restaurants = await response.json();
@@ -10,7 +16,7 @@ export async function getListOfMenus() {
   const settings = {
     method: "GET",
     headers: {
-      Authorization: localStorage.id_restaurant,
+      Authorization: getRestaurantId(),
     },
   };
   const response = await fetch(`${config.API_PATH}/menus`, settings);
@@ -22,7 +28,7 @@ export async function getMenuByDate(date) {
   const settings = {
     method: "GET",
     headers: {
-      Authorization: localStorage.id_restaurant,
+      Authorization: getRestaurantId(),
     },
   };
   const response = await fetch(
@@ -37,7 +43,7 @@ export async function getMenuModify() {
   const settings = {
     method: "GET",
     headers: {
-      Authorization: localStorage.id_restaurant,
+      Authorization: getRestaurantId(),
     },
   };
   const response = await fetch(
@@ -53,7 +59,7 @@ export async function updateMenu(menu) {
     method: "PUT",
     body: JSON.stringify(menu),
     headers: {
-      Authorization: localStorage.id_restaurant,
+      Authorization: getRestaurantId(),
       "Content-Type": "application/json",
     },
   };
