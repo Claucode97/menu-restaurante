@@ -123,7 +123,7 @@ export default {
 }
 .input_plate{
     margin:0.4em 0;
-    width:95%;
+    width:92%;
     margin-right: 0.3em;
 }
 .delete-button{
@@ -158,15 +158,8 @@ p{
 }
 
 
-.input_plate{
-    margin:0.4em 0;
-    width:96%;
-    margin-right: 0.3em;
-}
-.delete-button{
-    width: 20px;
-    height: 20px;
-}
+
+
 .date{
     display:flex;
     justify-content: flex-end;
