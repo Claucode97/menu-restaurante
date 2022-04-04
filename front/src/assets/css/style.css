@@ -1,7 +1,7 @@
-@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;700&family=Sacramento&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Sacramento&family=Ubuntu:ital,wght@0,300;0,400;0,700;1,300&display=swap");
 
 #app {
-  font-family: "Cormorant Garamond", serif;
+  font-family: "Ubuntu", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
@@ -14,15 +14,31 @@
   box-sizing: border-box;
 }
 
-#main-nav {
-  padding: 30px;
+#main-header {
+  background-color: rgb(247, 225, 181);
+  display: flex;
+  justify-content: space-between;
+  padding: 1.5em;
+  align-items: center;
+}
+
+#main-header img {
+  width: 25%;
+  display: block;
 }
 
 #main-nav a {
   font-weight: bold;
   color: #a31d1e;
+  font-size: 1.3em;
 }
 
 #main-nav a.router-link-exact-active {
   color: #f4c651;
+  text-decoration: none;
+}
+
+.btn {
+  cursor: pointer;
+  user-select: none;
 }

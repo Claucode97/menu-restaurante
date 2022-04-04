@@ -1,8 +1,8 @@
 <template>
   <div class="home">
-    <img alt="menu logo" src="@/assets/img/imagen_de_bienbenida_menu.png" />
+    <img alt="menu logo" src="@/assets/img/logo-restaurant.png" />
     <h1>Bienvenido</h1>
-  </div>
+  
 
   
     <div class="login-wrapper">
@@ -14,8 +14,10 @@
       
       <br/>
     </div>
+    <button @click="onButtonClicked()" @keyup.enter="onButtonClicked" class="btn login-btn">Acceder</button> 
+  </div>
     
-<button @click="onButtonClicked()" @keyup.enter="onButtonClicked">Ver los menus</button> 
+
 </template>
 
 <script>
@@ -58,18 +60,53 @@ export default {
 </script>
 
 <style scoped>
-h1 {
-  font-style: italic;
+.home{
+  min-height: 100vh;
+  background-color: rgb(247, 225, 181);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  padding: 8em 0;
 }
-img{
-  width: 30vw;
+.home h1{
+  font-size: 2.5em;
+  font-weight: normal;
+  color: #a31d1e;
+  margin-top: 2em;
+}
+.home .login-wrapper{
+  font-size: 1.2em;
+  font-weight: bold;
+}
+
+.home .login-wrapper input{
+  border: none;
+  box-shadow: 0px 0px 8px 0px rgb(247, 225, 181) inset;
+  padding: 0.5em 0.2em;
+  margin-top: 0.3em;
 
 }
+
 .login-wrapper{
   display: flex;
   flex-direction: column;
   max-width: 300px;
-  margin: 3em auto 0;
+ 
+}
+.login-btn{
+  border:none;
+  padding: 1em;
+  font-size: 0.9em;
+  font-weight: bold;
+  background-color:#a31d1e;
+  color:rgb(247, 225, 181);
+
+}
+.login-btn:hover{
+  background-color:rgb(247, 225, 181);
+  color:#a31d1e;
+  border: 2px solid #a31d1e;
 }
 
 </style>
