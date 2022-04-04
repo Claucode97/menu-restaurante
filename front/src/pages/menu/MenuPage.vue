@@ -1,4 +1,5 @@
 <template>
+<NavMenu/>
 <h2>-{{loggedRestaurant}}-</h2>
   <h3>
     Menú del día 
@@ -38,6 +39,7 @@
 </template>
 
 <script>
+import NavMenu from "@/components/NavMenu.vue";
 import {getMenuByDate} from "@/services/api.js"
 import SelectDateCopyMenu from "@/pages/menu-add/SelectDateCopyMenu.vue"
 import config from "@/config.js";
@@ -45,7 +47,7 @@ import { v4 as uuidv4 } from "uuid";
 
 export default {
   
-  components: { SelectDateCopyMenu },
+  components: { SelectDateCopyMenu, NavMenu },
   data() {
     return {
       firsts: [],
