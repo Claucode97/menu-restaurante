@@ -1,4 +1,5 @@
 <template>
+<NavMenu/>
 <h2>{{loggedRestaurant}}</h2>
   <router-link :to="{ name: 'Menu', params: { date: getToday } }">
     <button class="menu-day">Menú del día</button>
@@ -10,10 +11,11 @@
 </template>
 
 <script>
+import NavMenu from '@/components/NavMenu.vue';
 import ListOfMenus from './ListOfMenu.vue'
 import Calendar from './Calendar.vue'
 export default {
-  components: {Calendar,ListOfMenus},
+  components: {Calendar,ListOfMenus, NavMenu},
   data() {
     return {
       loggedRestaurant: localStorage.name,

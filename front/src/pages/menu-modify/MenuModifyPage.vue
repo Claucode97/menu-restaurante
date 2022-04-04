@@ -1,4 +1,5 @@
 <template>
+    <NavMenu/>
   <form>
     <div class="dateNameRestaurant">
       <p>{{ loggedRestaurant }}</p>
@@ -13,12 +14,13 @@
   </form>
 </template>
 <script>
+import NavMenu from '@/components/NavMenu.vue';
 import config from "@/config.js";
 import { getMenuModify } from "@/services/api.js";
 import MenuForm from "@/components/MenuForm.vue";
 export default {
   name: "modifymenu",
-  components: { MenuForm },
+  components: { MenuForm, NavMenu },
   data() {
     return {
       dateReceived: this.$route.params.date,
