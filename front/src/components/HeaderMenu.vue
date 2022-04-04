@@ -10,7 +10,7 @@
 
 <script>
 export default {
-    name:"NavMenu",
+    name:"HeaderMenu",
 //   props:{
 
 //   }
