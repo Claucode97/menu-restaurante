@@ -1,5 +1,7 @@
+@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;700&family=Sacramento&display=swap");
+
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  font-family: "Cormorant Garamond", serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
@@ -12,15 +14,15 @@
   box-sizing: border-box;
 }
 
-#nav {
+#main-nav {
   padding: 30px;
 }
 
-#nav a {
+#main-nav a {
   font-weight: bold;
-  color: #2c3e50;
+  color: #a31d1e;
 }
 
-#nav a.router-link-exact-active {
-  color: #42b983;
+#main-nav a.router-link-exact-active {
+  color: #f4c651;
 }
