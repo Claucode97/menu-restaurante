@@ -65,3 +65,10 @@ export async function updateMenu(menu) {
   };
   await fetch(`${config.API_PATH}/menus`, settings);
 }
+export async function getMenuToday(name_restaurant) {
+  const response = await fetch(
+    `${config.API_PATH}/menu-today/`+name_restaurant
+  );
+  const menu = await response.json();
+  return menu;
+}

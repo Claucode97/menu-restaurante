@@ -90,3 +90,20 @@ class RestaurantRepository:
             },
         )
         conn.commit()
+
+    def get_by_name(self, name):
+        conn = self.create_conn()
+        cursor = conn.cursor()
+        cursor.execute("""SELECT * FROM restaurants WHERE name =?""", (name,))
+        data = cursor.fetchone()
+        if data == None:
+            restaurant = None
+
+        else:
+
+            restaurant = Restaurant(
+                id_restaurant=data["id_restaurant"],
+                name=data["name"],
+                password=data["password"],
+            )
+        return restaurant.id_restaurant
