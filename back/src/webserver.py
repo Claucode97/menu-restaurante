@@ -109,11 +109,15 @@ def create_app(repositories):
 
     @app.route("/api/menu-today/<name_restaurant>", methods=["GET"])
     def show_menu_today(name_restaurant):
-        name = name_restaurant.replace("-", " ")
         date = datetime.today().strftime("%Y-%m-%d")
-        id_restaurant = repositories["restaurant"].get_by_name(name)
-        menu = repositories["menu"].get_by_date(date, id_restaurant)
-        menu_object = menu.to_dict()
-        return jsonify(menu_object["desc"]), 200
+        id_restaurant = repositories["restaurant"].get_by_name(name_restaurant)
+        if id_restaurant == None:
+            return " ", 404
+        else:
+            menu = repositories["menu"].get_by_date(date, id_restaurant)
+            if menu == None:
+                return " ", 404
+            menu_object = menu.to_dict()
+            return jsonify(menu_object["desc"]), 200
 
     return app

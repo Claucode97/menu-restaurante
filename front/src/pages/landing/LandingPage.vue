@@ -1,30 +1,33 @@
 <template>
-<h2>-{{loggedRestaurant}}-</h2>
-  <h3>
-    Menú del día 
-  </h3>
-  <p>{{ dateParsed }}</p>
-  <h3>Primeros</h3>
-  <section v-for="menu in this.firsts" :key="menu.id_dish">
-    <ul class="split_the_dishes">
-      <li>{{ menu.name_dish }}</li>
-      <li class="allergen-detail" v-for="allergen in menu.allergens" :key="allergen.id" >{{ allergen }}</li>
-    </ul>
-  </section>
-  <h3>Segundos</h3>
-  <section v-for="menu in this.seconds" :key="menu.id_dish">
-    <ul class="split_the_dishes">
-      <li>{{ menu.name_dish }}</li>
-      <li class="allergen-detail" v-for="allergen in menu.allergens" :key="allergen.id" >{{ allergen }}</li>
-    </ul> 
-  </section>
-  <h3>Postres</h3>
-  <section v-for="menu in this.desserts" :key="menu.id_dish">
-    <ul class="split_the_dishes">
-      <li>{{ menu.name_dish }}</li>
-      <li class="allergen-detail" v-for="allergen in menu.allergens" :key="allergen.id">{{ allergen}}</li>
-    </ul>
-  </section>
+<article v-if="!isMenuEmpty">
+  <h2>-{{loggedRestaurant}}-</h2>
+    <h3>
+      Menú del día 
+    </h3>
+    <p>{{ dateParsed }}</p>
+    <h3>Primeros</h3>
+    <section v-for="menu in this.firsts" :key="menu.id_dish">
+      <ul class="split_the_dishes">
+        <li>{{ menu.name_dish }}</li>
+        <li class="allergen-detail" v-for="allergen in menu.allergens" :key="allergen.id" >{{ allergen }}</li>
+      </ul>
+    </section>
+    <h3>Segundos</h3>
+    <section v-for="menu in this.seconds" :key="menu.id_dish">
+      <ul class="split_the_dishes">
+        <li>{{ menu.name_dish }}</li>
+        <li class="allergen-detail" v-for="allergen in menu.allergens" :key="allergen.id" >{{ allergen }}</li>
+      </ul> 
+    </section>
+    <h3>Postres</h3>
+    <section v-for="menu in this.desserts" :key="menu.id_dish">
+      <ul class="split_the_dishes">
+        <li>{{ menu.name_dish }}</li>
+        <li class="allergen-detail" v-for="allergen in menu.allergens" :key="allergen.id">{{ allergen}}</li>
+      </ul>
+    </section>
+  </article>
+  <p v-else>Hoy no hay menu</p>
 
 </template>
 
@@ -42,6 +45,7 @@ export default {
       parsedDate:'',
       loggedRestaurant:this.$route.params.name_restaurant.replace("-"," "),
       menu : {},
+      isMenuEmpty: false,
     };
   },
 
@@ -52,11 +56,17 @@ export default {
   methods: {
 
     async loadData() {
-      this.menus = await getMenuToday(this.loggedRestaurant)
-      
+      const response = await getMenuToday(this.loggedRestaurant)
+      console.log(response.status)
+      if (response === 404){
+          this.isMenuEmpty = true
+      }
+      else{
+      this.menus = response
       this.firsts = this.menus.firsts;
       this.seconds = this.menus.seconds;
       this.desserts = this.menus.desserts;
+      }
     },
     getToday() {
       let current = new Date();

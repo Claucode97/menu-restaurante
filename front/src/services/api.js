@@ -69,6 +69,11 @@ export async function getMenuToday(name_restaurant) {
   const response = await fetch(
     `${config.API_PATH}/menu-today/`+name_restaurant
   );
-  const menu = await response.json();
-  return menu;
+  if (response.status == 404 ){
+    return 404
+  }
+  else{
+    const menu = await response.json();
+    return menu;
+  }
 }

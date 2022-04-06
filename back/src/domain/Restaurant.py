@@ -98,6 +98,7 @@ class RestaurantRepository:
         data = cursor.fetchone()
         if data == None:
             restaurant = None
+            return restaurant
 
         else:
 
@@ -106,4 +107,4 @@ class RestaurantRepository:
                 name=data["name"],
                 password=data["password"],
             )
-        return restaurant.id_restaurant
+            return restaurant.id_restaurant
