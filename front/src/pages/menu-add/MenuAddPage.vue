@@ -1,4 +1,5 @@
 <template>
+<HeaderMenu/>
   <div id="add-menu-container">
       <h2>{{ loggedRestaurant }}</h2>
       <div class="date">
@@ -10,12 +11,13 @@
 </template>
 
 <script>
+import HeaderMenu from '@/components/HeaderMenu.vue';
 import config from "@/config.js";
 import { v4 as uuidv4 } from "uuid";
 import MenuForm from "@/components/MenuForm.vue" 
 export default {
   name: "MenuAdd",
-  components:{MenuForm},
+  components:{MenuForm, HeaderMenu},
   data() {
     return {
       date: this.$route.params.date,
