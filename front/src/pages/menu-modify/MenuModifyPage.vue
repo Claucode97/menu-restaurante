@@ -18,6 +18,7 @@ import HeaderMenu from '@/components/HeaderMenu.vue';
 import config from "@/config.js";
 import { getMenuModify } from "@/services/api.js";
 import MenuForm from "@/components/MenuForm.vue";
+import {getRestaurantName,getRestaurantId} from "@/services/localStorage.js";
 export default {
   name: "modifymenu",
   components: { MenuForm, HeaderMenu },
@@ -25,13 +26,15 @@ export default {
     return {
       dateReceived: this.$route.params.date,
       dict_menu: { desc: {} },
-      loggedRestaurant: localStorage.name,
+      loggedRestaurant:getRestaurantName() ,
       areThereEmpties: true,
     };
   },
 
   mounted() {
     this.loadData();
+  
+    
   },
 
   methods: {
@@ -84,13 +87,13 @@ export default {
           date: this.dateReceived,
           desc: desc,
           id: this.dict_menu.id,
-          id_restaurant: localStorage.id_restaurant,
+          id_restaurant: getRestaurantId(),
         };
         const settings = {
           method: "PUT",
           body: JSON.stringify(this.dictToSend),
           headers: {
-            Authorization: localStorage.id_restaurant,
+            Authorization: getRestaurantId(),
             "Content-Type": "application/json",
           },
         };
@@ -103,6 +106,7 @@ export default {
         this.areThereEmpties = false;
       }
     },
+
   },
 };
 </script>

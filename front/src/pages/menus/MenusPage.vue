@@ -16,11 +16,12 @@
 import HeaderMenu from '@/components/HeaderMenu.vue';
 import ListOfMenus from './ListOfMenu.vue'
 import Calendar from './Calendar.vue'
+import {getRestaurantName} from "@/services/localStorage.js";
 export default {
   components: {Calendar,ListOfMenus, HeaderMenu},
   data() {
     return {
-      loggedRestaurant: localStorage.name,
+      loggedRestaurant: getRestaurantName(),
       
     };
   },

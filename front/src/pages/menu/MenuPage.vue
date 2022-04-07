@@ -52,6 +52,7 @@ import {getMenuByDate} from "@/services/api.js"
 import SelectDateCopyMenu from "@/pages/menu-add/SelectDateCopyMenu.vue"
 import config from "@/config.js";
 import { v4 as uuidv4 } from "uuid";
+import {getRestaurantName,getRestaurantId} from "@/services/localStorage.js";
 
 export default {
   
@@ -64,7 +65,7 @@ export default {
       date: this.$route.params.date,
       dateToCopy : "",
       parsedDate:'',
-      loggedRestaurant:localStorage.name,
+      loggedRestaurant:getRestaurantName(),
       menu : {},
       modalOpened: false
     };
@@ -72,13 +73,13 @@ export default {
 
   mounted() {
     this.loadData();
+
   },
   methods: {
-
     async copyMenu(newDate){
        this.dateToCopy = newDate
         let desc = this.menu.desc;
-        this.dictToSend = { date: this.dateToCopy, desc: desc, id_restaurant: localStorage.id_restaurant };
+        this.dictToSend = { date: this.dateToCopy, desc: desc, id_restaurant: getRestaurantId()};
         this.dictToSend.id = uuidv4();
         localStorage.id_menu = this.dictToSend.id
 
@@ -86,7 +87,7 @@ export default {
           method: "POST",
           body: JSON.stringify(this.dictToSend),
           headers: {
-            Authorization: localStorage.id_restaurant,
+            Authorization: getRestaurantId(),
             "Content-Type": "application/json",
           },
         };
@@ -114,6 +115,7 @@ export default {
     modaltoFalse(newvalue){
       this.modalOpened = newvalue
     },
+
 
   },
   computed:{

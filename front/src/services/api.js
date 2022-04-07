@@ -1,16 +1,9 @@
 import config from "@/config.js";
+import {getRestaurantId} from "@/services/localStorage.js";
 
-function getRestaurantId() {
-  const userJson = localStorage.getItem("auth");
-  const user = JSON.parse(userJson);
-  return user.id_restaurant;
-}
 
-export async function getRestaurants() {
-  var response = await fetch(`${config.API_PATH}/restaurants`);
-  const restaurants = await response.json();
-  return restaurants;
-}
+
+
 
 export async function getListOfMenus() {
   const settings = {
