@@ -1,13 +1,15 @@
 <template>
-<HeaderMenu/>
-<h2>{{loggedRestaurant}}</h2>
-  <router-link :to="{ name: 'Menu', params: { date: getToday } }">
-    <button class="menu-day">Menú del día</button>
-  </router-link>
-
-  <Calendar />
-
-  <ListOfMenus />
+<div class="menu-list-page">
+  <HeaderMenu/>
+  <h2>{{loggedRestaurant}}</h2>
+    <router-link :to="{ name: 'Menu', params: { date: getToday } }">
+      <button class="menu-day-btn btn">Menú del día</button>
+    </router-link>
+  
+    <Calendar />
+  
+    <ListOfMenus />
+</div>
 </template>
 
 <script>
@@ -46,9 +48,31 @@ export default {
 
 <style scoped>
 
-
-
-.menu-day{
-  margin-top:1em
+.menu-list-page{
+  background-color: #fae8b9;
 }
+.menu-list-page h2{
+  margin: 1.5em 0 1em;
+  color: #a31d1e;
+  font-size: 1.8em;
+  font-weight: normal;
+}
+
+.menu-day-btn{
+  border: 2px solid #a31d1e;
+  padding: 1em;
+  font-size: 0.9em;
+  font-weight: bold;
+  background-color:#a31d1e;
+  color:rgb(247, 225, 181);
+
+}
+
+
+.menu-day-btn:hover{
+  background-color:rgb(247, 225, 181);
+  color:#a31d1e;
+  
+}
+
 </style>

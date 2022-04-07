@@ -8,13 +8,13 @@
     <div class="login-wrapper">
       <label for="user-name">Usuario</label>
       <input type="text" id="user-name" v-model="restaurants.id_restaurant">
-      <br />
+    
       <label for="password">Contraseña</label>
       <input type="password" id="password" v-model="restaurants.password" @keyup.enter="onButtonClicked">
       
-      <br/>
+      <button @click="onButtonClicked()" @keyup.enter="onButtonClicked" class="btn login-btn">Acceder</button> 
     </div>
-    <button @click="onButtonClicked()" @keyup.enter="onButtonClicked" class="btn login-btn">Acceder</button> 
+    
   </div>
     
 
@@ -61,13 +61,12 @@ export default {
 
 <style scoped>
 .home{
-  min-height: 100vh;
-  background-color: rgb(247, 225, 181);
+  height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
-  padding: 8em 0;
+  
 }
 .home h1{
   font-size: 2.5em;
@@ -85,6 +84,8 @@ export default {
   box-shadow: 0px 0px 8px 0px rgb(247, 225, 181) inset;
   padding: 0.5em 0.2em;
   margin-top: 0.3em;
+  font-family: "Ubuntu", sans-serif;
+  font-size: 1em;
 
 }
 
@@ -95,18 +96,19 @@ export default {
  
 }
 .login-btn{
-  border:none;
+  border:2px solid #a31d1e;;
   padding: 1em;
   font-size: 0.9em;
   font-weight: bold;
   background-color:#a31d1e;
   color:rgb(247, 225, 181);
+  margin-top: 1em;
 
 }
 .login-btn:hover{
-  background-color:rgb(247, 225, 181);
+  
   color:#a31d1e;
-  border: 2px solid #a31d1e;
+  
 }
 
 </style>

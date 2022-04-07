@@ -1,11 +1,12 @@
 <template>
   <article class="calendar">
     <section class="name-month">
-      <button class="button-last-month" @click="prevMonth">⬅</button>
-      <h2 @click="comeBackCurrentMonth()">
+      <button class="button-change-month btn" @click="prevMonth">⬅</button>
+      <!-- <h2 @click="comeBackCurrentMonth()"> -->
+      <h2>
         {{ nameMonths[this.currentMonth] }} {{ currentYear }}
       </h2>
-      <button class="button-last-month" @click="nextMonth">➡</button>
+      <button class="button-change-month btn" @click="nextMonth">➡</button>
     </section>
     <ul class="name-of-week">
       <li v-for="index in nameDaysOfWeek" :key="index">{{ index }}</li>
@@ -120,10 +121,10 @@ export default {
       }
       return daysConnected;
     },
-    comeBackCurrentMonth() {
-      let comebackMonth = new Date().getMonth();
-      this.currentMonth = comebackMonth;
-    },
+    // comeBackCurrentMonth() {
+    //   let comebackMonth = new Date().getMonth();
+    //   this.currentMonth = comebackMonth;
+    // },
     nextMonth() {
       this.currentMonth = this.currentMonth + 1;
       if (this.currentMonth > 11) {
@@ -175,8 +176,8 @@ export default {
 }
 
 .name-of-week {
-  background: rgba(173, 216, 230, 0.74);
-  margin: 0.2em 0;
+  background: #db5246;
+  color:rgb(247, 225, 181);
   padding: 0.5em;
   list-style: none;
   display: grid;
@@ -190,6 +191,8 @@ export default {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
   grid-auto-rows: 40px;
+  border: 1px solid #db5246;
+  color: #a31d1e;
 }
 .days-of-month > li {
   padding: 25% 25%;
@@ -200,8 +203,8 @@ export default {
 .days-of-month > .not-empty-list:hover {
   font-size: 1.07rem;
   font-weight: bolder;
-  color: darkblue;
-  background-color: lightblue;
+  color: rgb(247, 225, 181);
+  background-color: #a31d1e;
   border-radius: 50%;
   cursor: pointer;
 }
@@ -209,18 +212,28 @@ export default {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  background-color:#a31d1e;
+  color:rgb(247, 225, 181);
 }
-.name-month > h2 {
-  text-decoration: underline;
-  cursor: pointer;
+
+.button-change-month{
+  border: 2px solid #a31d1e;
+  padding: 0.8em 0.5em;
+  font-size: 0.9em;
+  font-weight: bold;
+  background-color:#a31d1e;
+  color:rgb(247, 225, 181);
+  
 }
-.button-last-month,
-.button-next-month {
-  width: 50px;
+.button-change-month:hover{
+  background-color:rgb(247, 225, 181);
+  color:#a31d1e;
 }
+
 
 .underline {
   text-decoration: underline double;
   cursor: pointer;
+  font-weight: bold;
 }
 </style>

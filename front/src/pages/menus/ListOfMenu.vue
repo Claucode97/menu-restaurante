@@ -1,11 +1,15 @@
 <template>
-    <ul class="menu-date" v-for="menu in listOfMenus" :key="menu.id">
-    <div>
-    <router-link :to="{ name: 'Menu', params: { date: menu.date } }">
-      <li>{{ menu.date }}</li>
-    </router-link>
+    <div class="menus-list">
+      <h3>Menus disponibles</h3>
+      <ul class="available-menus-list">
+        <li class="menu-date" v-for="menu in listOfMenus" :key="menu.id">
+          <router-link :to="{ name: 'Menu', params: { date: menu.date } }">
+        {{ menu.date }}
+        </router-link>
+        </li>
+      
+      </ul>
     </div>
-  </ul>
 </template>
 
 <script>
@@ -29,16 +33,21 @@ export default {
 </script>
 
 <style scoped>
-* {
-  margin: 0;
-  padding: 0;
-  font-size: 16px;
-  box-sizing: border-box;
+
+.menus-list {
+  color:#a31d1e;
 }
 .menu-date {
   list-style: none;
   text-align: center;
   margin: 1em;
+  
+}
+.menu-date a{
+  color:#a31d1e;
+}
+.menu-date a:hover{
+  font-weight:bold;
 }
 
 </style>
