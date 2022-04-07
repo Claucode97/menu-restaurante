@@ -4,6 +4,7 @@ import home from '../pages/home/HomePage.vue'
 import menus from '../pages/menus/MenusPage.vue'
 import MenuAddPage from '../pages/menu-add/MenuAddPage.vue'
 import MenuModifyPage from '../pages/menu-modify/MenuModifyPage.vue'
+import landing from '../pages/landing/LandingPage.vue'
 
 
 const routes = [
@@ -31,6 +32,11 @@ const routes = [
     path: '/menu/modify',
     name: 'MenuModifyPage',
     component: MenuModifyPage
+  },
+  {
+    path :'/menus/today/:name_restaurant',
+    name : 'MenuToday',
+    component: landing
   },
   
   

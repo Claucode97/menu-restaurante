@@ -81,6 +81,8 @@ class MenuRepository:
             (date, id_restaurant),
         )
         data = cursor.fetchone()
+        if data == None:
+            return None
         menu_class = Menu(
             id=data["id"],
             date=data["date"],

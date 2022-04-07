@@ -1,9 +1,10 @@
 from xml.dom.minidom import Identified
-from flask import Flask, request
+from flask import Flask, jsonify, request
 from flask_cors import CORS
 from src.lib.utils import object_to_json
 from src.domain.Menu import Menu
 from src.domain.Restaurant import Restaurant
+from datetime import datetime
 
 
 def create_app(repositories):
@@ -105,5 +106,18 @@ def create_app(repositories):
             return "", 401
 
         return object_to_json(restaurant), 200
+
+    @app.route("/api/menu-today/<name_restaurant>", methods=["GET"])
+    def show_menu_today(name_restaurant):
+        date = datetime.today().strftime("%Y-%m-%d")
+        id_restaurant = repositories["restaurant"].get_by_name(name_restaurant)
+        if id_restaurant == None:
+            return " ", 404
+        else:
+            menu = repositories["menu"].get_by_date(date, id_restaurant)
+            if menu == None:
+                return " ", 404
+            menu_object = menu.to_dict()
+            return jsonify(menu_object["desc"]), 200
 
     return app
