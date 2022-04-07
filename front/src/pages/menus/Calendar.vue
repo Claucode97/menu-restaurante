@@ -121,10 +121,6 @@ export default {
       }
       return daysConnected;
     },
-    // comeBackCurrentMonth() {
-    //   let comebackMonth = new Date().getMonth();
-    //   this.currentMonth = comebackMonth;
-    // },
     nextMonth() {
       this.currentMonth = this.currentMonth + 1;
       if (this.currentMonth > 11) {

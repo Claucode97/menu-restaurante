@@ -15,6 +15,7 @@ import HeaderMenu from '@/components/HeaderMenu.vue';
 import config from "@/config.js";
 import { v4 as uuidv4 } from "uuid";
 import MenuForm from "@/components/MenuForm.vue" 
+import {getRestaurantName,getRestaurantId} from "@/services/localStorage.js"
 export default {
   name: "MenuAdd",
   components:{MenuForm, HeaderMenu},
@@ -29,7 +30,7 @@ export default {
         seconds: [{name_dish:"", allergens:[]}],
         desserts: [{name_dish:"", allergens:[]}],
       },
-      loggedRestaurant: localStorage.name,
+      loggedRestaurant: getRestaurantName(),
     };
   },
 
@@ -53,7 +54,7 @@ export default {
     async onSaveClicked() {
       if (this.areValidInputsFromMenu() === true && this.date !== "") {
         let desc = this.dict_plates;
-        this.dictToSend = { date: this.date, desc: desc,id_restaurant:localStorage.id_restaurant };
+        this.dictToSend = { date: this.date, desc: desc,id_restaurant:getRestaurantId() };
         this.dictToSend.id = uuidv4();
         const settings = {
           method: "POST",
