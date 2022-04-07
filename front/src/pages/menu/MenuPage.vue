@@ -1,39 +1,47 @@
 <template>
 <HeaderMenu/>
-<h2>-{{loggedRestaurant}}-</h2>
-  <h3>
-    Menú del día 
-  </h3>
-  <p>{{ dateParsed }}</p>
-  <div class="modify_div_btn">
-    <router-link :to="{name: 'MenuModifyPage', params: {date: this.$route.params.date}}">
-    <button @click="saveMenuId">Modificar menu</button>
-    </router-link>
+<main class="main-menu-detail-wrapper">
+  <header class="menu-detail-header">
+    <div class="header-text-wrapper">
+      <h2>{{loggedRestaurant}}</h2>
+        <p>
+          Menú del {{ dateParsed }}
+        </p>
+       
+    </div>
+       <div class="buttons-wrapper">
+      <router-link :to="{name: 'MenuModifyPage', params: {date: this.$route.params.date}}">
+      <button @click="saveMenuId" class="btn">Modificar menu</button>
+      </router-link>
+  <button class="btn" @click="copyModalClicked">Copiar Menu</button>
+    </div>
+  </header>
+   
     
+    <section class="courses-wrapper">
+      <h3>Primeros</h3>
+      <ul v-for="menu in this.firsts" :key="menu.id_dish">
+        <li>{{ menu.name_dish }}</li>
+        <li class="allergen-detail" v-for="allergen in menu.allergens" :key="allergen.id" >{{ allergen }}</li>
+      </ul>
+    </section>
     
-  </div> 
-  <button class="copy-button" @click="copyModalClicked">Copiar Menu</button>
-  <h3>Primeros</h3>
-  <section v-for="menu in this.firsts" :key="menu.id_dish">
-    <ul class="split_the_dishes">
-      <li>{{ menu.name_dish }}</li>
-      <li class="allergen-detail" v-for="allergen in menu.allergens" :key="allergen.id" >{{ allergen }}</li>
-    </ul>
-  </section>
-  <h3>Segundos</h3>
-  <section v-for="menu in this.seconds" :key="menu.id_dish">
-    <ul class="split_the_dishes">
-      <li>{{ menu.name_dish }}</li>
-      <li class="allergen-detail" v-for="allergen in menu.allergens" :key="allergen.id" >{{ allergen }}</li>
-    </ul> 
-  </section>
-  <h3>Postres</h3>
-  <section v-for="menu in this.desserts" :key="menu.id_dish">
-    <ul class="split_the_dishes">
-      <li>{{ menu.name_dish }}</li>
-      <li class="allergen-detail" v-for="allergen in menu.allergens" :key="allergen.id">{{ allergen}}</li>
-    </ul>
-  </section>
+    <section class="courses-wrapper">
+      <h3>Segundos</h3>
+      <ul v-for="menu in this.seconds" :key="menu.id_dish">
+        <li>{{ menu.name_dish }}</li>
+        <li class="allergen-detail" v-for="allergen in menu.allergens" :key="allergen.id" >{{ allergen }}</li>
+      </ul>
+    </section>
+    
+    <section class="courses-wrapper">
+      <h3>Postres</h3>
+      <ul v-for="menu in this.desserts" :key="menu.id_dish">
+        <li>{{ menu.name_dish }}</li>
+        <li class="allergen-detail" v-for="allergen in menu.allergens" :key="allergen.id">{{ allergen}}</li>
+      </ul>
+    </section>
+</main>
 
 <SelectDateCopyMenu  v-show="modalOpened" @changedDate="copyMenu" @modaltoFALSE="modaltoFalse()"/>
 </template>
@@ -122,29 +130,53 @@ export default {
 </script>
 
 <style scoped>
-* {
-  padding: 0;
-  margin: 0;
-}
 
-li {
+
+
+.main-menu-detail-wrapper{
+  text-align: left;
+  padding: 0 0.5em;
+}
+.courses-wrapper{
+  margin-bottom: 2em;
+  font-family: 'Oswald', sans-serif;
+  font-size: 1em;
   text-align: center;
-  margin: 0.3em;
-  list-style: none;
-  font-style: bold;
+  color: #3b0b06;
+  letter-spacing: 0.1em;
 }
-
-.split_the_dishes {
-  margin: 0.8em;
+.courses-wrapper h3{
+  font-weight: 500;
+}
+.courses-wrapper li{
+  font-weight: 300;
 }
 .allergen-detail{
   font-size:11px;
   font-style: italic;
   display: inline;
 }
-.modify_div_btn{
-  display:flex;
-  justify-content: flex-end
+.buttons-wrapper{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
 }
+
+.buttons-wrapper .btn{
+  padding: 0.3em 0.2em;
+  font-weight: normal;
+  display: block;
+  width: 8em;
+  font-size: 0.8em;
+  margin-top: 0.2em;
+} 
+  .menu-detail-header{
+    display: flex;
+    justify-content: space-between;
+    padding: 1.3em 0;
+    border-bottom: 1px solid #a31d1e;
+    margin: 0 0 1.3em 0;
+  }
+
 
 </style>

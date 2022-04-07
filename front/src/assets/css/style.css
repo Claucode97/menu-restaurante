@@ -1,6 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Sacramento&family=Ubuntu:ital,wght@0,300;0,400;0,700;1,300&display=swap");
-
-#app {
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200;300;400;500&family=Ubuntu:ital,wght@0,300;0,400;0,700;1,300&display=swap');#app {
   font-family: "Ubuntu", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -14,7 +12,14 @@
 }
 body{
   min-height: 100vh;
-  background-color:rgb(247, 225, 181);
+  background-color:#fae8b9;
+  color:#a31d1e;
+}
+a{
+  text-decoration: none;
+}
+ul{
+  list-style: none;
 }
 #main-header {
   background-color: #C98040;
@@ -43,4 +48,15 @@ body{
 .btn {
   cursor: pointer;
   user-select: none;
+  border:2px solid #a31d1e;;
+  padding: 1em;
+  font-size: 0.9em;
+  font-weight: bold;
+  background-color:#a31d1e;
+  color:#fae8b9;
+  margin-top: 1em;
+}
+.btn:hover{
+  color:#a31d1e;
+  background-color:#fae8b9 ;
 }

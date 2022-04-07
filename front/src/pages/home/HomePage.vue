@@ -95,20 +95,7 @@ export default {
   max-width: 300px;
  
 }
-.login-btn{
-  border:2px solid #a31d1e;;
-  padding: 1em;
-  font-size: 0.9em;
-  font-weight: bold;
-  background-color:#a31d1e;
-  color:rgb(247, 225, 181);
-  margin-top: 1em;
 
-}
-.login-btn:hover{
-  
-  color:#a31d1e;
-  
-}
+
 
 </style>
