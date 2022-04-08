@@ -3,7 +3,7 @@
   <form>
     <div class="dateNameRestaurant">
       <p>{{ loggedRestaurant }}</p>
-      <p>{{ dateParsed() }}</p>
+      <p>Menú del {{ dateParsed() }}</p>
     </div>
 
     <MenuForm :dictMenu="dict_menu.desc" @changed="onMenuChanged" />
