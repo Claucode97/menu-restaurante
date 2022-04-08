@@ -1,50 +1,90 @@
 <template>
-<article v-if="!isMenuEmpty">
-  <h2>-{{loggedRestaurant}}-</h2>
-    <h3>
-      Menú del día 
-    </h3>
+  <article v-if="!isMenuEmpty">
+    <h2>-{{ loggedRestaurant }}-</h2>
+    <h3>Menú del día</h3>
     <p>{{ dateParsed }}</p>
     <h3>Primeros</h3>
     <section v-for="menu in this.firsts" :key="menu.id_dish">
       <ul class="split_the_dishes">
         <li>{{ menu.name_dish }}</li>
-        <li class="allergen-detail" v-for="allergen in menu.allergens" :key="allergen.id" >{{ allergen }}</li>
+        <li
+          class="allergen-detail"
+          v-for="allergen in menu.allergens"
+          :key="allergen.id"
+        >
+          <img
+            alt="allergensIcons.lactose"
+            :src="
+              require('@/assets/img/allergens_icons/' +
+                allergensIcons[allergen])
+            "
+          />
+        </li>
       </ul>
     </section>
     <h3>Segundos</h3>
     <section v-for="menu in this.seconds" :key="menu.id_dish">
       <ul class="split_the_dishes">
         <li>{{ menu.name_dish }}</li>
-        <li class="allergen-detail" v-for="allergen in menu.allergens" :key="allergen.id" >{{ allergen }}</li>
-      </ul> 
+        <li
+          class="allergen-detail"
+          v-for="allergen in menu.allergens"
+          :key="allergen.id"
+        >
+          <img
+            alt="allergensIcons.lactose"
+            :src="
+              require('@/assets/img/allergens_icons/' +
+                allergensIcons[allergen])
+            "
+          />
+        </li>
+      </ul>
     </section>
     <h3>Postres</h3>
     <section v-for="menu in this.desserts" :key="menu.id_dish">
       <ul class="split_the_dishes">
         <li>{{ menu.name_dish }}</li>
-        <li class="allergen-detail" v-for="allergen in menu.allergens" :key="allergen.id">{{ allergen}}</li>
+        <li
+          class="allergen-detail"
+          v-for="allergen in menu.allergens"
+          :key="allergen.id"
+        >
+          <img
+            alt="allergensIcons.lactose"
+            :src="
+              require('@/assets/img/allergens_icons/' +
+                allergensIcons[allergen])
+            "
+          />
+        </li>
       </ul>
     </section>
   </article>
   <p v-else>Hoy no hay menu</p>
-
 </template>
 
 <script>
-import {getMenuToday} from "@/services/api.js"
-
+import { getMenuToday } from "@/services/api.js";
 
 export default {
   data() {
     return {
+      allergensIcons: {
+        lactose: "lactose.png",
+        gluten: "gluten.png",
+        egg: "egg.png",
+        seafood: "seafood.png",
+        soy: "soy.png",
+        nut: "nuts.png",
+      },
       firsts: [],
       seconds: [],
       desserts: [],
       date: "",
-      parsedDate:'',
-      loggedRestaurant:this.$route.params.name_restaurant.replace("-"," "),
-      menu : {},
+      parsedDate: "",
+      loggedRestaurant: this.$route.params.name_restaurant.replace("-", " "),
+      menu: {},
       isMenuEmpty: false,
     };
   },
@@ -54,18 +94,16 @@ export default {
     this.loadData();
   },
   methods: {
-
     async loadData() {
-      const response = await getMenuToday(this.loggedRestaurant)
-      console.log(response.status)
-      if (response === 404){
-          this.isMenuEmpty = true
-      }
-      else{
-      this.menus = response
-      this.firsts = this.menus.firsts;
-      this.seconds = this.menus.seconds;
-      this.desserts = this.menus.desserts;
+      const response = await getMenuToday(this.loggedRestaurant);
+      console.log(response.status);
+      if (response === 404) {
+        this.isMenuEmpty = true;
+      } else {
+        this.menus = response;
+        this.firsts = this.menus.firsts;
+        this.seconds = this.menus.seconds;
+        this.desserts = this.menus.desserts;
       }
     },
     getToday() {
@@ -83,18 +121,29 @@ export default {
       const today = year + "-" + month + "-" + day;
       this.date = today;
     },
-
   },
-  computed:{
+  computed: {
     dateParsed() {
-      let year=this.date.slice(0,4)
-      let day=this.date.slice(8,10)
-      let month=this.date.slice(5,7)
-      let months={'01':'Enero','02':'Febrero','03':'Marzo','04':'Abril','05':'Mayo','06':'Junio','07':'Julio','08':'Agosto','09':'Septiembre','10':'Octubre','11':'Noviembre','12':'Diciembre'}
-      let fullDate=day+' de '+months[month]+' de '+year
-      return fullDate
+      let year = this.date.slice(0, 4);
+      let day = this.date.slice(8, 10);
+      let month = this.date.slice(5, 7);
+      let months = {
+        "01": "Enero",
+        "02": "Febrero",
+        "03": "Marzo",
+        "04": "Abril",
+        "05": "Mayo",
+        "06": "Junio",
+        "07": "Julio",
+        "08": "Agosto",
+        "09": "Septiembre",
+        10: "Octubre",
+        11: "Noviembre",
+        12: "Diciembre",
+      };
+      let fullDate = day + " de " + months[month] + " de " + year;
+      return fullDate;
     },
-
   },
 };
 </script>
@@ -115,14 +164,17 @@ li {
 .split_the_dishes {
   margin: 0.8em;
 }
-.allergen-detail{
-  font-size:11px;
+.split_the_dishes img{
+ width: 2em;
+ height: 2em;
+}
+.allergen-detail {
+  font-size: 11px;
   font-style: italic;
   display: inline;
 }
-.modify_div_btn{
-  display:flex;
-  justify-content: flex-end
+.modify_div_btn {
+  display: flex;
+  justify-content: flex-end;
 }
-
 </style>
