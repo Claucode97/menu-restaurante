@@ -61,7 +61,7 @@ export default {
           method: "POST",
           body: JSON.stringify(this.dictToSend),
           headers: {
-            Authorization: localStorage.id_restaurant,
+            Authorization: getRestaurantId(),
             "Content-Type": "application/json",
           },
         };
