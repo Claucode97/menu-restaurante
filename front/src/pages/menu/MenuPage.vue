@@ -106,7 +106,7 @@ export default {
         egg: "egg.png",
         seafood: "seafood.png",
         soy: "soy.png",
-        nut: "nuts.png",
+        nuts: "nut.png",
       },
       firsts: [],
       seconds: [],
