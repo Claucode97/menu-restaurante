@@ -142,6 +142,7 @@ export default {
 .wrappedNameDish {
     display: flex;
     flex-direction: column;
+    margin-bottom: 1.5em;
 }
 .input-button-wrapper{
     width: 100%;

@@ -1,6 +1,6 @@
 <template>
     <HeaderMenu/>
-  <form>
+  <form class="add-menu-container">
     <div class="dateNameRestaurant">
       <p>{{ loggedRestaurant }}</p>
       <p>Menú del {{ dateParsed() }}</p>
@@ -8,7 +8,7 @@
 
     <MenuForm :dictMenu="dict_menu.desc" @changed="onMenuChanged" />
 
-    <button @click.prevent="onSaveClicked" class="add-menu-button">
+    <button @click.prevent="onSaveClicked" class="btn">
       Modificar Menú
     </button>
   </form>
@@ -116,18 +116,20 @@ export default {
   margin: 0;
 }
 p{
-  margin: 0 0.5em;
+  text-align: left;
 }
 .add-menu-button {
   padding: 0.5em;
   margin: 2em 0;
 }
 
-p {
-  text-align: left;
-}
+
 .dateNameRestaurant {
   display: flex;
   justify-content: space-between;
+  margin-bottom: 2em;
+}
+.add-menu-container{
+  padding: 1em;
 }
 </style>
