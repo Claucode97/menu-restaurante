@@ -8,17 +8,17 @@
         <input @keyup="onMenuChanges" class="input_plate" type="text"  v-model="dish.name_dish">
         <button @click.prevent="deleteDish(dish,dict_plates.firsts)" class="delete-button"> x </button>
         <div class="allergens-wrapped">
-            <label for="lactose">Lactosa</label>
+            <label for="lactose"><img src="@/assets/img/allergens_icons/lactose.png" alt="">Lactosa </label>
             <input @change="onMenuChanges" id="lactose" type="checkbox" value="lactose" v-model="dish.allergens"/>
-            <label for="gluten">Gluten</label>
+            <label for="gluten"><img src="@/assets/img/allergens_icons/gluten.png" alt="">Gluten</label>
             <input @change="onMenuChanges" id="gluten" type="checkbox" value="gluten" v-model="dish.allergens"/>
-            <label for="egg">Huevo</label>
-            <input @change="onMenuChanges" id="egg" type="checkbox" value="egg" v-model="dish.allergens" />
-            <label for="seafood">Marisco</label>
-            <input @change="onMenuChanges" id="seafood" type="checkbox" value="seafood" v-model="dish.allergens"/>
-            <label for="soy">Soja</label>
+            <label for="egg"><img src="@/assets/img/allergens_icons/egg.png" alt="">Huevo</label>
+            <input @change="onMenuChanges"   id="egg" type="checkbox" value="egg" v-model="dish.allergens" />
+            <label for="seafood"><img src="@/assets/img/allergens_icons/seafood.png" alt="">Marisco</label>
+            <input  @change="onMenuChanges" id="seafood" type="checkbox" value="seafood" v-model="dish.allergens"/>
+            <label for="soy"><img src="@/assets/img/allergens_icons/soy.png" alt="">Soja</label>
             <input @change="onMenuChanges" id="soy" type="checkbox" value="soy" v-model="dish.allergens" />
-            <label for="nuts">Frutos de cascara</label>
+            <label for="nuts" ><img src="@/assets/img/allergens_icons/nut.png" alt="" >Frutos de cascara</label>
             <input @change="onMenuChanges" id="nuts" type="checkbox" value="nuts" v-model="dish.allergens"/>
         </div>
         
@@ -29,17 +29,17 @@
         <button @click.prevent="deleteDish(dish,dict_plates.seconds)" class="delete-button"> x </button>
 
         <div class="allergens-wrapped">
-            <label for="lactose">Lactosa</label>
+            <label for="lactose"><img src="@/assets/img/allergens_icons/lactose.png"  alt="">Lactosa </label>
             <input @change="onMenuChanges" id="lactose" type="checkbox" value="lactose" v-model="dish.allergens"/>
-            <label for="gluten">Gluten</label>
+            <label for="gluten"><img src="@/assets/img/allergens_icons/gluten.png" alt="">Gluten</label>
             <input @change="onMenuChanges" id="gluten" type="checkbox" value="gluten" v-model="dish.allergens"/>
-            <label for="egg">Huevo</label>
-            <input @change="onMenuChanges" id="egg" type="checkbox" value="egg" v-model="dish.allergens" />
-            <label for="seafood">Marisco</label>
+            <label for="egg"><img src="@/assets/img/allergens_icons/egg.png" alt="">Huevo</label>
+            <input @change="onMenuChanges"   id="egg" type="checkbox" value="egg" v-model="dish.allergens" />
+            <label for="seafood"><img src="@/assets/img/allergens_icons/seafood.png" alt="">Marisco</label>
             <input  @change="onMenuChanges" id="seafood" type="checkbox" value="seafood" v-model="dish.allergens"/>
-            <label for="soy">Soja</label>
-            <input @change="onMenuChanges"  id="soy" type="checkbox" value="soy" v-model="dish.allergens" />
-            <label for="nuts">Frutos de cascara</label>
+            <label for="soy"><img src="@/assets/img/allergens_icons/soy.png" alt="">Soja</label>
+            <input @change="onMenuChanges" id="soy" type="checkbox" value="soy" v-model="dish.allergens" />
+            <label for="nuts"><img src="@/assets/img/allergens_icons/nut.png" alt="">Frutos de cascara</label>
             <input @change="onMenuChanges" id="nuts" type="checkbox" value="nuts" v-model="dish.allergens"/>
         </div>
     </div>
@@ -50,17 +50,17 @@
         <input @keyup="onMenuChanges" class="input_plate" type="text"  v-model="dish.name_dish">
         <button @click.prevent="deleteDish(dish,dict_plates.desserts)" class="delete-button"> x </button>
         <div class="allergens-wrapped">
-            <label for="lactose">Lactosa</label>
+            <label for="lactose"><img src="@/assets/img/allergens_icons/lactose.png" alt="">Lactosa </label>
             <input @change="onMenuChanges" id="lactose" type="checkbox" value="lactose" v-model="dish.allergens"/>
-            <label for="gluten">Gluten</label>
+            <label for="gluten"><img src="@/assets/img/allergens_icons/gluten.png" alt="" class="allergens-icons">Gluten</label>
             <input @change="onMenuChanges" id="gluten" type="checkbox" value="gluten" v-model="dish.allergens"/>
-            <label for="egg">Huevo</label>
+            <label for="egg"><img src="@/assets/img/allergens_icons/egg.png" alt="">Huevo</label>
             <input @change="onMenuChanges"   id="egg" type="checkbox" value="egg" v-model="dish.allergens" />
-            <label for="seafood">Marisco</label>
+            <label for="seafood"><img src="@/assets/img/allergens_icons/seafood.png" alt="">Marisco</label>
             <input  @change="onMenuChanges" id="seafood" type="checkbox" value="seafood" v-model="dish.allergens"/>
-            <label for="soy">Soja</label>
+            <label for="soy"><img src="@/assets/img/allergens_icons/soy.png" alt="">Soja</label>
             <input @change="onMenuChanges" id="soy" type="checkbox" value="soy" v-model="dish.allergens" />
-            <label for="nuts">Frutos de cascara</label>
+            <label for="nuts"><img src="@/assets/img/allergens_icons/nut.png" alt="">Frutos de cascara</label>
             <input @change="onMenuChanges" id="nuts" type="checkbox" value="nuts" v-model="dish.allergens"/>
         </div>
         
@@ -155,6 +155,10 @@ p{
 }
 .addDish{
     margin-left: 1em;
+}
+.allergens-wrapped img{
+    width: 2.5em;
+    height: 2.5em;
 }
 
 
