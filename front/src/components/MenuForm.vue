@@ -1,12 +1,14 @@
 <template>
-   <section>
+   <section class="menu-form">
    <div class="wrappedNameDish">
         <p>Primeros</p> 
-        <button class="addDish" @click.prevent="addNewDish(dict_plates.firsts)">Añadir plato</button>
+        <button class="add-btn btn" @click.prevent="addNewDish(dict_plates.firsts)">Añadir plato</button>
     </div>
     <div class="firsts" v-for="dish in dict_plates.firsts" :key="dish.id_dish">
-        <input @keyup="onMenuChanges" class="input_plate" type="text"  v-model="dish.name_dish">
-        <button @click.prevent="deleteDish(dish,dict_plates.firsts)" class="delete-button"> x </button>
+        <div class="input-button-wrapper">
+            <input @keyup="onMenuChanges" class="input_plate" type="text"  v-model="dish.name_dish">
+            <button @click.prevent="deleteDish(dish,dict_plates.firsts)" class="btn delete-btn"> x </button>
+        </div>
         <div class="allergens-wrapped">
             <label for="lactose"><img src="@/assets/img/allergens_icons/lactose.png" alt="">Lactosa </label>
             <input @change="onMenuChanges" id="lactose" type="checkbox" value="lactose" v-model="dish.allergens"/>
@@ -23,11 +25,16 @@
         </div>
         
     </div>
-    <div class="wrappedNameDish"><p>Segundos</p> <button class="addDish" @click.prevent="addNewDish(dict_plates.seconds)">Añadir plato</button></div>
+    <div class="wrappedNameDish">
+        
+        <p>Segundos</p> 
+        <button class="add-btn btn" @click.prevent="addNewDish(dict_plates.seconds)">Añadir plato</button>
+        </div>
     <div class="seconds" v-for="dish in dict_plates.seconds" :key="dish.id_dish">
+        <div class="input-button-wrapper">
         <input @keyup="onMenuChanges" class="input_plate" type="text"  v-model="dish.name_dish">
-        <button @click.prevent="deleteDish(dish,dict_plates.seconds)" class="delete-button"> x </button>
-
+        <button @click.prevent="deleteDish(dish,dict_plates.seconds)" class="btn delete-btn"> x </button>
+        </div>
         <div class="allergens-wrapped">
             <label for="lactose"><img src="@/assets/img/allergens_icons/lactose.png"  alt="">Lactosa </label>
             <input @change="onMenuChanges" id="lactose" type="checkbox" value="lactose" v-model="dish.allergens"/>
@@ -45,10 +52,12 @@
     </div>
     <div class="wrappedNameDish">
         <p>Postres</p> 
-        <button class="addDish" @click.prevent="addNewDish(dict_plates.desserts)">Añadir plato</button></div>  
+        <button class="add-btn btn" @click.prevent="addNewDish(dict_plates.desserts)">Añadir plato</button></div>  
     <div class="desserts" v-for="dish in dict_plates.desserts" :key="dish.id_dish">
+        <div class="input-button-wrapper">
         <input @keyup="onMenuChanges" class="input_plate" type="text"  v-model="dish.name_dish">
-        <button @click.prevent="deleteDish(dish,dict_plates.desserts)" class="delete-button"> x </button>
+        <button @click.prevent="deleteDish(dish,dict_plates.desserts)" class="btn delete-btn"> x </button>
+        </div>
         <div class="allergens-wrapped">
             <label for="lactose"><img src="@/assets/img/allergens_icons/lactose.png" alt="">Lactosa </label>
             <input @change="onMenuChanges" id="lactose" type="checkbox" value="lactose" v-model="dish.allergens"/>
@@ -117,55 +126,48 @@ export default {
 </script>
 
 <style scoped>
-*{
-    padding:0;
+
+.add-btn, .delete-btn{
     margin:0;
-}
-.input_plate{
-    margin:0.4em 0;
-    width:92%;
-    margin-right: 0.3em;
-}
-.delete-button{
-    width: 20px;
-    height: 20px;
-}
-.wrappedNameDish{
-    margin-top: 2em;
-    margin-bottom: 1em
-}
-.wrappedNameDish p{
-    margin-bottom: 0.5em;
-}
-.wrappedNameDish .addDish{
-    padding:0.2em;
-    display:block;
-}
-.allergens-wrapped label{
-    margin-right:0.3em;
+    padding: 0.3em;
+    font-weight: normal;
     font-size: 0.8em;
+    width: fit-content;
 }
-.allergens-wrapped input{
-    margin-right:1em;
-    
-}
-p{
+.menu-form p{
     text-align: left;
-    margin-left: 1em;
+    font-size: 1.1em;
+    margin-bottom: 0.2em;
 }
-.addDish{
-    margin-left: 1em;
+.wrappedNameDish {
+    display: flex;
+    flex-direction: column;
+}
+.input-button-wrapper{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
 }
 .allergens-wrapped img{
     width: 2.5em;
     height: 2.5em;
 }
 
+.input-button-wrapper input{
+  border: none;
+  box-shadow: 0px 0px 8px 0px rgb(247, 225, 181) inset;
+  padding: 0.5em 0.2em;
+  font-family: "Ubuntu", sans-serif;
+  font-size: 1em;
+  width:95%;
+  margin: 0.2em 0;
 
-
-
-.date{
-    display:flex;
-    justify-content: flex-end;
 }
+.input-button-wrapper .delete-btn{
+    width: 4%;
+    margin: 0.2em 0;
+ 
+}
+
+
 </style>
