@@ -90,12 +90,6 @@ export default {
   font-weight: bold;
   background-color:#a31d1e;
   color:rgb(247, 225, 181);
-<<<<<<< HEAD
-=======
-  margin: 0 0.5em;
-
-
->>>>>>> 45df51d908e15a5c75e0453842c511cf9e3429ab
 }
 .menu-day-btn:hover{
   background-color:rgb(247, 225, 181);
