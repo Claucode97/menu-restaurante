@@ -1,10 +1,12 @@
 <template>
     <HeaderMenu/>
   <form class="add-menu-container">
-    <div class="dateNameRestaurant">
-      <p>{{ loggedRestaurant }}</p>
-      <p>Menú del {{ dateParsed() }}</p>
-    </div>
+    <div class="menu-detail-header">
+      <div class="header-text-wrapper">
+        <h2>{{loggedRestaurant}}</h2>
+        <p>Menú del {{ dateParsed() }}</p>
+      </div>
+      </div>
 
     <MenuForm :dictMenu="dict_menu.desc" @changed="onMenuChanged" />
 
@@ -111,18 +113,21 @@ export default {
 };
 </script>
 <style scoped>
-* {
-  padding: 0;
-  margin: 0;
-}
-p{
-  text-align: left;
-}
+
+
 .add-menu-button {
   padding: 0.5em;
   margin: 2em 0;
 }
-
+.menu-detail-header {
+  display: flex;
+  justify-content: space-between;
+  padding: 1.3em 0;
+  border-bottom: 1px solid #a31d1e;
+  margin: 0 0 1.3em 0;
+  align-items: center;
+  text-align: left;
+}
 
 .dateNameRestaurant {
   display: flex;

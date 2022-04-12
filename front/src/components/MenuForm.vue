@@ -168,12 +168,12 @@ export default {
   padding: 0.5em 0.2em;
   font-family: "Ubuntu", sans-serif;
   font-size: 1em;
-  width:95%;
+  width:92%;
   margin: 0.2em 0;
 
 }
 .input-button-wrapper .delete-btn{
-    width: 4%;
+    width: 6%;
     margin: 0.2em 0;
  
 }

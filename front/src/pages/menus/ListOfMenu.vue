@@ -34,13 +34,14 @@ export default {
 
 <style scoped>
 
-.menus-list {
-  color:#a31d1e;
+.menus-list{
+  margin-top: 2em;
 }
 .menu-date {
   list-style: none;
   text-align: center;
-  margin: 1em;
+  margin: 1em 0.6em;
+  
   
 }
 .menu-date a{
@@ -48,6 +49,22 @@ export default {
 }
 .menu-date a:hover{
   font-weight:bold;
+}
+.available-menus-list{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  max-width: 80%;
+  margin: 0 auto;
+}
+
+@media(min-width:600px) {
+  .available-menus-list{
+ 
+  grid-template-columns: 1fr 1fr 1fr;
+  max-width: 800px;
+ 
+}
+
 }
 
 </style>

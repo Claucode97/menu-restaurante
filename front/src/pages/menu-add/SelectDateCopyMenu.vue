@@ -3,7 +3,7 @@
       <div class="modal-inner-wrapper">
           <p class="close-btn" @click="copyModalClose">x</p>
           <p>¿En qué fecha quieres copiar el menú?</p>
-          <input type="date" v-model="newDate">
+          <input type="date" v-model="newDate" class="calendar-input">
     <router-link :to="{name: 'MenuModifyPage', params: {date:this.newDate}}">
           <button class="copy-btn btn" @click="sendDate">Copiar en esta fecha</button>
     </router-link>
@@ -102,6 +102,10 @@ export default {
     justify-content: center;
     align-items: center;
     align-self: flex-end;
-    }
+}
+
+.calendar-input{
+  background-color: #fae8b9;
+}
 
 </style>

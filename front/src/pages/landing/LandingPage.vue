@@ -149,7 +149,7 @@ export default {
 </script>
 
 <style scoped>
-* {
+/* * {
   padding: 0;
   margin: 0;
 }
@@ -176,5 +176,5 @@ li {
 .modify_div_btn {
   display: flex;
   justify-content: flex-end;
-}
+} */
 </style>

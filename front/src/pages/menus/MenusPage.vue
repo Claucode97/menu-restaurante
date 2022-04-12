@@ -4,7 +4,8 @@
   <h2>{{loggedRestaurant}}</h2>
      <button @click="checkMenuTodayExist" class="menu-day-btn btn">Menú del día</button>
 
-    <button @click="changeViewOfMenus" class="menu-day-btn btn">Cambiar vista</button>
+    <button @click="changeViewOfMenus" class="menu-day-btn btn" v-if="viewList">Ver calendario</button>
+    <button @click="changeViewOfMenus" class="menu-day-btn btn" v-if="viewCalendar">Ver lista</button>
     <Calendar v-if="viewCalendar" />
 
     <ListOfMenus v-if="viewList" />
@@ -84,12 +85,7 @@ export default {
 }
 
 .menu-day-btn{
-  border: 2px solid #a31d1e;
-  padding: 1em;
-  font-size: 0.9em;
-  font-weight: bold;
-  background-color:#a31d1e;
-  color:rgb(247, 225, 181);
+  margin: 0 0.2em;
 }
 .menu-day-btn:hover{
   background-color:rgb(247, 225, 181);
