@@ -16,6 +16,9 @@
           <button @click="saveMenuId" class="btn">Modificar menu</button>
         </router-link>
         <button class="btn" @click="copyModalClicked">Copiar Menu</button>
+        <router-link  v-if="date === getToday" :to="{name:'MenuToday',params:{name_restaurant:loggedRestaurant}}">
+          <button class="btn">ver version compartible</button>
+        </router-link>
       </div>
     </header>
 
@@ -168,6 +171,21 @@ export default {
     },
   },
   computed: {
+      getToday() {
+        let current = new Date();
+      let year = current.getFullYear();
+      let month = current.getMonth() + 1;
+      let day = current.getDate();
+      if (day < 10) {
+        day = "0" + day;
+      }
+      if (month < 10) {
+        month = "0" + month;
+      }
+
+      const today = year + "-" + month + "-" + day;
+      return today;
+    },
     dateParsed() {
       let year = this.date.slice(0, 4);
       let day = this.date.slice(8, 10);
