@@ -217,6 +217,10 @@ export default {
   font-style: italic;
   display: inline;
 }
+.allergen-detail img{
+  width: 8%;
+  margin-right: 0.5em;
+}
 .buttons-wrapper {
   display: flex;
   flex-direction: column;

@@ -149,10 +149,18 @@ export default {
     display: flex;
     justify-content: space-between;
 }
-.allergens-wrapped img{
-    width: 2.5em;
-    height: 2.5em;
+.allergens-wrapped label{
+    display: inline;
+    font-size: 0.8em;
+   
 }
+.allergens-wrapped img{
+    width: 1.5em;
+}
+.allergens-wrapped input{
+    margin-right: 0.5em;
+}
+
 
 .input-button-wrapper input{
   border: none;

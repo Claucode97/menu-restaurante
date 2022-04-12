@@ -72,11 +72,14 @@ export default {
   font-size: 2.5em;
   font-weight: normal;
   color: #a31d1e;
-  margin-top: 2em;
-}
+} 
 .home .login-wrapper{
   font-size: 1.2em;
   font-weight: bold;
+  height: 30vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .home .login-wrapper input{
