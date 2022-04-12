@@ -3,7 +3,7 @@ dict_menu = {
         {
             "id_dish": "01",
             "name_dish": "Ensalada mixta",
-            "allergens": ["lactose", "Gluten", "seafood", "nuts", "egg", "soy"],
+            "allergens": ["lactose", "gluten", "seafood", "nuts", "egg", "soy"],
         },
         {
             "id_dish": "02",

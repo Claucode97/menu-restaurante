@@ -2,15 +2,13 @@
 <div class="menu-list-page">
   <HeaderMenu/>
   <h2>{{loggedRestaurant}}</h2>
-    <router-link  v-if="menuToday === true" :to="{ name: 'Menu', params: { date: getToday } }">
-      <button class="menu-day-btn btn">Menú del día</button>
-    </router-link>
-     <router-link  v-else :to="{ name: 'MenuAddPage', params: { date: getToday } }">
-      <button class="menu-day-btn btn">Menú del día</button>
-    </router-link>
-    <Calendar />
-  
-    <ListOfMenus />
+     <button @click="checkMenuTodayExist" class="menu-day-btn btn">Menú del día</button>
+
+    <button @click="changeViewOfMenus" class="menu-day-btn btn">Cambiar vista</button>
+    <Calendar v-if="viewCalendar" />
+
+    <ListOfMenus v-if="viewList" />
+   
 </div>
 </template>
 
@@ -26,22 +24,30 @@ export default {
     return {
       loggedRestaurant: getRestaurantName(),
       menuToday : true,
+      viewCalendar:true,
+      viewList:false,
       
     };
-  },
-  mounted(){
-    this.checkMenuTodayExist()
   },
   methods:{
     async  checkMenuTodayExist(){
         const response = await getMenuToday(this.loggedRestaurant)
-        console.log(response)
         if ( response !== 404){
-          this.menuToday = true
+          this.$router.push({ name: 'Menu', params: { date: this.getToday } })
         }else{
-          this.menuToday = false
+          this.$router.push( {name: 'MenuAddPage', params: { date: this.getToday } })
         }
+    },
+    changeViewOfMenus(){
+      if (this.viewList == false && this.viewCalendar){
+        this.viewList = true
+        this.viewCalendar = false
+      }else{
+        this.viewCalendar = true
+        this.viewList = false
+      }
     }
+    
 
   },
   computed: {
@@ -84,6 +90,12 @@ export default {
   font-weight: bold;
   background-color:#a31d1e;
   color:rgb(247, 225, 181);
+<<<<<<< HEAD
+=======
+  margin: 0 0.5em;
+
+
+>>>>>>> 45df51d908e15a5c75e0453842c511cf9e3429ab
 }
 .menu-day-btn:hover{
   background-color:rgb(247, 225, 181);
