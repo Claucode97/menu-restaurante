@@ -60,3 +60,26 @@ ul{
   color:#a31d1e;
   background-color:#fae8b9 ;
 }
+
+@media (min-width:550px){
+
+#main-header{
+  padding: 2em;
+  
+}
+
+#main-header img{
+  width: 8%;
+}
+#main-nav a {
+  font-size: 1em;
+}
+
+}
+
+@media (min-width:800px){
+  #main-header{
+    padding: 0.8em 3em;
+  }
+
+}

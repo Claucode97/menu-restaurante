@@ -178,5 +178,9 @@ export default {
  
 }
 
+.menu-form{
+    margin-bottom: 2em;
+}
+
 
 </style>

@@ -17,7 +17,7 @@
         </router-link>
         <button class="btn" @click="copyModalClicked">Copiar Menu</button>
         <router-link  v-if="date === getToday" :to="{name:'MenuToday',params:{name_restaurant:loggedRestaurant}}">
-          <button class="btn">ver version compartible</button>
+          <button class="btn">Compartir</button>
         </router-link>
       </div>
     </header>
@@ -236,7 +236,7 @@ export default {
   display: inline;
 }
 .allergen-detail img{
-  width: 8%;
+  width: 6%;
   margin-right: 0.5em;
 }
 .buttons-wrapper {
@@ -259,5 +259,21 @@ export default {
   padding: 1.3em 0;
   border-bottom: 1px solid #a31d1e;
   margin: 0 0 1.3em 0;
+  align-items: center;
+}
+
+@media (min-width:550px){
+.allergen-detail img{
+  width: 2.5em;
+}
+.menu-detail-header{
+  max-width: 800px;
+  margin: 0 auto;
+}
+.courses-wrapper{
+  max-width: 500px;
+  margin: 0 auto;
+}
+
 }
 </style>

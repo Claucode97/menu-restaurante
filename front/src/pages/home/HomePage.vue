@@ -99,6 +99,15 @@ export default {
  
 }
 
+@media (min-width:550px){
+
+  .home{
+    max-width: 300px;
+    margin: 0 auto;
+    font-size: 0.8rem;
+  }
+
+}
 
 
 </style>

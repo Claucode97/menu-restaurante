@@ -84,14 +84,19 @@ export default {
   font-weight: bold;
   background-color:#a31d1e;
   color:rgb(247, 225, 181);
-
 }
-
-
 .menu-day-btn:hover{
   background-color:rgb(247, 225, 181);
   color:#a31d1e;
-  
+}
+@media (min-width:550px){
+
+.menu-list-page h2{
+  margin: 1em;
+  font-size: 1.4em;
+  font-weight: bold;
+}
+
 }
 
 </style>

@@ -9,7 +9,7 @@
     <MenuForm :dictMenu="dict_menu.desc" @changed="onMenuChanged" />
 
     <button @click.prevent="onSaveClicked" class="btn">
-      Modificar Menú
+      Guardar Menú
     </button>
   </form>
 </template>
