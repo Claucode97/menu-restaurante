@@ -214,7 +214,7 @@ export default {
 <style scoped>
 .main-menu-detail-wrapper {
   text-align: left;
-  padding: 0 0.5em;
+  padding-bottom: 3em;
 }
 .courses-wrapper {
   margin-bottom: 2em;
@@ -226,10 +226,12 @@ export default {
 }
 .courses-wrapper h3 {
   font-weight: 500;
+  margin: 1.5em 0 1em;
 }
 .courses-wrapper li {
   font-weight: 300;
-  margin-top: 1em;
+  margin-top: 0.4em;
+  
 }
 .allergen-detail {
   font-size: 11px;

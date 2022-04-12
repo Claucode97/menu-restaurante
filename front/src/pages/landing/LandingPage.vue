@@ -3,16 +3,18 @@
   
     
 
-<div class="menu-detail-header">
+  <div class="menu-detail-header">
       <div class="header-text-wrapper">
         <h2>{{ loggedRestaurant }}</h2>
         <p>Menú del {{ dateParsed }}</p>
       </div>
       
-    </div>
-    <h3>Primeros</h3>
-    <section v-for="menu in this.firsts" :key="menu.id_dish">
-      <ul class="split_the_dishes">
+  </div>
+    
+    <section class="courses-wrapper">
+      <h3>Primeros</h3>
+      <ul v-for="menu in this.firsts" :key="menu.id_dish">
+      
         <li>{{ menu.name_dish }}</li>
         <li
           class="allergen-detail"
@@ -29,9 +31,12 @@
         </li>
       </ul>
     </section>
-    <h3>Segundos</h3>
-    <section v-for="menu in this.seconds" :key="menu.id_dish">
-      <ul class="split_the_dishes">
+    
+    
+    
+    <section class="courses-wrapper">
+      <h3>Segundos</h3>
+      <ul v-for="menu in this.seconds" :key="menu.id_dish">
         <li>{{ menu.name_dish }}</li>
         <li
           class="allergen-detail"
@@ -48,9 +53,11 @@
         </li>
       </ul>
     </section>
-    <h3>Postres</h3>
-    <section v-for="menu in this.desserts" :key="menu.id_dish">
-      <ul class="split_the_dishes">
+
+    
+    <section class="courses-wrapper">
+      <h3>Postres</h3>
+      <ul v-for="menu in this.desserts" :key="menu.id_dish">
         <li>{{ menu.name_dish }}</li>
         <li
           class="allergen-detail"
@@ -68,7 +75,7 @@
       </ul>
     </section>
   </article>
-  <p v-else>Hoy no hay menu</p>
+  <p v-else>No hay menú del día disponible</p>
 </template>
 
 <script>
@@ -159,13 +166,15 @@ export default {
 
 .menu-detail-header {
   padding: 1.3em 0;
-  border-bottom: 1px solid #a31d1e;
+  background-color: #a31d1e;
   margin: 0 0 1.3em 0;
-  
+  color:#fae8b9;
+  text-align: center;
 }
+
 .main-menu-detail-wrapper {
   text-align: left;
-  padding: 0 0.5em;
+  padding-bottom: 3em;
 }
 .courses-wrapper {
   margin-bottom: 2em;
@@ -177,10 +186,12 @@ export default {
 }
 .courses-wrapper h3 {
   font-weight: 500;
+  margin: 1.5em 0 1em;
 }
 .courses-wrapper li {
   font-weight: 300;
-  margin-top: 1em;
+  margin-top: 0.4em;
+  
 }
 .allergen-detail {
   font-size: 11px;
@@ -191,5 +202,33 @@ export default {
   width: 6%;
   margin-right: 0.5em;
 }
+.buttons-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.buttons-wrapper .btn {
+  padding: 0.3em 0.2em;
+  font-weight: normal;
+  display: block;
+  width: 8em;
+  font-size: 0.8em;
+  margin-top: 0.2em;
+}
+
+
+@media (min-width:550px){
+.allergen-detail img{
+  width: 2.5em;
+}
+
+.courses-wrapper{
+  max-width: 500px;
+  margin: 0 auto 3em;
+}
+
+}
+
 
 </style>
