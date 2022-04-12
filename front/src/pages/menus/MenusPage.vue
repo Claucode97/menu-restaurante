@@ -2,12 +2,8 @@
 <div class="menu-list-page">
   <HeaderMenu/>
   <h2>{{loggedRestaurant}}</h2>
-    <router-link  v-if="menuToday === true" :to="{ name: 'Menu', params: { date: getToday } }">
-      <button class="menu-day-btn btn">Menú del día</button>
-    </router-link>
-     <router-link  v-else :to="{ name: 'MenuAddPage', params: { date: getToday } }">
-      <button class="menu-day-btn btn">Menú del día</button>
-    </router-link>
+     <button @click="checkMenuTodayExist" class="menu-day-btn btn">Menú del día</button>
+  
     <Calendar />
   
     <ListOfMenus />
@@ -29,19 +25,17 @@ export default {
       
     };
   },
-  mounted(){
-    this.checkMenuTodayExist()
-  },
   methods:{
     async  checkMenuTodayExist(){
         const response = await getMenuToday(this.loggedRestaurant)
         console.log(response)
         if ( response !== 404){
-          this.menuToday = true
+          this.$router.push({ name: 'Menu', params: { date: this.getToday } })
         }else{
-          this.menuToday = false
+          this.$router.push( {name: 'MenuAddPage', params: { date: this.getToday } })
         }
-    }
+    },
+    
 
   },
   computed: {
