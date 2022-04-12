@@ -3,10 +3,12 @@
   <HeaderMenu/>
   <h2>{{loggedRestaurant}}</h2>
      <button @click="checkMenuTodayExist" class="menu-day-btn btn">Menú del día</button>
-  
-    <Calendar />
-  
-    <ListOfMenus />
+
+    <button @click="changeViewOfMenus" class="menu-day-btn btn">Cambiar vista</button>
+    <Calendar v-if="viewCalendar" />
+
+    <ListOfMenus v-if="viewList" />
+   
 </div>
 </template>
 
@@ -22,19 +24,29 @@ export default {
     return {
       loggedRestaurant: getRestaurantName(),
       menuToday : true,
+      viewCalendar:true,
+      viewList:false,
       
     };
   },
   methods:{
     async  checkMenuTodayExist(){
         const response = await getMenuToday(this.loggedRestaurant)
-        console.log(response)
         if ( response !== 404){
           this.$router.push({ name: 'Menu', params: { date: this.getToday } })
         }else{
           this.$router.push( {name: 'MenuAddPage', params: { date: this.getToday } })
         }
     },
+    changeViewOfMenus(){
+      if (this.viewList == false && this.viewCalendar){
+        this.viewList = true
+        this.viewCalendar = false
+      }else{
+        this.viewCalendar = true
+        this.viewList = false
+      }
+    }
     
 
   },
@@ -78,6 +90,8 @@ export default {
   font-weight: bold;
   background-color:#a31d1e;
   color:rgb(247, 225, 181);
+  margin: 0 0.5em;
+
 
 }
 
