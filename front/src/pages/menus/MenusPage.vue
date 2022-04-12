@@ -2,10 +2,12 @@
 <div class="menu-list-page">
   <HeaderMenu/>
   <h2>{{loggedRestaurant}}</h2>
-    <router-link :to="{ name: 'Menu', params: { date: getToday } }">
+    <router-link  v-if="menuToday === true" :to="{ name: 'Menu', params: { date: getToday } }">
       <button class="menu-day-btn btn">Menú del día</button>
     </router-link>
-  
+     <router-link  v-else :to="{ name: 'MenuAddPage', params: { date: getToday } }">
+      <button class="menu-day-btn btn">Menú del día</button>
+    </router-link>
     <Calendar />
   
     <ListOfMenus />
@@ -17,18 +19,34 @@ import HeaderMenu from '@/components/HeaderMenu.vue';
 import ListOfMenus from './ListOfMenu.vue'
 import Calendar from './Calendar.vue'
 import {getRestaurantName} from "@/services/localStorage.js";
+import { getMenuToday } from "@/services/api.js";
 export default {
   components: {Calendar,ListOfMenus, HeaderMenu},
   data() {
     return {
       loggedRestaurant: getRestaurantName(),
+      menuToday : true,
       
     };
   },
+  mounted(){
+    this.checkMenuTodayExist()
+  },
+  methods:{
+    async  checkMenuTodayExist(){
+        const response = await getMenuToday(this.loggedRestaurant)
+        console.log(response)
+        if ( response !== 404){
+          this.menuToday = true
+        }else{
+          this.menuToday = false
+        }
+    }
 
+  },
   computed: {
-    getToday() {
-      let current = new Date();
+      getToday() {
+        let current = new Date();
       let year = current.getFullYear();
       let month = current.getMonth() + 1;
       let day = current.getDate();
