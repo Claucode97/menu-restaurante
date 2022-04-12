@@ -229,6 +229,7 @@ export default {
 }
 .courses-wrapper li {
   font-weight: 300;
+  margin-top: 1em;
 }
 .allergen-detail {
   font-size: 11px;

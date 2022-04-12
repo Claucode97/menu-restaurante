@@ -1,8 +1,15 @@
 <template>
   <article v-if="!isMenuEmpty">
-    <h2>-{{ loggedRestaurant }}-</h2>
-    <h3>Menú del día</h3>
-    <p>{{ dateParsed }}</p>
+  
+    
+
+<div class="menu-detail-header">
+      <div class="header-text-wrapper">
+        <h2>{{ loggedRestaurant }}</h2>
+        <p>Menú del {{ dateParsed }}</p>
+      </div>
+      
+    </div>
     <h3>Primeros</h3>
     <section v-for="menu in this.firsts" :key="menu.id_dish">
       <ul class="split_the_dishes">
@@ -149,32 +156,40 @@ export default {
 </script>
 
 <style scoped>
-/* * {
-  padding: 0;
-  margin: 0;
-}
 
-li {
+.menu-detail-header {
+  padding: 1.3em 0;
+  border-bottom: 1px solid #a31d1e;
+  margin: 0 0 1.3em 0;
+  
+}
+.main-menu-detail-wrapper {
+  text-align: left;
+  padding: 0 0.5em;
+}
+.courses-wrapper {
+  margin-bottom: 2em;
+  font-family: "Oswald", sans-serif;
+  font-size: 1em;
   text-align: center;
-  margin: 0.3em;
-  list-style: none;
-  font-style: bold;
+  color: #3b0b06;
+  letter-spacing: 0.1em;
 }
-
-.split_the_dishes {
-  margin: 0.8em;
+.courses-wrapper h3 {
+  font-weight: 500;
 }
-.split_the_dishes img{
- width: 2em;
- height: 2em;
+.courses-wrapper li {
+  font-weight: 300;
+  margin-top: 1em;
 }
 .allergen-detail {
   font-size: 11px;
   font-style: italic;
   display: inline;
 }
-.modify_div_btn {
-  display: flex;
-  justify-content: flex-end;
-} */
+.allergen-detail img{
+  width: 6%;
+  margin-right: 0.5em;
+}
+
 </style>
