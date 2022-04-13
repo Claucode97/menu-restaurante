@@ -91,7 +91,10 @@ export default {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  margin-bottom: 0.8em;
+  margin: 0 auto 1.3em;
+  max-width: 1000px;
+  border-bottom: 1px solid #a31d1e;
+  padding: 1.3em 0;
 }
 
 </style>

@@ -124,9 +124,11 @@ export default {
   justify-content: space-between;
   padding: 1.3em 0;
   border-bottom: 1px solid #a31d1e;
-  margin: 0 0 1.3em 0;
+  margin: 0 auto 1.3em;
   align-items: center;
   text-align: left;
+  max-width: 1000px;
+
 }
 
 .dateNameRestaurant {
