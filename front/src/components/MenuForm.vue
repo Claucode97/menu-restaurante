@@ -179,7 +179,9 @@ export default {
 }
 
 .menu-form{
-    margin-bottom: 2em;
+    margin: 0 auto 2em;
+    max-width: 900px;
+
 }
 
 
